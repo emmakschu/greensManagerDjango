@@ -33,6 +33,8 @@ class Fertilizer(models.Model):
     p_value = models.PositiveIntegerField()
     k_value = models.PositiveIntegerField()
 
+    spreader = models.ManyToManyField('machines.FertSpreader')
+
     # Bag size. Can use any units, but should have a consistent
     # standard for the facility (or, price per container for 
     # liquid fertilizers)
