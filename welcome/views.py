@@ -20,7 +20,9 @@ def index(request):
         Irrig.SprinklerHead.objects.filter(problem=True)
     drain_probs = \
         Irrig.Drain.objects.filter(problem=True)
-    oos_parts = Parts.Part.objects.filter(in_stock=0)[:5]
+    oos_parts = \
+        Parts.Part.objects.filter(in_stock=0) \
+            .order_by('-updated_at')[:5]
     greens_mowing = \
         Mow.GreensMowing.objects.all().order_by('-mow_date')[:5]
     tee_mowing = \
@@ -34,7 +36,8 @@ def index(request):
     tees_fert = \
         Fert.TeeFert.objects.all().order_by('-fert_date')[:5]
     ooc_machines = \
-        Machines.Machine.objects.filter(in_commission=False)
+        Machines.Machine.objects.filter(in_commission=False) \
+            .order_by('-updated_at')[:5]
 
     context = {
         'curr_time': curr_time,

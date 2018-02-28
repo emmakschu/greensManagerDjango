@@ -1,0 +1,45 @@
+<!-- vim: set ft=htmldjango: -->
+
+<!DOCTYPE html>
+<html>
+
+{% load static %}
+
+<head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0" />
+
+    <meta name="http-equiv"
+          content="text/html" />
+
+    <title>PartsManager | Home</title>
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="{% static 'styles/main.css' %}" />
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="{% static 'styles/tablet.css' %}" />
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="{% static 'parts/styles/parts.css' %}" />
+
+    <link href="https://fonts.googleapis.com/css?family=Quattrocento+Sans|Overlock"
+          rel="stylesheet" />
+
+    <link rel="icon"
+          type="image/png"
+          href="{% static 'favicon.png' %}" />
+</head>
+
+<body>
+
+<header>
+   <a href="{% url 'parts:index' %}">
+       <h1>PartsManager</h1>
+   </a>
+</header>
