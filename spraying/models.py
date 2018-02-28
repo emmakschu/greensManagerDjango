@@ -6,12 +6,16 @@ from django.utils import timezone
 
 class ChemManufacturer(models.Model):
     name = models.CharField(max_length = 128)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 class Chemical(models.Model):
     scientific_name = models.CharField(max_length = 256)
     common_name = models.CharField(max_length = 256,
                                    blank = True,
                                    null = True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 class TradeChem(models.Model):
     manufacturer = models.ForeignKey(ChemManufacturer)
@@ -21,10 +25,14 @@ class TradeChem(models.Model):
     unit_price = models.DecimalField(decimal_places = 2,
                                      max_digits = 15)
     notes = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 class Spraying(models.Model):
     spray_date = models.DateTimeField(default = timezone.now)
     sprayer = models.ForeignKey('machines.Sprayer')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 class ChemUsedInSpray(models.Model):
     chemical = models.ForeignKey(TradeChem)
@@ -32,3 +40,5 @@ class ChemUsedInSpray(models.Model):
     tank_size = models.
     amount_used = models.FloatField()
     rate = models.FloatField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

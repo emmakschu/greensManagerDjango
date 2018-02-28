@@ -76,6 +76,8 @@ class Machine(models.Model):
     fuel_filter = models.ManyToManyField('parts.Filter', 
                                          blank = True,
                                          related_name = '+')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return "%s %s" % (self.model, self.ident_number)
@@ -227,3 +229,5 @@ class FertSpreader(models.Model):
     capacity = models.FloatField()
     # Notes, e.g.: "Should be set to H for tees", etc.
     notes = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

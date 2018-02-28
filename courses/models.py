@@ -33,6 +33,8 @@ class Course(models.Model):
 
     # Name as a VARCHAR(256) -- anything longer would seem excessive
     name = models.CharField(max_length=256)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return "%s" % (self.name)
@@ -64,6 +66,8 @@ class Hole(models.Model):
     
     # Hole must belong to a Course object
     course = models.ForeignKey(Course, related_name='hole')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return "%s, hole %d" % (self.course,
@@ -94,6 +98,9 @@ class TurfFeature(models.Model):
     turf_cultivar = models.ForeignKey('turfs.Cultivar',
                                       blank = True,
                                       null = True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
 class Tee(TurfFeature):
@@ -176,6 +183,8 @@ class Bunker(models.Model):
     """
     hole = models.ForeignKey(Hole, related_name='bunker')
     bunker_location = models.ForeignKey(BunkerLocation)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return "%s %s bunker" % (self.hole, self.bunker_location)

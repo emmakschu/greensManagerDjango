@@ -6,7 +6,8 @@ class Fluid(models.Model):
     name = models.TextField()
     price_per_unit = models.DecimalField(decimal_places = 2,
                                          max_digits = 10)
-    last_updated = models.DateTimeField(auto_now = True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 class Fuel(Fluid):
     def __str__(self):
@@ -27,9 +28,9 @@ class Part(models.Model):
     in_stock = models.PositiveIntegerField()
     price = models.DecimalField(decimal_places = 2,
                                 max_digits = 10)
-    date_added = models.DateTimeField(auto_now_add = True)
-    last_updated = models.DateTimeField(auto_now = True)
     obsolete = models.BooleanField(default = False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return "%s %s" % (self.make, self.description)
@@ -37,4 +38,3 @@ class Part(models.Model):
 class Filter(Part):
     def __str__(self):
         return "Filter %s" % self.part_no
-

@@ -54,3 +54,11 @@ def index(request):
     }
 
     return render(request, 'welcome/index.html', context)
+
+def daily(request):
+    curr_time = now()
+
+    context = {
+        'curr_time': curr_time,
+    }
+    return render(request, 'welcome/daily.html', context)

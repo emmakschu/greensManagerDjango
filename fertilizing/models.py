@@ -40,6 +40,8 @@ class Fertilizer(models.Model):
     # Price paid per bag/container
     price_per_bag = models.DecimalField(decimal_places = 2,
                                         max_digits = 10)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return "%s %d-%d-%d" % (self.manufacturer,
@@ -79,6 +81,8 @@ class Fertilizing(models.Model):
                                max_digits = 10,
                                blank=True,
                                null = True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def calculate_cost(self):
         fert = self.fertilizer

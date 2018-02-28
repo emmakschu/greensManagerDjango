@@ -28,5 +28,5 @@ urlpatterns = [
     url(r'^turfs/', include('turfs.urls', namespace="turfs")),
     url(r'^fert/', include('fertilizing.urls', namespace="fert")),
     url(r'^admin/', admin.site.urls),
-    url(r'^$', include('welcome.urls', namespace="welcome"))
+    url(r'^', include('welcome.urls', namespace="welcome"))
 ]

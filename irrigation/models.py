@@ -51,6 +51,8 @@ class SatelliteBox(models.Model):
     longitude = models.FloatField()
 
     problem = models.BooleanField(default = False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return "box %d" % (self.box_number)
@@ -100,6 +102,8 @@ class SprinklerHead(models.Model):
                               null = True)
 
     problem = models.BooleanField(default = False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         if self.tee:
@@ -150,6 +154,8 @@ class QuickCoupler(models.Model):
                               null = True)
 
     problem = models.BooleanField(default = False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 class Drain(models.Model):
     """
@@ -182,6 +188,8 @@ class Drain(models.Model):
     hole = models.ForeignKey('courses.Hole')
 
     problem = models.BooleanField(default = False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 class ShutoffValve(models.Model):
     """
@@ -225,6 +233,8 @@ class ShutoffValve(models.Model):
                               null = True)
 
     problem = models.BooleanField(default = False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
 class IrrigationDig(models.Model):
@@ -244,4 +254,6 @@ class IrrigationDig(models.Model):
     quick_coupler = models.ForeignKey(QuickCoupler)
     drain = models.ForeignKey(Drain)
     fixed = models.BooleanField(default = False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 

@@ -24,6 +24,8 @@ class Mowing(models.Model):
     # When the mowing occurred. Defaults to current time. Can of
     # course be as exact or approximate as desired.
     mow_date = models.DateTimeField(default=timezone.now)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 class GreensMowing(Mowing):
     """

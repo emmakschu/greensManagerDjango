@@ -52,13 +52,18 @@
 
 
             <div class="parent-menu">
-                <li><a href="{% url 'mow:index' %}">Mowing</a>
+                <li><a href="{% url 'welcome:daily' %}">Daily tasks</a>
                     <ul class="child-menu">
+                        <li>
+                            <a href="{% url 'mow:index' %}">
+                                Mowing overview
+                            </a>
+                        </li>
                         <li>Greens</li>
                         <li>Tees</li>
                         <li>Fairways</li>
                         <li>Roughs</li>
-                        <li>Rolling</li>
+                        <li>Bunkers</li>
                     </ul>
                 </li>
             </div>
@@ -77,7 +82,7 @@
             <div class="parent-menu">
                 <li>Irrigation
                     <ul class="child-menu">
-                        <li>Sat Boxes</li>
+                        <li>Sat. Boxes</li>
                         <li>Shutoff valves</li>
                         <li>Drains</li>
                         <li>Digs</li>

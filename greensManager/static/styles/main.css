@@ -64,6 +64,11 @@ nav ul li {
     color: black;
 }
 
+.child-menu a {
+    color: black;
+    text-decoration: none;
+}
+
 .child-menu li {
     display: block;
     padding: 10px;
