@@ -1,6 +1,87 @@
 {% include "parts/partshead.html" %}
 
-<h2>Parts Database</h2>
+<h2>Parts at a glance:</h2>
+
+<section class="content-block">
+    <h3>Recently added parts</h3>
+
+    <table>
+        <thead>
+            <th>Part #</th>
+            <th>Description</th>
+            <th>Make</th>
+            <th>Location</th>
+            <th>Alt Part #</th>
+            <th>In Stock</th>
+            <th>Added</th>
+        </thead>
+
+        {% for p in recently_added %}
+        <tr>
+            <td>{{ p.part_no }}</td>
+            <td>{{ p.description }}</td>
+            <td>{{ p.make }}</td>
+            <td>{{ p.location }}</td>
+            <td>{{ p.alt_part_no }}</td>
+            <td>{{ p.in_stock }}</td>
+            <td>{{ p.created_at }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</section>
+
+<section class="content-block">
+    <h3>Recently updated parts</h3>
+
+    <table>
+        <thead>
+        <th>Part #</th>
+        <th>Description</th>
+        <th>Make</th>
+        <th>Location</th>
+        <th>Alt Part #</th>
+        <th>In Stock</th>
+        <th>Added</th>
+        </thead>
+
+        {% for p in recently_updated %}
+            <tr>
+                <td>{{ p.part_no }}</td>
+                <td>{{ p.description }}</td>
+                <td>{{ p.make }}</td>
+                <td>{{ p.location }}</td>
+                <td>{{ p.alt_part_no }}</td>
+                <td>{{ p.in_stock }}</td>
+                <td>{{ p.created_at }}</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+</section>
+
+<section class="content-block">
+    <h3>Out of stock parts</h3>
+
+    <table>
+        <thead>
+            <th>Part #</th>
+            <th>Description</th>
+            <th>Make</th>
+            <th>Alt Part #</th>
+            <th>Price</th>
+        </thead>
+
+        {% for p in oos %}
+        <tr>
+            <td>{{ p.part_no }}</td>
+            <td>{{ p.description }}</td>
+            <td>{{ p.make }}</td>
+            <td>{{ p.alt_part_no }}</td>
+            <td>{{ p.price }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</section>
 
 {% include "foot.html" %}
 

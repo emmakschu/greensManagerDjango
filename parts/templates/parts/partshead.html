@@ -14,7 +14,7 @@
     <meta name="http-equiv"
           content="text/html" />
 
-    <title>PartsManager | Home</title>
+    <title>PartsManager | Parts</title>
 
     <link rel="stylesheet"
           type="text/css"
@@ -42,4 +42,80 @@
    <a href="{% url 'parts:index' %}">
        <h1>PartsManager</h1>
    </a>
+
+    <nav>
+        <ul>
+            <div class="parent-menu">
+                <li>
+                    <a href="{% url 'welcome:index' %}">
+                        GreensManager
+                    </a>
+                </li>
+            </div>
+
+            <div class="parent-menu">
+                <li>Find Parts
+                    <ul class="child-menu">
+                        <li>
+                            <input type="text"
+                                   id="searchByNum"
+                                   placeholder="Part #" />
+                            <input type="submit"
+                                   value="Find by Part No" />
+                        </li>
+
+                        <li>
+                            <input type="text"
+                                   id="searchByMake"
+                                   placeholder="Make" />
+                            <input type="submit"
+                                   value="Find by Make" />
+                        </li>
+
+                        <li>
+                            <input type="text"
+                                   id="searchByDesc"
+                                   placeholder="Description" />
+                            <input type="submit"
+                                   value="Find by Description" />
+                        </li>
+
+                        <li>
+                            <input type="text"
+                                   id="searchByLoc"
+                                   placeholder="Location" />
+                            <input type="submit"
+                                   value="Find by Location" />
+                        </li>
+                    </ul>
+                </li>
+            </div>
+
+            <div class="parent-menu">
+                <li>Add Part</li>
+            </div>
+
+            <div class="parent-menu">
+                <li>Machines
+                    <ul class="child-menu">
+                        <li>Greens Mowers</li>
+                        <li>Tee Mowers</li>
+                        <li>Fairway Mowers</li>
+                        <li>Rough Mowers</li>
+                        <li>Rollers</li>
+                        <li>Trap Rakes</li>
+                        <li>Util Vehicles</li>
+                        <li>Carts</li>
+                        <li>Sprayers</li>
+                        <li>Aerators</li>
+                    </ul>
+                </li>
+            </div>
+        </ul>
+    </nav>
+
+    <p class="right-aligned" id="session-info">
+        Welcome {{ user.get_username }}!<br />
+        It is {{ curr_time }}
+    </p>
 </header>

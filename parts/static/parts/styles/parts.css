@@ -1,3 +1,15 @@
-h1 {
-
+header {
+    background: darkblue;
 }
+
+.parent-menu:hover {
+    background: slateblue;
+}
+
+.child-menu {
+    background: linear-gradient(lightsteelblue, #e7f3ff);
+    position: absolute;
+    right: inherit;
+    padding: 0.5em;
+}
+
