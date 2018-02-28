@@ -1,0 +1,116 @@
+<!-- vim: set ft=htmldjango: -->
+
+<!DOCTYPE html>
+<html>
+
+{% load static %}
+
+<head>
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0" />
+
+    <meta name="http-equiv"
+          content="text/html" />
+
+    <title>GreensManager | Home</title>
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="{% static 'styles/main.css' %}" />
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="{% static 'styles/tablet.css' %}" />
+
+    <link href="https://fonts.googleapis.com/css?family=Quattrocento+Sans|Overlock"
+          rel="stylesheet" />
+
+    <link rel="icon"
+          type="image/png"
+          href="{% static 'favicon.png' %}" />
+</head>
+
+<body>
+
+<header>
+    <a href="{% url 'welcome:index' %}">
+        <h1>GreensManager</h1>
+    </a>
+
+    <nav>
+        <ul>
+            <div class="parent-menu">
+                <li><a href="{% url 'courses:index' %}">Courses</a>
+                    <ul class="child-menu">
+                        <li>Overview</li>
+                        <li>Building</li>
+                    </ul>
+                </li>
+            </div>
+
+
+            <div class="parent-menu">
+                <li><a href="{% url 'mow:index' %}">Mowing</a>
+                    <ul class="child-menu">
+                        <li>Greens</li>
+                        <li>Tees</li>
+                        <li>Fairways</li>
+                        <li>Roughs</li>
+                        <li>Rolling</li>
+                    </ul>
+                </li>
+            </div>
+
+            <div class="parent-menu">
+                <li>Fert
+                    <ul class="child-menu">
+                        <li>Fertilizers</li>
+                        <li>Greens</li>
+                        <li>Tees</li>
+                        <li>Fairways</li>
+                    </ul>
+                </li>
+            </div>
+
+            <div class="parent-menu">
+                <li>Irrigation
+                    <ul class="child-menu">
+                        <li>Sat Boxes</li>
+                        <li>Shutoff valves</li>
+                        <li>Drains</li>
+                        <li>Digs</li>
+                    </ul>
+                </li>
+            </div>
+
+            <div class="parent-menu">
+                <li>Mechanical
+                    <ul class="child-menu">
+                        <li>Machine catalog</li>
+                        <li>Repairs</li>
+                        <li>Parts database</li>
+                    </ul>
+                </li>
+            </div>
+
+            <div class="parent-menu">
+                <li>Spraying
+                    <ul class="child-menu">
+                        <li>Chemicals & Diseases</li>
+                        <li>Greens</li>
+                        <li>Tees</li>
+                        <li>Fairways</li>
+                    </ul>
+                </li>
+            </div>
+        </ul>
+    </nav>
+
+    <p class="right-aligned" id="session-info">
+        Welcome {{ user.get_username }}!<br />
+        It is {{ curr_time }}
+    </p>
+
+</header>

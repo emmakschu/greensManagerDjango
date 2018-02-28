@@ -1,0 +1,113 @@
+{% include "head.html" %}
+
+<h2>Recent mowing:</h2>
+
+<section class="content-block content-block-half">
+    <h3>Greens</h3>
+    <p>Last: {{ last_greens }} ago</p>
+    <table>
+        <thead>
+            <th>Date</th>
+            <th>Mower</th>
+            <th>Greens</th>
+        </thead>
+
+        {% for m in greens_mow %}
+        <tr>
+            <td>{{ m.mow_date }}</td>
+            <td>{% for mower in m.mower.all %}
+                    {{ mower }}<br />
+                {% endfor %}
+            </td>
+            <td>{% for g in m.green.all %}
+                    {{ g }}<br />
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</section>
+
+<section class="content-block content-block-half">
+    <h3>Tees</h3>
+    <p>Last: {{ last_tees }} ago</p>
+
+    <table>
+        <thead>
+            <th>Date</th>
+            <th>Mower</th>
+            <th>Tees</th>
+        </thead>
+
+        {% for m in tee_mow %}
+        <tr>
+            <td>{{ m.mow_date }}</td>
+            <td>{% for mower in m.mower.all %}
+                    {{ mower }}<br />
+                {% endfor %}
+            </td>
+            <td>{% for t in m.tee.all %}
+                    {{ t }}<br />
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</section>
+
+<section class="content-block content-block-half">
+    <h3>Fairways</h3>
+    <p>Last: {{ last_fairway }} ago</p>
+
+    <table>
+        <thead>
+            <th>Date</th>
+            <th>Mower</th>
+            <th>Fairways</th>
+        </thead>
+
+        {% for m in fairway_mow %}
+        <tr>
+            <td>{{ m.mow_date }}</td>
+            <td>{% for mower in m.mower.all %}
+                    {{ mower }}<br />
+                {% endfor %}
+            </td>
+            <td>{% for f in m.fairway.all %}
+                    {{ f }}<br />
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</section>
+
+<section class="content-block content-block-half">
+    <h3>Roughs</h3>
+    <p>Last: {{ last_rough }} ago</p>
+
+    <table>
+        <thead>
+            <th>Date</th>
+            <th>Mower</th>
+            <th>Roughs</th>
+        </thead>
+
+        {% for m in rough_mow %}
+        <tr>
+            <td>{{ m.mow_date }}</td>
+            <td>{% for mower in m.mower.all %}
+                    {{ mower }}<br />
+                {% endfor %}
+            </td>
+            <td>{% for r in m.rough.all %}
+                    {{ r }}<br />
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</section>
+
+{% include "foot.html" %}
+

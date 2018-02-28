@@ -1,0 +1,18 @@
+{% include "head.html" %}
+
+<h2>Your courses:</h2>
+
+{% for c in courses %}
+<section class="content-block">
+<div class="scroll-container">
+    <h3>{{ c.name }}</h3>
+    {% for h in c.hole.all %}
+        <p>{{ h }}</p>
+    {% endfor %}
+
+</div>
+</section>
+{% endfor %}
+
+{% include "foot.html" %}
+

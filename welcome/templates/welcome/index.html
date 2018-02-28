@@ -1,0 +1,234 @@
+{% include "head.html" %}
+
+<h2>Your turf facility at a glance:</h2>
+
+
+<section class="content-block">
+<div class="scroll-container">
+    <h3>Recent Mowing</h3>
+
+    <h4>Greens:</h4>
+    <table>
+        <thead>
+            <th>Date</th>
+            <th>Mower</th>
+            <th>Greens</th>
+        </thead>
+        {% for g in greens_mowing %}
+        <tr>
+            <td>{{ g.mow_date }}</td>
+            <td>
+                {% for m in g.mower.all %}
+                    {{ m }}<br />
+                {% endfor %}
+            </td>
+            <td>
+                {% for gr in g.green.all %}
+                    {{ gr }}
+                    <br />
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h4>Tees</h4>
+    <table>
+        <thead>
+            <th>Date</th>
+            <th>Mower</th>
+            <th>Tees</th>
+        </thead>
+        {% for m in tee_mowing %}
+        <tr>
+            <td>{{ m.mow_date }}</td>
+            <td>
+                {% for mow in m.mower.all %}
+                    {{ mow }}<br />
+                {% endfor %}
+            </td>
+            <td>
+                {% for t in m.tee.all %}
+                    {{ t }} <br />
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+</section>
+
+<section class="content-block">
+<div class="scroll-container">
+    <h3>Recent Greens Rolling</h3>
+    <table>
+        <thead>
+            <th>Date</th>
+            <th>Roller</th>
+            <th>Greens</th>
+        </thead>
+        {% for r in greens_roll %}
+        <tr>
+            <td>{{ r.roll_date }}</td>
+            <td>{{ r.roller.first }}</td>
+            <td>
+                {% for g in r.green.all %}
+                    {{ g }}
+                    <br />
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+</section>
+
+<section class="content-block">
+<div class="scroll-container">
+    <h3>Recent Fertilizer Applications</h3>
+
+    <h4>Greens:</h4>
+    <table>
+        <thead>
+            <th>Date</th>
+            <th>Fert</th>
+            <th>Greens</th>
+        </thead>
+        {% for f in greens_fert %}
+        <tr>
+            <td>{{ f.fert_date }}</td>
+            <td>{{ f.fertilizer }}</td>
+            <td>
+                {% for g in f.green.all %}
+                    {{ g }}
+                    <br />
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h4>Tees:</h4>
+    <table>
+        <thead>
+            <th>Date</th>
+            <th>Fert</th>
+            <th>Tees</th>
+        </thead>
+        {% for f in tees_fert %}
+            <tr>
+                <td>{{ f.fert_date }}</td>
+                <td>{{ f.fertilizer }}</td>
+                <td>
+                    {% for t in f.tee.all %}
+                        {{ t }}
+                        <br />
+                    {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+</section>
+
+<section class="content-block">
+<div class="scroll-container">
+    <h3>Out of Stock Parts</h3>
+    <table>
+        <thead>
+            <th>Part #</th>
+            <th>Make</th>
+            <th>Description</th>
+            <th>Price</th>
+        </thead>
+        {% for p in oos_parts %}
+        <tr>
+            <td>{{ p.part_no }}</td>
+            <td>{{ p.make }}</td>
+            <td>{{ p.description }}</td>
+            <td>{{ p.price }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+</section>
+
+<section class="content-block">
+<div class="scroll-container">
+    <h3>Irrigation System</h3>
+
+    <h4>Satellite boxes with problems:</h4>
+    <table>
+        <thead>
+            <th>Box #</th>
+            <th>Lat.</th>
+            <th>Long.</th>
+        </thead>
+        {% for b in box_probs %}
+        <tr>
+            <td>{{ b }}</td>
+            <td>{{ b.latitude }}</td>
+            <td>{{ b.longitude }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h4>Sprinklers with problems:</h4>
+    <table>
+        <thead>
+            <th>Hole</th>
+            <th>Box</th>
+            <th>#</th>
+            <th>Lat.</th>
+            <th>Long.</th>
+        </thead>
+        {% for s in sprinkler_probs %}
+        <tr>
+            <td>{{ s }}</td>
+            <td>{{ s.satellite_box }}</td>
+            <td>{{ s.sprinkler_number }}</td>
+            <td>{{ s.latitude }}</td>
+            <td>{{ s.longitude }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h4>Drains with problems:</h4>
+    <table>
+        <thead>
+            <th>Hole</th>
+            <th>Lat.</th>
+            <th>Long.</th>
+        </thead>
+        {% for d in drain_probs %}
+        <tr>
+            <td>{{ d.hole }}</td>
+            <td>{{ d.latitude }}</td>
+            <td>{{ d.longitude }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+</section>
+
+<section class="content-block">
+<div class="scroll-container">
+    <h3>Machines out of commission</h3>
+    <table>
+        <thead>
+            <th>Make</th>
+            <th>Model</th>
+            <th>ID</th>
+        </thead>
+        {% for m in ooc_machines %}
+        <tr>
+            <td>{{ m.make }}</td>
+            <td>{{ m.model }}</td>
+            <td>{{ m.ident_number }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+</section>
+
+{% include "foot.html" %}

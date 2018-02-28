@@ -1,0 +1,40 @@
+@media (max-width: 1129px) {
+
+    body {
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    header {
+        height: 12vh;
+    }
+
+    nav ul {
+        display: none;
+    }
+
+    .content-block {
+        width: 48vw;
+    }
+}
+
+@media (max-width: 767px) {
+
+    nav ul {
+        display: none;
+    }
+
+    header h1 {
+        float: none;
+        text-align: center;
+    }
+
+    #session-info {
+        display: none;
+    }
+
+    .content-block {
+        width: 95%;
+        clear: left;
+    }
+}

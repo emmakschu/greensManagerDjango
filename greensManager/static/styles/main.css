@@ -1,0 +1,136 @@
+body{
+	background: #e6e6e6;
+    font-family: 'Quattrocento Sans', sans-serif;
+    width: 100vw;
+    overflow: hidden;
+}
+
+header {
+	border-bottom: black solid 1px;
+    background: darkgreen;
+    color: white;
+    padding: 1em;
+    margin-left: -1em;
+    margin-top: -1em;
+    height: 8vh;
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+}
+
+header h1 {
+	float: left;
+    font-family: 'Overlock', sans-serif;
+    width: 15%;
+}
+
+header nav {
+    float: left;
+    font-weight: bold;
+}
+
+nav ul {
+	list-style-type: none;
+}
+
+nav ul li {
+    display: inline;
+}
+
+.parent-menu {
+    position: relative;
+    min-width: 80px;
+    float: left;
+    padding: 2vh 1.5em 2vh 1.5em;
+    z-index: 10;
+    text-align: center;
+}
+
+.child-menu {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    min-width: 80px;
+    z-index: 1;
+    margin-top: 2vh;
+    padding: 0.5em 0 0.5em 0.5em;
+    background: linear-gradient(#afd9a8, ivory);
+    box-shadow: -1px 1px 5px 1px darkgray;
+    border-radius: 0 0 3px 3px;
+    text-align: left;
+    color: black;
+}
+
+.child-menu li {
+    display: block;
+    padding: 10px;
+}
+
+.parent-menu:hover .child-menu {
+    display: block;
+}
+
+.parent-menu:hover {
+    background: green;
+    box-shadow: 0 -1px 5px 1px darkgray;
+}
+
+#session-info {
+    float: right;
+    width: 15%;
+}
+
+.content-block {
+	width: 32%;
+	float: left;
+	border-radius: 5px;
+	margin: 5px;
+	padding: 2px;
+	background: ivory;
+	box-shadow: 3px 3px 5px darkgray;
+    height: 37vh;
+    overflow: hidden;
+}
+
+.scroll-container {
+    height: 100%;
+    overflow: auto;
+    overflow-scrolling: auto;
+}
+
+.content-block h3 {
+    text-align: center;
+}
+
+.content-block table {
+	width: 100%;
+}
+
+.content-block tr:nth-child(odd) {
+	background: #d9e3de;
+}
+
+.content-block tr:nth-child(even) {
+	background: #e7e7e7;
+}
+.content-block-half {
+	width: 48.5%;
+}
+
+.right-aligned {
+	text-align: right;
+}
+
+footer {
+    clear: both;
+    font-size: 0.6em;
+    text-align: center;
+    border-top: 1px solid black;
+}
+
+footer a {
+    color: darkgreen;
+}
