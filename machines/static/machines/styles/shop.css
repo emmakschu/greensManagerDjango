@@ -1,0 +1,11 @@
+header {
+    background: darkgoldenrod;
+}
+
+.parent-menu:hover {
+    background: goldenrod;
+}
+
+.child-menu {
+    background: linear-gradient(palegoldenrod, lightyellow);
+}

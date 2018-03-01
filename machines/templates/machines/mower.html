@@ -1,0 +1,78 @@
+{% include "machines/shophead.html" %}
+
+<h2>Mower detail: {{ mower }}</h2>
+
+<section class="content-block content-block-half">
+    <h3>Machine specs</h3>
+
+    <table>
+        <tr>
+            <td>Make:</td>
+            <td>{{ mower.make }}</td>
+        </tr>
+
+        <tr>
+            <td>Model:</td>
+            <td>{{ mower.model }}</td>
+        </tr>
+
+        <tr>
+            <td>Year:</td>
+            <td>{{ mower.year }}</td>
+        </tr>
+
+        <tr>
+            <td>Hours:</td>
+            <td>{{ mower.hours }}</td>
+        </tr>
+
+        <tr>
+            <td>Fuel type:</td>
+            <td>{{ mower.fuel_type.first }}</td>
+        </tr>
+
+        <tr>
+            <td>Oil filter:</td>
+            <td>{{ mower.oil_filter.first }}</td>
+        </tr>
+
+        <tr>
+            <td>Cut height:</td>
+            <td>{{ mower.cut_height }}</td>
+        </tr>
+
+        <tr>
+            <td></td>
+        </tr>
+    </table>
+</section>
+
+<section class="content-block content-block-half">
+    <h3>Maintenance Records</h3>
+
+    <h4>Oil changes</h4>
+    <table>
+        <thead>
+            <th>Date</th>
+            <th>Hours</th>
+            <th>Notes</th>
+            <th>Mechanic</th>
+            <th>Oil type</th>
+            <th>Oil qty</th>
+        </thead>
+
+        {% for o in oil_changes %}
+        <tr>
+            <td>{{ o.date_fixed }}</td>
+            <td>{{ o.hours_on_machine }}</td>
+            <td>{{ o.description }}</td>
+            <td>{{ o.acked }}</td>
+            <td>{{ o.oil }}</td>
+            <td>{{ o.oil_qty }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</section>
+
+{% include "foot.html" %}

@@ -14,7 +14,7 @@
     <meta name="http-equiv"
           content="text/html" />
 
-    <title>PartsManager | Parts</title>
+    <title>ShopManager | Machines</title>
 
     <link rel="stylesheet"
           type="text/css"
@@ -28,6 +28,10 @@
           type="text/css"
           href="{% static 'parts/styles/parts.css' %}" />
 
+    <link rel="stylesheet"
+          type="text/css"
+          href="{% static 'machines/styles/shop.css' %}" />
+
     <link href="https://fonts.googleapis.com/css?family=Quattrocento+Sans|Overlock"
           rel="stylesheet" />
 
@@ -39,9 +43,9 @@
 <body>
 
 <header>
-   <a href="{% url 'parts:index' %}">
-       <h1>PartsManager</h1>
-   </a>
+    <a href="{% url 'shop:index' %}">
+        <h1>ShopManager</h1>
+    </a>
 
     <nav>
         <ul>
@@ -96,7 +100,8 @@
             </div>
 
             <div class="parent-menu">
-                <li><a href="{% url 'shop:index' %}">Machines</a>                    <ul class="child-menu">
+                <li>Machines
+                    <ul class="child-menu">
                         <li>Greens Mowers</li>
                         <li>Tee Mowers</li>
                         <li>Fairway Mowers</li>
