@@ -18,16 +18,27 @@
 
 <script type="text/javascript">
     $('#dailyEditor').hide();
-    $('#dailyView').text("{{ daily_notes }}");
 
     $('#dailyEditButton').click(function() {
-        $('#dailyEditor').text('{{ test_text }}');
+        $.ajax({
+            url: "{{ daily_notes }}",
+            type: "text",
+            success: function(notes) {
+                $('#dailyEditor').text(notes);
+            }
+        });
         $('#dailyView').hide();
         $('#dailyEditor').show();
     });
 
-    $('#dailyViewButton').click(function() {
-        $('#dailyView').text('{{ daily_notes }}');
+    $('#dailyViewButton').on('click', function() {
+        $.ajax({
+            url: "{{ daily_notes }}",
+            type: "text",
+            success: function(notes) {
+                $('#dailyView').html(notes);
+            }
+        });
         $('#dailyEditor').hide();
         $('#dailyView').show();
     });

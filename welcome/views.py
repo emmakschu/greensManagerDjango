@@ -37,7 +37,7 @@ def index(request):
     ooc_machines = \
         Machines.Machine.objects.filter(in_commission=False) \
             .order_by('-updated_at')[:5]
-    daily_notes = "static/notes/%s" % (curr_time.strftime('%Y-%m-%d'))
+    daily_notes = "/static/notes/%s" % (curr_time.strftime('%Y-%m-%d'))
     test_text = "Hello"
 
     context = {
