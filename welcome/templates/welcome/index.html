@@ -46,7 +46,7 @@
 
 <section class="content-block">
 <div class="scroll-container">
-    <h3>Recent Greens Rolling</h3>
+    <h3>Greens Rolling</h3>
     <table>
         <thead>
             <th>Date</th>
@@ -71,49 +71,8 @@
 
 <section class="content-block">
 <div class="scroll-container">
-    <h3>Recent Fertilizer Applications</h3>
+    <h3>Weekly notes</h3>
 
-    <h4>Greens:</h4>
-    <table>
-        <thead>
-            <th>Date</th>
-            <th>Fert</th>
-            <th>Greens</th>
-        </thead>
-        {% for f in greens_fert %}
-        <tr>
-            <td>{{ f.fert_date }}</td>
-            <td>{{ f.fertilizer }}</td>
-            <td>
-                {% for g in f.green.all %}
-                    {{ g }}
-                    <br />
-                {% endfor %}
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
-
-    <h4>Tees:</h4>
-    <table>
-        <thead>
-            <th>Date</th>
-            <th>Fert</th>
-            <th>Tees</th>
-        </thead>
-        {% for f in tees_fert %}
-            <tr>
-                <td>{{ f.fert_date }}</td>
-                <td>{{ f.fertilizer }}</td>
-                <td>
-                    {% for t in f.tee.all %}
-                        {{ t }}
-                        <br />
-                    {% endfor %}
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
 </div>
 </section>
 
