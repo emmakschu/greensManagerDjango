@@ -140,3 +140,8 @@ footer {
 footer a {
     color: darkgreen;
 }
+
+.content-block textarea {
+    width: 95%;
+    height: 75%;
+}

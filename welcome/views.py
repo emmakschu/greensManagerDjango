@@ -10,7 +10,6 @@ from turfs import models as Turfs
 from mowing import models as Mow
 from rolling import models as Roll
 
-
 def index(request):
     curr_time = now()
     course_list = Courses.Course.objects.all()
@@ -38,6 +37,8 @@ def index(request):
     ooc_machines = \
         Machines.Machine.objects.filter(in_commission=False) \
             .order_by('-updated_at')[:5]
+    daily_notes = "static/notes/%s" % (curr_time.strftime('%Y-%m-%d'))
+    test_text = "Hello"
 
     context = {
         'curr_time': curr_time,
@@ -54,6 +55,8 @@ def index(request):
         'greens_fert': greens_fert,
         'tees_fert': tees_fert,
         'ooc_machines': ooc_machines,
+        'daily_notes': daily_notes,
+        'test_text': test_text,
     }
 
     return render(request, 'welcome/index.html', context)

@@ -5,58 +5,33 @@
 
 <section class="content-block">
 <div class="scroll-container">
-    <h3>Recent Mowing</h3>
+    <h3>Today's notes:</h3>
 
-    <h4>Greens:</h4>
-    <table>
-        <thead>
-            <th>Date</th>
-            <th>Mower</th>
-            <th>Greens</th>
-        </thead>
-        {% for g in greens_mowing %}
-        <tr>
-            <td>{{ g.mow_date }}</td>
-            <td>
-                {% for m in g.mower.all %}
-                    {{ m }}<br />
-                {% endfor %}
-            </td>
-            <td>
-                {% for gr in g.green.all %}
-                    {{ gr }}
-                    <br />
-                {% endfor %}
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+    <button id="dailyViewButton">View</button> &nbsp;
+    <button id="dailyEditButton">Edit</button>
 
-    <h4>Tees</h4>
-    <table>
-        <thead>
-            <th>Date</th>
-            <th>Mower</th>
-            <th>Tees</th>
-        </thead>
-        {% for m in tee_mowing %}
-        <tr>
-            <td>{{ m.mow_date }}</td>
-            <td>
-                {% for mow in m.mower.all %}
-                    {{ mow }}<br />
-                {% endfor %}
-            </td>
-            <td>
-                {% for t in m.tee.all %}
-                    {{ t }} <br />
-                {% endfor %}
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+    <textarea id="dailyEditor"></textarea>
+    <div id="dailyView"></div>
+
 </div>
 </section>
+
+<script type="text/javascript">
+    $('#dailyEditor').hide();
+    $('#dailyView').text("{{ daily_notes }}");
+
+    $('#dailyEditButton').click(function() {
+        $('#dailyEditor').text('{{ test_text }}');
+        $('#dailyView').hide();
+        $('#dailyEditor').show();
+    });
+
+    $('#dailyViewButton').click(function() {
+        $('#dailyView').text('{{ daily_notes }}');
+        $('#dailyEditor').hide();
+        $('#dailyView').show();
+    });
+</script>
 
 <section class="content-block">
 <div class="scroll-container">

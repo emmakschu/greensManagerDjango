@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'rolling.apps.RollingConfig',
     'fertilizing.apps.FertilizingConfig',
     'maintenance.apps.MaintenanceConfig',
-    'greensManager'
+    'greensManager',
 ]
 
 MIDDLEWARE = [
