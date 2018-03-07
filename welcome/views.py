@@ -9,9 +9,11 @@ from parts import models as Parts
 from turfs import models as Turfs
 from mowing import models as Mow
 from rolling import models as Roll
+from notes import models as Notes
 
 def index(request):
     curr_time = now()
+    today = curr_time.strftime('%Y-%m-%d')
     course_list = Courses.Course.objects.all()
     hole_list = Courses.Hole.objects.all()
     box_probs = Irrig.SatelliteBox.objects.filter(problem=True)
@@ -37,9 +39,11 @@ def index(request):
     ooc_machines = \
         Machines.Machine.objects.filter(in_commission=False) \
             .order_by('-updated_at')[:5]
-    daily_notes = "/static/notes/%s" % \
-            (curr_time.strftime('%Y-%m-%d'))
-    test_text = "Hello"
+    daily_notes = \
+        Notes.DailyNote.objects.filter(valid_date='%s' % today).first()
+    weekly_notes = \
+        Notes.WeeklyNote.objects.filter(end_date__gte='%s' % today).order_by(
+            'start_date').first()
 
     context = {
         'curr_time': curr_time,
@@ -57,7 +61,7 @@ def index(request):
         'tees_fert': tees_fert,
         'ooc_machines': ooc_machines,
         'daily_notes': daily_notes,
-        'test_text': test_text,
+        'weekly_notes': weekly_notes
     }
 
     return render(request, 'welcome/index.html', context)

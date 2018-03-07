@@ -145,3 +145,7 @@ footer a {
     width: 95%;
     height: 75%;
 }
+
+.notes-view {
+    white-space: pre-line;
+}
