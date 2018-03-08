@@ -13,7 +13,6 @@ from notes import models as Notes
 
 def index(request):
     curr_time = now()
-    today = curr_time.strftime('%Y-%m-%d')
     course_list = Courses.Course.objects.all()
     hole_list = Courses.Hole.objects.all()
     box_probs = Irrig.SatelliteBox.objects.filter(problem=True)
@@ -40,9 +39,9 @@ def index(request):
         Machines.Machine.objects.filter(in_commission=False) \
             .order_by('-updated_at')[:5]
     daily_notes = \
-        Notes.DailyNote.objects.filter(valid_date='%s' % today).first()
+        Notes.DailyNote.objects.get(valid_date=curr_time)
     weekly_notes = \
-        Notes.WeeklyNote.objects.filter(end_date__gte='%s' % today).order_by(
+        Notes.WeeklyNote.objects.filter(end_date__gte=curr_time).order_by(
             'start_date').first()
 
     context = {

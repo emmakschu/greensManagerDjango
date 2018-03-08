@@ -10,7 +10,7 @@
     <button id="dailyViewButton">View</button> &nbsp;
     <button id="dailyEditButton">Edit</button>
 
-    <textarea id="dailyEditor"></textarea>
+    <textarea id="dailyEditor">{{ daily_notes.content }}</textarea>
     <div id="dailyView" class="notes-view">{{ daily_notes.content }}</div>
 
 </div>
@@ -20,14 +20,12 @@
     $('#dailyEditor').hide();
 
     $('#dailyEditButton').click(function() {
-        $('#dailyEditor').html(`{{ daily_notes.content }}`);
         $('#dailyView').hide();
         $('#dailyEditor').show();
     });
 
     $('#dailyViewButton').click(function() {
         location.reload(true);
-        var $dailyNotes = `{{ daily_notes.content }}`
         $('#dailyView').html($dailyNotes);
         $('#dailyEditor').hide();
         $('#dailyView').show();
