@@ -99,6 +99,10 @@ class TurfFeature(models.Model):
                                       blank = True,
                                       null = True)
 
+    mow_direction = models.DecimalField(decimal_places=24,
+                                        max_digits=32,
+                                        default=0)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
