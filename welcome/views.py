@@ -13,6 +13,8 @@ from notes import models as Notes
 
 from notes import forms as NoteF
 
+from .calcMowDirections import *
+
 def index(request):
     curr_time = now()
     course_list = Courses.Course.objects.all()
@@ -40,6 +42,10 @@ def index(request):
     ooc_machines = \
         Machines.Machine.objects.filter(in_commission=False) \
             .order_by('-updated_at')[:5]
+
+    greens_mow_dir = greens_mow_direction()
+    tee_mow_dir = tee_mow_direction()
+    fairway_mow_dir = fairway_mow_direction()
 
     try:
         daily_notes = \
@@ -79,7 +85,10 @@ def index(request):
         'daily_notes': daily_notes,
         'daily_form': daily_form,
         'weekly_notes': weekly_notes,
-        'weekly_form': weekly_form
+        'weekly_form': weekly_form,
+        'greens_mow_dir': greens_mow_dir,
+        'tee_mow_dir': tee_mow_dir,
+        'fairway_mow_dir': fairway_mow_dir,
     }
 
     return render(request, 'welcome/index.html', context)
@@ -92,36 +101,3 @@ def daily(request):
     }
     return render(request, 'welcome/daily.html', context)
 
-def daily_update(request, pk):
-    if request.method == 'POST':
-        note = Notes.DailyNote.objects.get(pk=pk)
-        form = NoteF.DailyNoteEdit(instance=note, data=request.POST)
-
-        if form.is_valid():
-            form.instance.created_by = note.created_by
-            form.instance.valid_date = note.valid_date
-
-            pending_form = form.save(commit=False)
-            if request.user.is_authenticated():
-                pending_form.updated_by = request.user
-
-                pending_form.save()
-
-    return redirect('welcome:index')
-
-def weekly_update(request, pk):
-    if request.method == 'POST':
-        note = Notes.WeeklyNote.objects.get(pk=pk)
-        form = NoteF.WeeklyNoteEdit(instance=note, data=request.POST)
-
-        if form.is_valid():
-            form.instance.created_by = note.created_by
-            form.instance.start_date = note.start_date
-
-            pending_form = form.save(commit=False)
-            if request.user.is_authenticated():
-                pending_form.updated_by = request.user
-
-                pending_form.save()
-
-    return redirect('welcome:index')
