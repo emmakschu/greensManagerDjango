@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^parts/', include('parts.urls', namespace="parts")),
     url(r'^turfs/', include('turfs.urls', namespace="turfs")),
     url(r'^fert/', include('fertilizing.urls', namespace="fert")),
+    url(r'^notes/', include('notes.urls', namespace="notes")),
     url(r'^admin/', admin.site.urls),
     url(r'^', include('welcome.urls', namespace="welcome"))
 ]

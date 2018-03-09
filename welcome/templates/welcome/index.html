@@ -10,8 +10,20 @@
     <button id="dailyViewButton">View</button> &nbsp;
     <button id="dailyEditButton">Edit</button>
 
-    <textarea id="dailyEditor">{{ daily_notes.content }}</textarea>
     <div id="dailyView" class="notes-view">{{ daily_notes.content }}</div>
+
+    <form id="dailyEditor"
+          method="POST"
+          action="/notes/daily/{{ daily_notes.pk }}/edit/">
+        {% csrf_token %}
+
+        <table>
+            {{ daily_form.as_table }}
+        </table>
+
+        <input type="submit" value="Update" />
+    </form>
+
 
 </div>
 </section>
@@ -25,8 +37,6 @@
     });
 
     $('#dailyViewButton').click(function() {
-        location.reload(true);
-        $('#dailyView').html($dailyNotes);
         $('#dailyEditor').hide();
         $('#dailyView').show();
     });
@@ -61,10 +71,39 @@
 <div class="scroll-container">
     <h3>Weekly notes</h3>
 
-    <div class="notes-view">{{ weekly_notes.content }}</div>
+    <button id="weeklyViewButton">View</button> &nbsp;
+    <button id="weeklyEditButton">Edit</button>
+
+    <div class="notes-view" id="weeklyView">{{ weekly_notes.content }}</div>
+
+    <form id="weeklyEdit"
+          method="POST"
+          action="/notes/weekly/{{ weekly_notes.pk }}/edit/">
+
+        {% csrf_token %}
+        <table>
+            {{ weekly_form.as_table }}
+        </table>
+
+        <input type="submit" value="Update" />
+    </form>
 
 </div>
 </section>
+
+<script type="text/javascript">
+    $('#weeklyEdit').hide();
+
+    $('#weeklyViewButton').click(function() {
+        $('#weeklyEdit').hide();
+        $('#weeklyView').show();
+    });
+
+    $('#weeklyEditButton').click(function() {
+        $('#weeklyView').hide();
+        $('#weeklyEdit').show();
+    });
+</script>
 
 <section class="content-block">
 <div class="scroll-container">
