@@ -1,0 +1,79 @@
+{% include "head.html" %}
+
+<h2>{{ course.name }}</h2>
+
+<section class="content-block">
+
+	<h3>Holes</h3>
+
+	<table>
+
+		<thead>
+			<th>#</th>
+			<th>Par</th>
+			<th>Yardage</th>
+			<th>(Nickname)</th>
+		</thead>
+
+
+		{% for h in course.hole.all %}
+			<tr>
+				<td>{{ h.number }}</td>
+				<td>{{ h.par }}</td>
+				<td>{{ h.yardage }}</td>
+				<td>{{ h.name }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+
+</section>
+
+
+<section class="content-block">
+
+	<h3>Greens</h3>
+
+	<table>
+		<thead>
+			<th>#</th>
+			<th>Soil</th>
+			<th>Cultivar</th>
+		</thead>
+
+		{% for h in course.hole.all %}
+			{% for g in h.green.all %}
+			<tr>
+				<td>{{ h.number }}</td>
+				<td>{{ g.soil_type }}</td>
+				<td>{{ g.turf_cultivar }}</td>
+			</tr>
+			{% endfor %}
+		{% endfor %}
+	</table>
+</section>
+
+
+<section class="content-block">
+	<h3>Tees</h3>
+
+	<table>
+		<thead>
+			<th>#</th>
+			<th>Soil</th>
+			<th>Cultivar</th>
+		</thead>
+
+		{% for h in course.hole.all %}
+			{% for t in h.tee.all %}
+			<tr>
+				<td>{{ h.number }}</td>
+				<td>{{ t.soil_type }}</td>
+				<td>{{ t.turf_cultivar }}</td>
+			</tr>
+			{% endfor %}
+		{% endfor %}
+	</table>
+	
+</section>
+
+{% include "foot.html" %}

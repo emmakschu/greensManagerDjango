@@ -24,7 +24,8 @@ def index(request):
     return render(request, 'courses/index.html', context)
 
 def course_detail(request, pk):
-    course = Course.objects.get(pk=pk)
+    course = Course.objects.prefetch_related(
+        'hole', 'hole__green', 'hole__tee').get(pk=pk)
 
     context = {
         'curr_time': curr_time,
