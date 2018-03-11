@@ -1,3 +1,5 @@
+<!-- vim: set syntax=htmldjango: -->
+
 {% include "head.html" %}
 
 <h2>Your courses:</h2>
@@ -5,7 +7,12 @@
 {% for c in courses %}
 <section class="content-block">
 <div class="scroll-container">
-    <h3>{{ c.name }}</h3>
+    <h3>
+			<a href="{% url 'courses:course_detail' c.pk %}">
+				{{ c.name }}
+			</a>
+		</h3>
+
     {% for h in c.hole.all %}
         <p>{{ h }}</p>
     {% endfor %}
