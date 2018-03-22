@@ -1,4 +1,9 @@
+greensmanager/
 __pycache__/
+.kdev4/
 *.swp
 .*.swp
 greensmanager.sublime*
+.project
+.pydevproject
+greensManager.kdev4

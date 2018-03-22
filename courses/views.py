@@ -7,6 +7,7 @@ from courses.models import (
     Tee,
     Green,
     Fairway,
+    Rough,
     Bunker
 )
 

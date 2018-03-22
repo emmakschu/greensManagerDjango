@@ -1,14 +1,14 @@
-<!-- vim: set ft=htmldjango: -->
+<!-- vim: set syntax=htmldjango: -->
 
 {% include "head.html" %}
 
 <h2>{{ tee }}:</h2>
 
 <section class="content-block">
-	<h3>Details</h3>
+    <h3>Details</h3>
 
-	<table>
-		<tr>
+    <table>
+        <tr>
 			<th>Soil Type</th>
 			<td>{{ tee.soil_type }}</td>
 		</tr>
@@ -21,6 +21,11 @@
 		<tr>
 			<th>Turfgrass cultivar</th>
 			<td>{{ tee.turf_cultivar.name }}</td>
+		</tr>
+
+		<tr>
+			<th>Surface area</th>
+			<td>{{ tee.area }}</td>
 		</tr>
 
 	</table>
