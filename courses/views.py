@@ -10,14 +10,15 @@ from courses.models import (
     Bunker
 )
 
-curr_time = now()
+def curr_time():
+    return now()
 
 def index(request):
     courses = Course.objects.all()
     holes = Hole.objects.all()
 
     context = {
-        'curr_time': curr_time,
+        'curr_time': curr_time(),
         'courses': courses,
         'holes': holes,
     }
@@ -28,27 +29,28 @@ def course_detail(request, pk):
         'hole', 'hole__green', 'hole__tee').get(pk=pk)
 
     context = {
-        'curr_time': curr_time,
+        'curr_time': curr_time(),
         'course': course,
     }
 
     return render(request, 'courses/course_detail.html', context)
 
 def hole_index(request):
-    holes = Hole.objects.all()
+    courses = Course.objects.prefetch_related('hole').all()
 
     context = {
-        'curr_time': curr_time,
-        'holes': holes,
+        'curr_time': curr_time(),
+        'courses': courses,
     }
 
     return render(request, 'courses/hole_index.html', context)
 
 def hole_detail(request, pk):
-    hole = Hole.objects.get(pk=pk)
+    hole = Hole.objects.prefetch_related('tee', 'green', 'fairway',
+        'rough').get(pk=pk)
 
     context = {
-        'curr_time': curr_time,
+        'curr_time': curr_time(),
         'hole': hole,
     }
 
@@ -58,7 +60,7 @@ def tee_index(request):
     tees = Tee.objects.all()
 
     context = {
-        'curr_time': curr_time,
+        'curr_time': curr_time(),
         'tees': tees,
     }
 
@@ -68,7 +70,7 @@ def tee_detail(request, pk):
     tee = Tee.objects.get(pk=pk)
 
     context = {
-        'curr_time': curr_time,
+        'curr_time': curr_time(),
         'tee': tee,
     }
 
@@ -82,7 +84,7 @@ def fairway_index(request):
     fairways = Fairway.objects.all()
 
     context = {
-        'curr_time': curr_time,
+        'curr_time': curr_time(),
         'fairways': fairways,
     }
 
@@ -92,7 +94,7 @@ def fairway_detail(request, pk):
     fairway = Fairway.objects.get(pk=pk)
 
     context = {
-        'curr_time': curr_time,
+        'curr_time': curr_time(),
         'fairway': fairway,
     }
 
@@ -106,7 +108,7 @@ def green_index(request):
     greens = Green.objects.all()
 
     context = {
-        'curr_time': curr_time,
+        'curr_time': curr_time(),
         'greens': greens,
     }
 
@@ -116,7 +118,7 @@ def green_detail(request, pk):
     green = Green.objects.get(pk=pk)
 
     context = {
-        'curr_time': curr_time,
+        'curr_time': curr_time(),
         'green': green,
     }
 
@@ -130,7 +132,7 @@ def rough_index(request):
     roughs = Rough.objects.all()
 
     context = {
-        'curr_time': curr_time,
+        'curr_time': curr_time(),
         'roughs': roughs,
     }
 
@@ -140,7 +142,7 @@ def rough_detail(request, pk):
     rough = Rough.objects.get(pk=pk)
 
     context = {
-        'curr_time': curr_time,
+        'curr_time': curr_time(),
         'rough': rough,
     }
 
@@ -154,7 +156,7 @@ def bunker_index(request):
     bunkers = Bunker.objects.all()
 
     context = {
-        'curr_time': curr_time,
+        'curr_time': curr_time(),
         'bunkers': bunkers,
     }
 
@@ -164,7 +166,7 @@ def bunker_detail(request, pk):
     bunker = Bunker.objects.get(pk=pk)
 
     context = {
-        'curr_time': curr_time,
+        'curr_time': curr_time(),
         'bunker': bunker,
     }
 

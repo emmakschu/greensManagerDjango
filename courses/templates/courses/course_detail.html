@@ -20,7 +20,11 @@
 
 		{% for h in course.hole.all %}
 			<tr>
-				<td>{{ h.number }}</td>
+				<td>
+					<a href="{% url 'courses:hole_detail' h.pk %}">
+						{{ h.number }}
+					</a>
+				</td>
 				<td>{{ h.par }}</td>
 				<td>{{ h.yardage }}</td>
 				<td>{{ h.name }}</td>
@@ -39,6 +43,7 @@
 		<thead>
 			<th>#</th>
 			<th>Soil</th>
+			<th>Species</th>
 			<th>Cultivar</th>
 		</thead>
 
@@ -47,7 +52,8 @@
 			<tr>
 				<td>{{ h.number }}</td>
 				<td>{{ g.soil_type }}</td>
-				<td>{{ g.turf_cultivar }}</td>
+				<td>{{ g.turf_species }}</td>
+				<td>{{ g.turf_cultivar.name }}</td>
 			</tr>
 			{% endfor %}
 		{% endfor %}
@@ -62,6 +68,7 @@
 		<thead>
 			<th>#</th>
 			<th>Soil</th>
+			<th>Species</th>
 			<th>Cultivar</th>
 		</thead>
 
@@ -70,7 +77,8 @@
 			<tr>
 				<td>{{ h.number }}</td>
 				<td>{{ t.soil_type }}</td>
-				<td>{{ t.turf_cultivar }}</td>
+				<td>{{ t.turf_species }}</td>
+				<td>{{ t.turf_cultivar.name }}</td>
 			</tr>
 			{% endfor %}
 		{% endfor %}

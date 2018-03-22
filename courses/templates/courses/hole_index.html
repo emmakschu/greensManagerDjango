@@ -1,0 +1,39 @@
+<!-- vim: set syntax=htmldjango: -->
+
+{% include "head.html" %}
+
+<h2>Holes</h2>
+
+{% for c in courses.all %}
+
+	<section class="content-block">
+
+		<h3>
+			<a href="{% url 'courses:course_detail' c.pk %}">
+				{{ c.name }}
+			</a>
+		</h3>
+
+		<table>
+			<thead>
+				<th>#</th>
+				<th>Par</th>
+				<th>Yardage</th>
+				<th>(Nickname)</th>
+			</thead>
+
+			{% for h in c.hole.all %}
+			<tr>
+				<td>{{ h.number }}</td>
+				<td>{{ h.par }}</td>
+				<td>{{ h.yardage }}</td>
+				<td>{{ h.name }}</td>
+			</tr>
+			{% endfor %}
+
+		</table>
+	</section>
+
+{% endfor %}
+
+{% include "foot.html" %}

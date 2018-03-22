@@ -44,10 +44,10 @@ urlpatterns = [
 		name="tee_detail"),
 	url(r'^tee/', views.tee_index, name="tee_index"),
 
-	url(r'^hole/(?P<pk>\d+)/', 
+	url(r'^holes/(?P<pk>\d+)/', 
 		views.hole_detail, 
 		name="hole_detail"),
-	url(r'^hole/', views.hole_index, name="hole_index"),
+	url(r'^holes/', views.hole_index, name="hole_index"),
 
 	url(r'^(?P<pk>\d+)/', 
 		views.course_detail, 

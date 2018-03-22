@@ -89,6 +89,11 @@ nav ul li {
     width: 15%;
 }
 
+a {
+	text-decoration: none;
+	color: darkgreen;
+}
+
 .content-block {
 	width: 32%;
 	float: left;
