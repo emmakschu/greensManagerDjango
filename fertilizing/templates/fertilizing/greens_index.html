@@ -1,0 +1,39 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include "head.html" %}
+
+<h2>Greens fertilizations:</h2>
+
+<section class="content-block content-block-full">
+
+    <h3>Most recent greens fertilizations</h3>
+    
+    <table>
+        <thead>
+            <th>Date</th>
+            <th>Fertilizer</th>
+            <th>Rate</th>
+            <th>Greens</th>
+            <th>Bags Used</th>
+            <th>Cost</th>
+        </thead>
+        
+        {% for f in greens_fert %}
+        <tr>
+            <td>{{ f.fert_date }}</td>
+            <td>{{ f.fertilizer }}</td>
+            <td>{{ f.rate }}</td>
+            <td>
+                {% for g in f.green.all %}
+                    &bull; {{ g }}<br />
+                {% endfor %}
+            </td>
+            <td>{{ f.bags_used }}</td>
+            <td>{{ f.cost }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</section>
+
+{% include "foot.html" %}

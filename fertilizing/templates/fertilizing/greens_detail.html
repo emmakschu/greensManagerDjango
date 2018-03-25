@@ -1,0 +1,84 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include "head.html" %}
+
+<h2>Greens fertilization:</h2>
+
+<section class="content-block content-block-full">
+
+    <h3>Greens Fertilization Details</h3>
+
+    <table>
+        <tr>
+            <th>Date</th>
+            <td>{{ greens_fert.fert_date }}</td>
+        </tr>
+        
+        <tr>
+            <th>Greens Covered</th>
+            <td>
+                {% for g in greens_fert.green.all %}
+                    &bull; {{ g }}<br />
+                {% endfor %}
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <th colspan="2">Fertilizer</th>
+        </tr>
+        
+        <tr>
+            <th>Manufacturer</th>
+            <td>{{ greens_fert.fertilizer.manufacturer }}</td>
+        </tr>
+        
+        <tr>
+            <th>Nitrogen (N)</th>
+            <td>{{ greens_fert.fertilizer.n_value }}</td>
+        </tr>
+        
+        <tr>
+            <th>Phosphorus (P<sub>2</sub>O<sub>5</sub>)</th>
+            <td>{{ greens_fert.fertilizer.p_value }}</td>
+        </tr>
+        
+        <tr>
+            <th>Potassium (K<sub>2</sub>O)</th>
+            <td>{{ greens_fert.fertilizer.k_value }}</td>
+        </tr>
+        
+        <tr>
+            <th>Rate</th>
+            <td>{{ greens_fert.rate }}</td>
+        </tr>
+        
+        <tr>
+            <th colspan="2">Costs</th>
+        </tr>
+        
+        <tr>
+            <th>Bag Size</th>
+            <td>{{ greens_fert.fertilizer.bag_size }}</td>
+        </tr>
+        
+        <tr>
+            <th>Bags Used</th>
+            <td>{{ greens_fert.bags_used }}</td>
+        </tr>
+        
+        <tr>
+            <th>Cost per Bag</th>
+            <td>{{ greens_fert.fertilizer.price_per_bag }}</td>
+        </tr>
+        
+        <tr>
+            <th>Total Cost</th>
+            <td><strong>{{ greens_fert.cost }}</strong></td>
+        </tr>
+
+    </table>
+    
+</section>
+
+{% include "foot.html" %}

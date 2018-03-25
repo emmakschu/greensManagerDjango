@@ -4,6 +4,10 @@ from . import views
 
 urlpatterns = [
     
+    url(r'^greens/(?P<pk>\d+)/',
+        views.greensDetail, name="greens_detail"),
+    url(r'^greens/', views.greensIndex, name="greens_index"),
+    
     url(r'^fertilizers/(?P<pk>\d+)/update/',
         views.fertUpdate, name="fert_update"),
     url(r'^fertilizers/(?P<pk>\d+)/edit/',

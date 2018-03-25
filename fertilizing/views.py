@@ -33,7 +33,7 @@ def index(request):
     return render(request, 'fertilizing/index.html', context)
 
 def fertIndex(request):
-    fertilizers = Fertilizer.objects.all().order_by('-created_at')[:10]
+    fertilizers = Fertilizer.objects.all().order_by('-updated_at')
     
     context = {
         'curr_time': curr_time(),
@@ -101,3 +101,23 @@ def fertUpdate(request, pk):
                 pending_form = form.save(commit=False)
     
     return redirect('fert:fert_detail', pk=pk)
+
+def greensIndex(request):
+    greens_fert = GreensFert.objects.all().order_by('-fert_date')[:10]
+    
+    context = {
+        'curr_time': curr_time(),
+        'greens_fert': greens_fert,
+    }
+    
+    return render(request, 'fertilizing/greens_index.html', context)
+
+def greensDetail(request, pk):
+    greens_fert = GreensFert.objects.get(pk=pk)
+    
+    context = {
+        'curr_time': curr_time(),
+        'greens_fert': greens_fert,
+    }
+    
+    return render(request, 'fertilizing/greens_detail.html', context)
