@@ -1,0 +1,37 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include "head.html" %}
+
+<h2>Satellite boxes:</h2>
+
+<section class="content-block content-block-full">
+
+    <a href="{% url 'irr:satbox_new' %}">
+        <button>Add New</button>
+    </a>
+
+    <h3>Satellite Boxes</h3>
+    
+    <table>
+        <thead>
+            <th>Box #</th>
+            <th>Lat.</th>
+            <th>Long.</th>
+        </thead>
+        
+        {% for s in satboxes %}
+        <tr>
+            <td>
+                <a href="{% url 'irr:satbox_detail' pk=s.pk %}">
+                {{ s.box_number }}</a>
+            </td>
+            <td>{{ s.latitude }}</td>
+            <td>{{ s.longitude }}</td>
+        </tr>
+        {% endfor %}
+        
+    </table>
+
+</section>
+
+{% include "foot.html" %}

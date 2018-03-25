@@ -1,0 +1,58 @@
+<!-- vim:set ft=htmldjango: -->
+
+{% include "head.html" %}
+
+<h2>Satellite box detail:</h2>
+
+<section class="content-block content-block-full">
+
+    <h3>{{ satbox }}</h3>
+    
+    <table>
+        <tr>
+            <th>Box #</th>
+            <td>{{ satbox.box_number }}</td>
+        </tr>
+        
+        <tr>
+            <th>Latitude</th>
+            <td>{{ satbox.latitude }}</td>
+        </tr>
+        
+        <tr>
+            <th>Longitude</th>
+            <td>{{ satbox.longitude }}</td>
+        </tr>
+        
+        <tr>
+            <th>Problem?</th>
+            <td>
+                {% if satbox.problem %}
+                    <strong>{{ satbox.problem }}</strong>
+                {% else %}
+                    {{ satbox.problem }}
+                {% endif %}
+            </td>
+        </tr>
+        
+        <tr>
+            <th>Added to Database</th>
+            <td>{{ satbox.created_at }}</td>
+        </tr>
+        
+        <tr>
+            <th>Last Updated</th>
+            <td>{{ satbox.updated_at }}</td>
+        </tr>
+        
+    </table>
+    
+    <br />
+    
+    <a href="{% url 'irr:satbox_edit' pk=satbox.pk %}">
+        <button>Edit</button>
+    </a>
+
+</section>
+
+{% include "foot.html" %}

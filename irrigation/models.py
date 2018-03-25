@@ -173,7 +173,7 @@ class Drain(models.Model):
     # Whether the drain is open. Defaults to closed
     open = models.BooleanField(default = False)
 
-    ####
+    ###
     # Indicate latitude and longitude. These fields are probably more
     # important here than for any other irrigation Class, since
     # drains can sometimes be very difficult to find. As usual, 
@@ -201,7 +201,7 @@ class ShutoffValve(models.Model):
     """
 
     # Status indicates whether the valve is open or closed. A value
-    # of True indicates open, thus the areas that it is capable of 
+    # of True ineicates open, thus the areas that it is capable of 
     # shutting off ARE receiving water pressure. A value of False
     # indicates that the areas it covers should *not* be receiving
     # water pressure
