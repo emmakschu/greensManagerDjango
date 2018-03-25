@@ -32,7 +32,7 @@ def index(request):
     }
     return render(request, 'fertilizing/index.html', context)
 
-def fert_index(request):
+def fertIndex(request):
     fertilizers = Fertilizer.objects.all().order_by('-created_at')[:10]
     
     context = {

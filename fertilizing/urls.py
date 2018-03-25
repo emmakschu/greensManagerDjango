@@ -12,7 +12,7 @@ urlpatterns = [
         views.fertDetail, name="fert_detail"),
     url(r'^fertilizers/create/', views.createFert, name="create_fert"),
     url(r'^fertilizers/new/', views.newFert, name="new_fert"),
-    url(r'^fertilizers/', views.fert_index, name="fert_index"),
+    url(r'^fertilizers/', views.fertIndex, name="fert_index"),
     
     url(r'^', views.index, name="index"),
 ]
