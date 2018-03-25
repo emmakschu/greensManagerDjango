@@ -86,8 +86,21 @@
                                 Greens
                             </a>
                         </li>
-                        <li>Tees</li>
-                        <li>Fairways</li>
+                        <li>
+                            <a href="{% url 'fert:tees_index' %}">
+                                Tees
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'fert:fairways_index' %}">
+                                Fairways
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'fert:roughs_index' %}">
+                                Roughs
+                            </a>
+                        </li>
                     </ul>
                 </li>
             </div>
@@ -95,7 +108,11 @@
             <div class="parent-menu">
                 <li>Irrigation
                     <ul class="child-menu">
-                        <li>Sat. Boxes</li>
+                        <li>
+                            <a href="{% url 'irr:satbox_index' %}">
+                                Sat. Boxes
+                            </a>
+                        </li>
                         <li>Shutoff valves</li>
                         <li>Drains</li>
                         <li>Digs</li>
