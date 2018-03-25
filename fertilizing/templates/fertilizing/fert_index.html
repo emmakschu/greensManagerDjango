@@ -1,0 +1,44 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include "head.html" %}
+
+<h2>Fertilizers:</h2>
+    
+<section class="content-block content-block-full">
+
+    <h3>List of Fertilizers</h3>
+    
+    <table>
+        <thead>
+            <th>Brand</th>
+            <th>Formulation</th>
+            <th>Bag Size</th>
+            <th>Price</th>
+            <th>Price/unit</th>
+        </thead>
+        
+        {% for f in fertilizers %}
+        <tr>
+            <td>{{ f.manufacturer }}</td>
+            <td><a href="{% url 'fert:fert_detail' pk=f.pk %}">
+                {{ f.n_value }} &ndash;
+                {{ f.p_value }} &ndash;
+                {{ f.k_value }}
+                </a>
+            </td>
+            <td>{{ f.bag_size }}</td>
+            <td>{{ f.price_per_bag }}</td>
+            <td>{{ f.unit_price }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+    <br />
+    
+    <a href="{% url 'fert:new_fert' %}">
+        <button>Add a new fertilizer</button>
+    </a>
+    
+</section>
+    
+{% include "foot.html" %}

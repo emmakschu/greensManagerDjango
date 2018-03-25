@@ -33,8 +33,6 @@ class Fertilizer(models.Model):
     p_value = models.PositiveIntegerField()
     k_value = models.PositiveIntegerField()
 
-    spreader = models.ManyToManyField('machines.FertSpreader')
-
     # Bag size. Can use any units, but should have a consistent
     # standard for the facility (or, price per container for 
     # liquid fertilizers)
@@ -42,6 +40,10 @@ class Fertilizer(models.Model):
     # Price paid per bag/container
     price_per_bag = models.DecimalField(decimal_places = 2,
                                         max_digits = 10)
+    unit_price = models.DecimalField(decimal_places=2,
+                                     max_digits=10,
+                                     blank=True,
+                                     null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -65,6 +67,9 @@ class Fertilizing(models.Model):
 
     # Fertilizer used; refs an instance of the Fertilizer class
     fertilizer = models.ForeignKey(Fertilizer)
+    
+    # Fertilizer spreader used
+    spreader = models.ManyToManyField('machines.FertSpreader')
 
     # Amount of bags/containers used
     bags_used = models.DecimalField(decimal_places=2,
@@ -106,6 +111,7 @@ class GreensFert(Fertilizing):
     # Greens fertilized in a many-to-many model. References one or
     # more instances of the courses/Green model
     green = models.ManyToManyField('courses.Green')
+
 
 class TeeFert(Fertilizing):
     """

@@ -15,8 +15,10 @@ from notes import forms as NoteF
 
 from .calcMowDirections import *
 
+def curr_time():
+    return now()
+
 def index(request):
-    curr_time = now()
     course_list = Courses.Course.objects.all()
     hole_list = Courses.Hole.objects.all()
     box_probs = Irrig.SatelliteBox.objects.filter(problem=True)
@@ -53,7 +55,7 @@ def index(request):
 
     except Exception:
         daily_notes = \
-            Notes.DailyNote.objects.all().order_by('-valid_date').first()
+        Notes.DailyNote.objects.all().order_by('-valid_date').first()
 
     daily_form = NoteF.DailyNoteEdit(instance=daily_notes)
 

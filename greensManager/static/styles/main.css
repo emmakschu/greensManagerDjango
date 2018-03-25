@@ -131,6 +131,25 @@ a {
 	width: 48.5%;
 }
 
+.content-block-full {
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    float: none;
+    height: auto;
+    overflow: auto;
+    padding: 1em;
+}
+
+.content-block-full table {
+    margin: auto;
+}
+
+.form-table td {
+    padding: 10px 0;
+}
+
 .right-aligned {
 	text-align: right;
 }

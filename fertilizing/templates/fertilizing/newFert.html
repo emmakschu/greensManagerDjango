@@ -1,24 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- vim: set ft=htmldjango: -->
 
-{% load static %}
+{% include "head.html" %}
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="content-type"
-              content="text/html" />
-
-        <meta name="viewport"
-              content="width=device-width,initial-scale=1.0" />
-
-        <title>GreensManager | Add Fertilizer</title>
-    </head>
-<body>
+<section class="content-block content-block-full">
 
     <h2>Add a new fertilizer:</h2>
+    
+    <form id="fertForm"
+          method="POST"
+          action="{% url 'fert:create_fert' %}">
+          
+        {% csrf_token %}
+          
+        <table class="form-table">
+            {{ form.as_table }}
+        </table>
+        
+        <input type="submit" value="Submit" />
+    </form>
+    
+</section>
 
-    <h4>N-value</h4>
-    <h4>P-value</h4>
-    <h4>K-value</h4>
-</body>
-</html>
+{% include "foot.html" %}

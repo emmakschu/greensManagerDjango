@@ -15,7 +15,11 @@
 
 		<tr>
 			<th>Turfgrass species</th>
-			<td>{{ tee.turf_species }}</td>
+			<td>
+                {{ tee.turf_species.common_name }}
+                (<em>{{ tee.turf_species.genus.name }} 
+                {{ tee.turf_species.name }}</em>)
+            </td>
 		</tr>
 
 		<tr>
@@ -25,7 +29,7 @@
 
 		<tr>
 			<th>Surface area</th>
-			<td>{{ tee.area }}</td>
+			<td>{{ tee.area }} ft<sup>2</sup></td>
 		</tr>
 
 	</table>
