@@ -4,6 +4,13 @@ from . import views
 
 urlpatterns = [
     
+    url(r'^qc/(?P<pk>\d+)/update/', views.qcUpdate, name="qc_update"),
+    url(r'^qc/(?P<pk>\d+)/edit/', views.qcEdit, name="qc_edit"),
+    url(r'^qc/(?P<pk>\d+)/', views.qcDetail, name="qc_detail"),
+    url(r'^qc/create/', views.qcCreate, name="qc_create"),
+    url(r'^qc/new/', views.qcNew, name="qc_new"),
+    url(r'^qc/', views.qcIndex, name="qc_index"),
+        
     url(r'^sprinkler/(?P<pk>\d+)/update/', views.sprinklerUpdate,
         name="sprinkler_update"),
     url(r'^sprinkler/(?P<pk>\d+)/edit/', views.sprinklerEdit,

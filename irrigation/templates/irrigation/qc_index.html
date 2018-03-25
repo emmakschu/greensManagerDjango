@@ -1,0 +1,50 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include "head.html" %}
+
+<h2>Quick couplers overview:</h2>
+
+<section class="content-block content-block-full">
+
+    <a href="{% url 'irr:qc_new' %}">
+        <button>Add New</button>
+    </a>
+    
+    <h3>All Quick Couplers</h3>
+    
+    <table>
+        <thead>
+            <th>Lat.</th>
+            <th>Long.</th>
+            <th>Coverage</th>
+        </thead>
+        
+        {% for q in qcs %}
+        <tr>
+            <td>{{ q.latitude }}</td>
+            <td>{{ q.longitude }}</td>
+            <td>
+                {% if q.green %}
+                    {{ q.green }}<br />
+                {% endif %}
+                
+                {% if q.tee %}
+                    {{ q.tee }}<br />
+                {% endif %}
+                
+                {% if q.fairway %}
+                    {{ q.fairway }}<br />
+                {% endif %}
+                
+                {% if q.rough %}
+                    {{ q.rough }}
+                {% endif %}
+                
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+                
+</section>
+
+{% include "foot.html" %}

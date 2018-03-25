@@ -1,0 +1,80 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include "head.html" %}
+
+<h2>Quick coupler detail:</h2>
+
+<section class="content-block content-block-full">
+
+    <h3>Quick Coupler</h3>
+    
+    <table>
+        <tr>
+            <th>Latitude</th>
+            <td>{{ qc.latitude }}</td>
+        </tr>
+        
+        <tr>
+            <th>Longitude</th>
+            <td>{{ qc.longitude }}</td>
+        </tr>
+        
+        {% if qc.green %}
+        <tr>
+            <th>Green Covered</th>
+            <td>{{ qc.green }}</td>
+        </tr>
+        {% endif %}
+        
+        {% if qc.tee %}
+        <tr>
+            <th>Tee Covered</th>
+            <td>{{ qc.tee }}</td>
+        </tr>
+        {% endif %}
+        
+        {% if qc.fairway %}
+        <tr>
+            <th>Fairway Covered</th>
+            <td>{{ qc.fairway }}</td>
+        </tr>
+        {% endif %}
+        
+        {% if qc.rough %}
+        <tr>
+            <th>Rough Covered</th>
+            <td>{{ qc.rough }}</td>
+        </tr>
+        {% endif %}
+        
+        <tr>
+            <th>Problem?</th>
+            <td>
+                {% if qc.problem %}
+                    <strong>{{ qc.problem }}</strong>
+                {% else %}
+                    {{ qc.problem }}
+                {% endif %}
+            </td>
+        </tr>
+        
+        <tr>
+            <th>Added to Database</th>
+            <td>{{ qc.created_at }}</td>
+        </tr>
+        
+        <tr>
+            <th>Last Updated</th>
+            <td>{{ qc.updated_at }}</td>
+        </tr>
+    </table>
+    
+    <br />
+    
+    <a href="{% url 'irr:qc_edit' pk=qc.pk %}">
+        <button>Edit</button>
+    </a>
+
+</section>
+
+{% include "foot.html" %}

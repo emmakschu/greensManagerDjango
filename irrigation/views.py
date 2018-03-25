@@ -151,3 +151,66 @@ def sprinklerUpdate(request, pk):
             form.save()
         
     return redirect('irr:sprinkler_detail', pk=sprinkler.pk)
+
+def qcIndex(request):
+    qcs = QuickCoupler.objects.all()
+    
+    context = {
+        'curr_time': curr_time(),
+        'qcs': qcs,
+    }
+    
+    return render(request, 'irrigation/qc_index.html', context)
+
+def qcNew(request):
+    form = QuickCouplerForm()
+    
+    context = {
+        'curr_time': curr_time(),
+        'form': form,
+    }
+    
+    return render(request, 'irrigation/qc_new.html', context)
+
+def qcCreate(request):
+    if request.method == 'POST':
+        form = QuickCouplerForm(data=request.POST)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            pending_form = form.save(commit=False)
+            pending_form.save()
+    
+    return redirect('irr:qc_detail', pk=pending_form.pk)
+
+def qcDetail(request, pk):
+    qc = QuickCoupler.objects.get(pk=pk)
+    
+    context = {
+        'curr_time': curr_time(),
+        'qc': qc,
+    }
+    
+    return render(request, 'irrigation/qc_detail.html', context)
+
+def qcEdit(request, pk):
+    qc = QuickCoupler.objects.get(pk=pk)
+    form = QuickCouplerForm(instance=qc)
+    
+    context = {
+        'curr_time': curr_time(),
+        'qc': qc,
+        'form': form,
+    }
+    
+    return render(request, 'irrigation/qc_edit.html', context)
+
+def qcUpdate(request, pk):
+    qc = QuickCoupler.objects.get(pk=pk)
+    
+    if request.method == 'POST':
+        form = QuickCouplerForm(request.POST, instance=qc)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            form.save()
+    
+    return redirect('irr:qc_detail', pk=qc.pk)
