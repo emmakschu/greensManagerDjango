@@ -19,6 +19,20 @@
             <td>{{ sprinkler.sprinkler_number }}</td>
         </tr>
         
+        {% if sprinkler.make %}
+        <tr>
+            <th>Make</th>
+            <td>{{ sprinkler.make }}</td>
+        </tr>
+        {% endif %}
+        
+        {% if sprinkler.model %}
+        <tr>
+            <th>Model</th>
+            <td>{{ sprinkler.model }}</td>
+        </tr>
+        {% endif %}
+        
         <tr>
             <th>Latitude</th>
             <td>{{ sprinkler.latitude }}</td>

@@ -69,6 +69,13 @@ class SprinklerHead(models.Model):
 
     # Indicate sprinkler number in box as referenced by radio system.
     sprinkler_number = models.IntegerField()
+    
+    make = models.CharField(max_length=256,
+                            blank=True,
+                            null=True)
+    model = models.CharField(max_length=256,
+                             blank=True,
+                             null=True)
 
     # Latitude and longitude in decimal format. See note for lat and
     # long for SatelliteBox class ut supra.
