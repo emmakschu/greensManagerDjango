@@ -2,32 +2,32 @@
 
 {% include "head.html" %}
 
-<h2>Greens fertilizations:</h2>
+<h2>Tees fertilizations:</h2>
 
 <section class="content-block content-block-full">
 
-    <a href="{% url 'fert:greens_new' %}">
+    <a href="{% url 'fert:tees_new' %}">
         <button>Add New</button>
     </a>
     
     <br />
 
-    <h3>Most recent greens fertilizations</h3>
+    <h3>Most recent tees fertilizations</h3>
     
     <table>
         <thead>
             <th>Date</th>
             <th>Fertilizer</th>
             <th>Rate</th>
-            <th>Greens</th>
+            <th>Tees</th>
             <th>Bags Used</th>
             <th>Cost</th>
         </thead>
         
-        {% for f in greens_fert %}
+        {% for f in tees_fert %}
         <tr>
             <td>
-                <a href="{% url 'fert:greens_detail' pk=f.pk %}">
+                <a href="{% url 'fert:tees_detail' pk=f.pk %}">
                 {{ f.fert_date }}</a>
             </td>
             <td>
@@ -36,9 +36,9 @@
             </td>
             <td>{{ f.rate }}</td>
             <td>
-                {% for g in f.green.all %}
+                {% for g in f.tee.all %}
                     &bull; 
-                    <a href="{% url 'courses:green_detail' pk=g.pk %}">{{ g }}</a><br />
+                    <a href="{% url 'courses:tee_detail' pk=g.pk %}">{{ g }}</a><br />
                 {% endfor %}
             </td>
             <td>{{ f.bags_used }}</td>
@@ -50,3 +50,4 @@
 </section>
 
 {% include "foot.html" %}
+

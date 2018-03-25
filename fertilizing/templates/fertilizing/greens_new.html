@@ -1,0 +1,26 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include "head.html" %}
+
+<h2>Add new greens fertilization:</h2>
+
+<section class="content-block content-block-full">
+
+    <form id="greensFertForm"
+          method="POST"
+          action="{% url 'fert:greens_create' %}">
+        <table>
+        {% csrf_token %}
+        
+            {{ form.as_table }}
+        
+        </table>
+        
+        <br />
+        
+        <input type="submit" value="Submit" />
+    </form>
+
+</section>
+
+{% include "foot.html" %}

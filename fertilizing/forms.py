@@ -17,13 +17,14 @@ class FertilizerForm(forms.ModelForm):
             'updated_at',
             'unit_price',
         ]
-    
+        
 class GreensFertForm(forms.ModelForm):
     class Meta:
         model = GreensFert
         exclude = [
             'created_at',
-            'updated_at'
+            'updated_at',
+            'cost'
         ]
         
 class TeeFertForm(forms.ModelForm):
@@ -31,7 +32,8 @@ class TeeFertForm(forms.ModelForm):
         model = TeeFert
         exclude = [
             'created_at',
-            'updated_at'
+            'updated_at',
+            'cost'
         ]
 
 class FairwayFertForm(forms.ModelForm):
@@ -39,7 +41,8 @@ class FairwayFertForm(forms.ModelForm):
         model = FairwayFert
         exclude = [
             'created_at',
-            'updated_at'
+            'updated_at',
+            'cost'
         ]
 
 class RoughFertForm(forms.ModelForm):
@@ -47,5 +50,6 @@ class RoughFertForm(forms.ModelForm):
         model = RoughFert
         exclude = [
             'created_at',
-            'updated_at'
+            'updated_at',
+            'cost'
         ]

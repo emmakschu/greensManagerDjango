@@ -2,56 +2,56 @@
 
 {% include "head.html" %}
 
-<h2>Greens fertilization:</h2>
+<h2>Fairways fertilization:</h2>
 
 <section class="content-block content-block-full">
 
-    <h3>Greens Fertilization Details</h3>
+    <h3>Fairways Fertilization Details</h3>
 
     <table>
         <tr>
             <th>Date</th>
-            <td>{{ greens_fert.fert_date }}</td>
+            <td>{{ fairways_fert.fert_date }}</td>
         </tr>
         
         <tr>
-            <th>Greens Covered</th>
+            <th>Fairways Covered</th>
             <td>
-                {% for g in greens_fert.green.all %}
+                {% for g in fairways_fert.fairway.all %}
                     &bull; 
-                    <a href="{% url 'courses:green_detail' pk=g.pk %}">{{ g }}</a><br />
+                    <a href="{% url 'courses:fairway_detail' pk=g.pk %}">{{ g }}</a><br />
                 {% endfor %}
             </td>
         </tr>
         
         <tr>
             <th colspan="2">
-            <a href="{% url 'fert:fert_detail' pk=greens_fert.fertilizer.pk %}"> Fertilizer</th> 
+            <a href="{% url 'fert:fert_detail' pk=fairways_fert.fertilizer.pk %}"> Fertilizer</th> 
         </tr>
         
         <tr>
             <th>Manufacturer</th>
-            <td>{{ greens_fert.fertilizer.manufacturer }}</td>
+            <td>{{ fairways_fert.fertilizer.manufacturer }}</td>
         </tr>
         
         <tr>
             <th>Nitrogen (N)</th>
-            <td>{{ greens_fert.fertilizer.n_value }}</td>
+            <td>{{ fairways_fert.fertilizer.n_value }}</td>
         </tr>
         
         <tr>
             <th>Phosphorus (P<sub>2</sub>O<sub>5</sub>)</th>
-            <td>{{ greens_fert.fertilizer.p_value }}</td>
+            <td>{{ fairways_fert.fertilizer.p_value }}</td>
         </tr>
         
         <tr>
             <th>Potassium (K<sub>2</sub>O)</th>
-            <td>{{ greens_fert.fertilizer.k_value }}</td>
+            <td>{{ fairways_fert.fertilizer.k_value }}</td>
         </tr>
         
         <tr>
             <th>Rate</th>
-            <td>{{ greens_fert.rate }}</td>
+            <td>{{ fairways_fert.rate }}</td>
         </tr>
         
         <tr>
@@ -60,32 +60,33 @@
         
         <tr>
             <th>Bag Size</th>
-            <td>{{ greens_fert.fertilizer.bag_size }}</td>
+            <td>{{ fairways_fert.fertilizer.bag_size }}</td>
         </tr>
         
         <tr>
             <th>Bags Used</th>
-            <td>{{ greens_fert.bags_used }}</td>
+            <td>{{ fairways_fert.bags_used }}</td>
         </tr>
         
         <tr>
             <th>Cost per Bag</th>
-            <td>{{ greens_fert.fertilizer.price_per_bag }}</td>
+            <td>{{ fairways_fert.fertilizer.price_per_bag }}</td>
         </tr>
         
         <tr>
             <th>Total Cost</th>
-            <td><strong>{{ greens_fert.cost }}</strong></td>
+            <td><strong>{{ fairways_fert.cost }}</strong></td>
         </tr>
 
     </table>
     
     <br />
     
-    <a href="{% url 'fert:greens_edit' pk=greens_fert.pk %}">
+    <a href="{% url 'fert:fairways_edit' pk=fairways_fert.pk %}">
         <button>Edit</button>
     </a>
     
 </section>
 
 {% include "foot.html" %}
+
