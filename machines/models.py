@@ -228,6 +228,9 @@ class FertSpreader(models.Model):
     # used in the Fertilizing app
     capacity = models.FloatField()
     # Notes, e.g.: "Should be set to H for tees", etc.
-    notes = models.TextField()
+    notes = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return "%s %s spreader" % (self.make, self.ident_number)

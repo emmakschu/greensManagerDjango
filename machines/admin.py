@@ -13,7 +13,8 @@ from .models import (
     Cart,
     TrapRake,
     UtilVehicle,
-    Tractor
+    Tractor,
+    FertSpreader
 )
 
 admin.site.register(GreensMower)
@@ -27,4 +28,4 @@ admin.site.register(Cart)
 admin.site.register(TrapRake)
 admin.site.register(UtilVehicle)
 admin.site.register(Tractor)
-
+admin.site.register(FertSpreader)
