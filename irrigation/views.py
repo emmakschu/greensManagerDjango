@@ -87,3 +87,67 @@ def satboxUpdate(request, pk):
             form.save()
         
     return redirect('irr:satbox_detail', pk=satbox.pk)
+
+def sprinklerIndex(request):
+    sprinklers = SprinklerHead.objects.all()
+    
+    context = {
+        'curr_time': curr_time(),
+        'sprinklers': sprinklers,
+    }
+    
+    return render(request, 'irrigation/sprinkler_index.html', context)
+
+def sprinklerNew(request):
+    form = SprinklerHeadForm()
+    
+    context = {
+        'curr_time': curr_time(),
+        'form': form,
+    }
+    
+    return render(request, 'irrigation/sprinkler_new.html', context)
+
+def sprinklerCreate(request):
+    if request.method == 'POST':
+        form = SprinklerHeadForm(data=request.POST)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            pending_form = form.save(commit=False)
+            pending_form.save()
+            
+    return redirect('irr:sprinkler_detail', pk=pending_form.pk)
+
+def sprinklerDetail(request, pk):
+    sprinkler = SprinklerHead.objects.get(pk=pk)
+    
+    context = {
+        'curr_time': curr_time(),
+        'sprinkler': sprinkler,
+    }
+    
+    return render(request, 'irrigation/sprinkler_detail.html',
+                  context)
+
+def sprinklerEdit(request, pk):
+    sprinkler = SprinklerHead.objects.get(pk=pk)
+    form = SprinklerHeadForm(instance=sprinkler)
+    
+    context = {
+        'curr_time': curr_time(),
+        'sprinkler': sprinkler,
+        'form': form,
+    }
+    
+    return render(request, 'irrigation/sprinkler_edit.html', context)
+
+def sprinklerUpdate(request, pk):
+    sprinkler = SprinklerHead.objects.get(pk=pk)
+    
+    if request.method == 'POST':
+        form = SprinklerHeadForm(request.POST, instance=sprinkler)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            form.save()
+        
+    return redirect('irr:sprinkler_detail', pk=sprinkler.pk)

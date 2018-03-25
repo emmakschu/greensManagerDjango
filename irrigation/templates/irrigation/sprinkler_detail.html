@@ -1,0 +1,100 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include "head.html" %}
+
+<h2>Sprinkler detail:</h2>
+
+<section class="content-block content-block-full">
+
+    <h3>{{ sprinkler }}</h3>
+    
+    <table>
+        <tr>
+            <th>Box #</th>
+            <td>{{ sprinkler.satellite_box.box_number }}</td>
+        </tr>
+        
+        <tr>
+            <th>Sprinkler #</th>
+            <td>{{ sprinkler.sprinkler_number }}</td>
+        </tr>
+        
+        <tr>
+            <th>Latitude</th>
+            <td>{{ sprinkler.latitude }}</td>
+        </tr>
+        
+        <tr>
+            <th>Longitude</th>
+            <td>{{ sprinkler.longitude }}</td>
+        </tr>
+        
+        {% if sprinkler.distance %}
+        <tr>
+            <th>Distance Marker</th>
+            <td>{{ sprinkler.distance }}</td>
+        </tr>
+        {% endif %}
+        
+        {% if sprinkler.hole %}
+        <tr>
+            <th>Hole</th>
+            <td>{{ sprinkler.hole }}</td>
+        </tr>
+        {% endif %}
+        
+        {% if sprinkler.tee %}
+        <tr>
+            <th>Tee</th>
+            <td>{{ sprinkler.tee }}</td>
+        </tr>
+        
+        {% elif sprinkler.fairway %}
+        <tr>
+            <th>Fairway</th>
+            <td>{{ sprinkler.fairway }}</td>
+        </tr>
+        
+        {% elif sprinkler.green %}
+        <tr>
+            <th>Green</th>
+            <td>{{ sprinkler.green }}</td>
+        </tr>
+        
+        {% elif sprinkler.rough %}
+        <tr>
+            <th>Rough</th>
+            <td>{{ sprinkler.rough }}</td>
+        </tr>
+        {% endif %}
+        
+        <tr>
+            <th>Problem?</th>
+            {% if sprinkler.problem %}
+                <td><strong>{{ sprinkler.problem }}</strong></td>
+            {% else %}
+                <td>{{ sprinkler.problem }}</td>
+            {% endif %}
+        </tr>
+        
+        <tr>
+            <th>Added to Database</th>
+            <td>{{ sprinkler.created_at }}</td>
+        </tr>
+        
+        <tr>
+            <th>Last Updated</th>
+            <td>{{ sprinkler.updated_at }}</td>
+        </tr>
+        
+    </table>
+    
+    <br />
+    
+    <a href="{% url 'irr:sprinkler_edit' pk=sprinkler.pk %}">
+        <button>Edit</button>
+    </a>
+
+</section>
+
+{% include "foot.html" %}
