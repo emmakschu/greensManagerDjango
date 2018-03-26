@@ -6,6 +6,10 @@
     
 <section class="content-block content-block-full">
 
+    <a href="{% url 'fert:new_fert' %}">
+        <button>Add New</button>
+    </a>
+
     <h3>List of Fertilizers</h3>
     
     <table>
@@ -20,24 +24,24 @@
         {% for f in fertilizers %}
         <tr>
             <td>{{ f.manufacturer }}</td>
-            <td><a href="{% url 'fert:fert_detail' pk=f.pk %}">
+            <td>
                 {{ f.n_value }} &ndash;
                 {{ f.p_value }} &ndash;
                 {{ f.k_value }}
-                </a>
             </td>
             <td>{{ f.bag_size }}</td>
             <td>{{ f.price_per_bag }}</td>
             <td>{{ f.unit_price }}</td>
+            <td class="center-align">
+                <a href="{% url 'fert:fert_detail' pk=f.pk %}">
+                    <button>Detail</button>
+                </a>
+            </td>
         </tr>
         {% endfor %}
     </table>
     
     <br />
-    
-    <a href="{% url 'fert:new_fert' %}">
-        <button>Add a new fertilizer</button>
-    </a>
     
 </section>
     
