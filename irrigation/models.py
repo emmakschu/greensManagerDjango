@@ -255,12 +255,18 @@ class IrrigationDig(models.Model):
     under this realm for future reference.
     """
     date = models.DateField(default=date.today)
+    hole = models.ForeignKey('courses.Hole')
     sprinkler = models.ForeignKey(SprinklerHead,
                                   blank = True,
                                   null = True)
-    quick_coupler = models.ForeignKey(QuickCoupler)
-    drain = models.ForeignKey(Drain)
+    quick_coupler = models.ForeignKey(QuickCoupler,
+                                      blank=True,
+                                      null=True)
+    drain = models.ForeignKey(Drain,
+                              blank=True,
+                              null=True)
     fixed = models.BooleanField(default = False)
+    description = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

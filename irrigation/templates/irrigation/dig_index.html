@@ -1,0 +1,59 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include "head.html" %}
+
+<h2>Irrigation digs overview:</h2>
+
+<section class="content-block content-block-full">
+
+    <a href="{% url 'irr:dig_new' %}">
+        <button>Add New</button>
+    </a>
+
+    <h3>Irrigation Digs</h3>
+    
+    <table>
+        <thead>
+            <th>Date</th>
+            <th>Hole</th>
+            <th>Target</th>
+            <th>Fixed</th>
+        </thead>
+        
+        {% for d in digs %}
+        <tr>
+            <td>{{ d.date }}</td>
+            <td>{{ d.hole }}</td>
+            <td>
+                {% if d.sprinkler %}
+                    {{ d.sprinkler }}
+                {% endif %}
+                
+                {% if d.quick_coupler %}
+                    {{ d.quick_coupler }}
+                {% endif %}
+                
+                {% if d.drain %}
+                    {{ d.drain }}
+                {% endif %}
+            </td>
+            <td>
+                {% if d.fixed %}
+                    Yes
+                {% else %}
+                    No
+                {% endif %}
+            </td>
+            <td>
+                <a href="{% url 'irr:dig_detail' pk=d.pk %}">
+                    <button>Detail</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+        
+    </table>
+
+</section>
+
+{% include "foot.html" %}

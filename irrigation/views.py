@@ -343,3 +343,67 @@ def isoUpdate(request, pk):
             form.save()
             
     return redirect('irr:iso_detail', pk=iso.pk)
+
+def digIndex(request):
+    digs = IrrigationDig.objects.all().order_by('-date')
+    
+    context = {
+        'curr_time': curr_time(),
+        'digs': digs,
+    }
+    
+    return render(request, 'irrigation/dig_index.html', context)
+
+def digNew(request):
+    form = IrrigationDigForm()
+    
+    context = {
+        'curr_time': curr_time(),
+        'form': form,
+    }
+    
+    return render(request, 'irrigation/dig_new.html', context)
+
+def digCreate(request):
+    if request.method == 'POST':
+        
+        form = IrrigationDigForm(data=request.POST)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            pending_form = form.save(commit=False)
+            pending_form.save()
+            
+    return redirect('irr:dig_detail', pk=pending_form.pk)
+
+def digDetail(request, pk):
+    dig = IrrigationDig.objects.get(pk=pk)
+    
+    context = {
+        'curr_time': curr_time(),
+        'dig': dig,
+    }
+    
+    return render(request, 'irrigation/dig_detail.html', context)
+
+def digEdit(request, pk):
+    dig = IrrigationDig.objects.get(pk=pk)
+    form = IrrigationDigForm(instance=dig)
+    
+    context = {
+        'curr_time': curr_time(),
+        'dig': dig,
+        'form': form,
+    }
+    
+    return render(request, 'irrigation/dig_edit.html', context)
+
+def digUpdate(request, pk):
+    dig = IrrigationDig.objects.get(pk=pk)
+    
+    if request.method == 'POST':
+        form = IrrigationDigForm(request.POST, instance=dig)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            form.save()
+            
+    return redirect('irr:dig_detail', pk=dig.pk)

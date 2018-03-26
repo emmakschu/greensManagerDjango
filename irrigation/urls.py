@@ -4,6 +4,14 @@ from . import views
 
 urlpatterns = [
     
+    url(r'^dig/(?P<pk>\d+)/update/', views.digUpdate, 
+        name="dig_update"),
+    url(r'^dig/(?P<pk>\d+)/edit/', views.digEdit, name="dig_edit"),
+    url(r'^dig/(?P<pk>\d+)/', views.digDetail, name="dig_detail"),
+    url(r'^dig/create/', views.digCreate, name="dig_create"),
+    url(r'^dig/new/', views.digNew, name="dig_new"),
+    url(r'^dig/', views.digIndex, name="dig_index"),
+    
     url(r'^iso/(?P<pk>\d+)/update/', views.isoUpdate,
         name="iso_update"),
     url(r'^iso/(?P<pk>\d+)/edit/', views.isoEdit, name="iso_edit"),
