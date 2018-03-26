@@ -4,6 +4,24 @@ from . import views
 
 urlpatterns = [
     
+    url(r'^iso/(?P<pk>\d+)/update/', views.isoUpdate,
+        name="iso_update"),
+    url(r'^iso/(?P<pk>\d+)/edit/', views.isoEdit, name="iso_edit"),
+    url(r'^iso/(?P<pk>\d+)/', views.isoDetail, name="iso_detail"),
+    url(r'^iso/create/', views.isoCreate, name="iso_create"),
+    url(r'^iso/new/', views.isoNew, name="iso_new"),
+    url(r'^iso/', views.isoIndex, name="iso_index"),
+    
+    url(r'^drain/(?P<pk>\d+)/update/', views.drainUpdate,
+        name="drain_update"),
+    url(r'^drain/(?P<pk>\d+)/edit/', views.drainEdit,
+        name="drain_edit"),
+    url(r'^drain/(?P<pk>\d+)/', views.drainDetail,
+        name="drain_detail"),
+    url(r'^drain/create/', views.drainCreate, name="drain_create"),
+    url(r'^drain/new/', views.drainNew, name="drain_new"),
+    url(r'^drain/', views.drainIndex, name="drain_index"),
+    
     url(r'^qc/(?P<pk>\d+)/update/', views.qcUpdate, name="qc_update"),
     url(r'^qc/(?P<pk>\d+)/edit/', views.qcEdit, name="qc_edit"),
     url(r'^qc/(?P<pk>\d+)/', views.qcDetail, name="qc_detail"),

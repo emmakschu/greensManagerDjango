@@ -1,0 +1,65 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include "head.html" %}
+
+<h2>Isolation valves overview:</h2>
+
+<section class="content-block content-block-full">
+
+    <a href="{% url 'irr:iso_new' %}">
+        <button>Add New</button>
+    </a>
+
+    <h3>All Isolation Valves</h3>
+    
+    <table>
+        <thead>
+            <th>Isolation Area</th>
+            <th>Lat.</th>
+            <th>Long.</th>
+            <th>Open</th>
+        </thead>
+        
+        {% for v in isos %}
+        <tr>
+            <td>
+                {% if v.green %}
+                    {{ v.green }}
+                {% endif %}
+                
+                {% if v.tee %}
+                    {{ v.tee }}
+                {% endif %}
+                
+                {% if v.fairway %}
+                    {{ v.fairway }}
+                {% endif %}
+                
+                {% if v.rough %}
+                    {{ v.rough }}
+                {% endif %}
+            </td>
+        
+            <td>{{ v.latitude }}</td>
+            <td>{{ v.longitude }}</td>
+            <td>
+                {% if v.open %}
+                    Y
+                {% else %}
+                    <strong>N</strong>
+                {% endif %}
+            </td>
+            <td>
+                <a href="{% url 'irr:iso_detail' pk=v.pk %}">
+                    <button>Detail</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+        
+    </table>
+            
+
+</section>
+
+{% include "foot.html" %}

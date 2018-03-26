@@ -214,3 +214,132 @@ def qcUpdate(request, pk):
             form.save()
     
     return redirect('irr:qc_detail', pk=qc.pk)
+
+def drainIndex(request):
+    drains = Drain.objects.all()
+    
+    context = {
+        'curr_time': curr_time(),
+        'drains': drains,
+    }
+    
+    return render(request, 'irrigation/drain_index.html', context)
+
+def drainNew(request):
+    form = DrainForm()
+    
+    context = {
+        'curr_time': curr_time(),
+        'form': form,
+    }
+    
+    return render(request, 'irrigation/drain_new.html', context)
+
+def drainCreate(request):
+    if request.method == 'POST':
+        
+        form = DrainForm(data=request.POST)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            pending_form = form.save(commit=False)
+            pending_form.save()
+            
+    return redirect('irr:drain_detail', pk=pending_form.pk)
+
+def drainDetail(request, pk):
+    drain = Drain.objects.get(pk=pk)
+    
+    context = {
+        'curr_time': curr_time(),
+        'drain': drain,
+    }
+    
+    return render(request, 'irrigation/drain_detail.html', context)
+
+def drainEdit(request, pk):
+    drain = Drain.objects.get(pk=pk)
+    form = DrainForm(instance=drain)
+    
+    context = {
+        'curr_time': curr_time(),
+        'drain': drain,
+        'form': form,
+    }
+    
+    return render(request, 'irrigation/drain_edit.html', context)
+
+def drainUpdate(request, pk):
+    drain = Drain.objects.get(pk=pk)
+    
+    if request.method == 'POST':
+        form = DrainForm(request.POST, instance=drain)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            form.save()
+            
+    return redirect('irr:drain_detail', pk=drain.pk)
+
+def isoIndex(request):
+    isos = ShutoffValve.objects.all()
+    
+    context = {
+        'curr_time': curr_time(),
+        'isos': isos,
+    }
+    
+    return render(request, 'irrigation/iso_index.html', context)
+
+def isoNew(request):
+    form = ShutoffValveForm()
+    
+    context = {
+        'curr_time': curr_time(),
+        'form': form,
+    }
+    
+    return render(request, 'irrigation/iso_new.html', context)
+
+def isoCreate(request):
+    if request.method == 'POST':
+        
+        form = ShutoffValveForm(data=request.POST)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            pending_form = form.save(commit=False)
+            pending_form.save()
+            
+    return redirect('irr:iso_detail', pk=pending_form.pk)
+
+def isoDetail(request, pk):
+    iso = ShutoffValve.objects.get(pk=pk)
+    
+    context = {
+        'curr_time': curr_time(),
+        'iso': iso,
+    }
+    
+    return render(request, 'irrigation/iso_detail.html', context)
+
+def isoEdit(request, pk):
+    iso = ShutoffValve.objects.get(pk=pk)
+    form = ShutoffValveForm(instance=iso)
+    
+    context = {
+        'curr_time': curr_time(),
+        'iso': iso,
+        'form': form,
+    }
+    
+    return render(request, 'irrigation/iso_edit.html', context)
+
+def isoUpdate(request, pk):
+    iso = ShutoffValve.objects.get(pk=pk)
+    
+    if request.method == 'POST':
+        
+        form = ShutoffValveForm(request.POST, instance=iso)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            form.save()
+            
+    return redirect('irr:iso_detail', pk=iso.pk)

@@ -1,0 +1,85 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include "head.html" %}
+
+<h2>Isolation valves:</h2>
+
+<section class="content-block content-block-full">
+
+    <h3>Iso Valve Detail</h3>
+    
+    <table>
+        <tr>
+            <th>Area Isolated</th>
+            <td>
+                {% if iso.green %}
+                    {{ iso.green }}
+                {% endif %}
+                
+                {% if iso.tee %}
+                    {{ iso.tee }}
+                {% endif %}
+                
+                {% if iso.fairway %}
+                    {{ iso.fairway }}
+                {% endif %}
+                
+                {% if iso.rough %}
+                    {{ iso.rough }}
+                {% endif %}
+            </td>
+        </tr>
+        
+        <tr>
+            <th>Latitude</th>
+            <td>{{ iso.latitude }}</td>
+        </tr>
+        
+        <tr>
+            <th>Longitude</th>
+            <td>{{ iso.longitude }}</td>
+        </tr>
+        
+        <tr>
+            <th>Open</th>
+            <td>
+                {% if iso.open %}
+                    Yes
+                {% else %}
+                    <strong>No</strong>
+                {% endif %}
+            </td>
+        </tr>
+        
+        <tr>
+            <th>Problem?</th>
+            <td>
+                {% if iso.problem %}
+                    <strong>{{ iso.problem }}</strong>
+                {% else %}
+                    {{ iso.problem }}
+                {% endif %}
+            </td>
+        </tr>
+        
+        <tr>
+            <th>Added to Database</th>
+            <td>{{ iso.created_at }}</td>
+        </tr>
+        
+        <tr>
+            <th>Last Updated</th>
+            <td>{{ iso.updated_at }}</td>
+        </tr>
+        
+    </table>
+    
+    <br />
+    
+    <a href="{% url 'irr:iso_edit' pk=iso.pk %}">
+        <button>Edit</button>
+    </a>
+
+</section>
+
+{% include "foot.html" %}

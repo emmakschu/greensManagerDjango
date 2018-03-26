@@ -1,0 +1,69 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include "head.html" %}
+
+<h2>Irrigation drains:</h2>
+
+<section class="content-block content-block-full">
+
+    <h3>Drain Detail</h3>
+    
+    <table>
+        <tr>
+            <th>Hole</th>
+            <td>{{ drain.hole }}</td>
+        </tr>
+        
+        <tr>
+            <th>Latitude</th>
+            <td>{{ drain.latitude }}</td>
+        </tr>
+        
+        <tr>
+            <th>Longitude</th>
+            <td>{{ drain.longitude }}</td>
+        </tr>
+        
+        <tr>
+            <th>Open</th>
+            <td>
+                {% if drain.open %}
+                    <strong>Yes</strong>
+                {% else %}
+                    No
+                {% endif %}
+            </td>
+        </tr>
+        
+        <tr>
+            <th>Problem?</th>
+            <td>
+                {% if drain.problem %}
+                    <strong>{{ drain.problem }}</strong>
+                {% else %}
+                    {{ drain.problem }}
+                {% endif %}
+            </td>
+        </tr>
+        
+        <tr>
+            <th>Added to Database</th>
+            <td>{{ drain.created_at }}</td>
+        </tr>
+        
+        <tr>
+            <th>Last Updated</th>
+            <td>{{ drain.updated_at }}</td>
+        </tr>
+    
+    </table>
+    
+    <br />
+    
+    <a href="{% url 'irr:drain_edit' pk=drain.pk %}">
+        <button>Edit</button>
+    </a>
+    
+</section>
+
+{% include "foot.html" %}
