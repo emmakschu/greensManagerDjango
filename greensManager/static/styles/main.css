@@ -132,10 +132,9 @@ a {
 }
 
 .content-block-full {
-    /*max-width: 960px;*/
     margin-left: auto;
     margin-right: auto;
-    text-align: center;
+    /*text-align: center;*/
     float: none;
     height: auto;
     overflow: auto;
@@ -172,4 +171,12 @@ footer a {
 
 .notes-view {
     white-space: pre-line;
+}
+
+.right-align {
+    text-align: right;
+}
+
+.center-align {
+    text-align: center;
 }

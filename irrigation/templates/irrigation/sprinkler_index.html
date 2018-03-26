@@ -45,6 +45,10 @@
                     {{ s.rough }}
                 {% endif %}
             </td>
+            <td class="center-align">
+                <a href="{% url 'irr:sprinkler_detail' pk=s.pk %}">
+                <button>Detail</button></a>
+            </td>
         </tr>
         {% endfor %}
         

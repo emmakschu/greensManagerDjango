@@ -27,6 +27,10 @@
             </td>
             <td>{{ s.latitude }}</td>
             <td>{{ s.longitude }}</td>
+            <td class="center-align">
+                <a href="{% url 'irr:satbox_detail' pk=s.pk %}">
+                <button>Detail</button></a>
+            </td>
         </tr>
         {% endfor %}
         
