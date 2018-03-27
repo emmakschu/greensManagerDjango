@@ -1,0 +1,27 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include "machines/shophead.html" %}
+
+<h2>Edit greensmower:</h2>
+
+<section class="content-block content-block-full">
+
+    <h3>Editing {{ mower }}</h3>
+    
+    <form id="mowerForm"
+          method="POST"
+          action="{% url 'shop:greensmow_update' pk=mower.pk %}">
+        
+        {% csrf_token %}
+        
+        <table>
+            {{ form.as_table }}
+        </table>
+        
+        <input type="submit" value="Save" />
+    
+    </form>
+
+</section>
+
+{% include "foot.html" %}

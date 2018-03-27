@@ -102,9 +102,24 @@
             <div class="parent-menu">
                 <li>Machines
                     <ul class="child-menu">
-                        <li>Greens Mowers</li>
-                        <li>Tee Mowers</li>
-                        <li>Fairway Mowers</li>
+                        <li>
+                            <a href="{% url 'shop:greensmow_index' %}">
+                                Greens Mowers
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="{% url 'shop:teemow_index' %}">
+                                Tee Mowers
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="{% url 'shop:fairwaymow_index' %}">
+                                Fairway Mowers
+                            </a>
+                        </li>
+                        
                         <li>Rough Mowers</li>
                         <li>Rollers</li>
                         <li>Trap Rakes</li>

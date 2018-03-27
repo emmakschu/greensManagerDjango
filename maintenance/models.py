@@ -15,6 +15,10 @@ class Maintenance(models.Model):
     parts_used = models.ManyToManyField('parts.Part',
                                         through=RepairPart,
                                         blank = True)
+    parts_cost = models.DecimalField(decimal_places=2,
+                                     max_digits=12,
+                                     blank=True,
+                                     null=True)
     acked = models.ForeignKey(User)
     updated_at = models.DateTimeField(auto_now=True)
 

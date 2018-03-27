@@ -2,7 +2,7 @@ body{
 	background: #e6e6e6;
     font-family: 'Quattrocento Sans', sans-serif;
     width: 100vw;
-    overflow: hidden;
+    overflow: auto;
 }
 
 header {
