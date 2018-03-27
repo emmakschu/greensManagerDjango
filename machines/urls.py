@@ -4,6 +4,17 @@ from . import views
 
 urlpatterns = [
     
+    url(r'^tractor/(?P<pk>\d+)/update/', views.tractorUpdate,
+        name="tractor_update"),
+    url(r'^tractor/(?P<pk>\d+)/edit/', views.tractorEdit,
+        name="tractor_edit"),
+    url(r'^tractor/(?P<pk>\d+)/', views.tractorDetail,
+        name="tractor_detail"),
+    url(r'^tractor/create/', views.tractorCreate,
+        name="tractor_create"),
+    url(r'^tractor/new/', views.tractorNew, name="tractor_new"),
+    url(r'^tractor/', views.tractorIndex, name="tractor_index"),
+    
     url(r'^util/(?P<pk>\d+)/update/', views.utilUpdate,
         name="util_update"),
     url(r'^util/(?P<pk>\d+)/edit/', views.utilEdit, name="util_edit"),

@@ -747,3 +747,72 @@ def utilUpdate(request, pk):
             form.save_m2m()
             
     return redirect('shop:util_detail', pk=util.pk)
+
+def tractorIndex(request):
+    tractors = Tractor.objects.all()
+    
+    context = {
+        'curr_time': curr_time(),
+        'tractors': tractors,
+    }
+    
+    return render(request, 'machines/tractor_index.html', context)
+
+def tractorNew(request):
+    form = TractorForm()
+    
+    context = {
+        'curr_time': curr_time(),
+        'form': form,
+    }
+    
+    return render(request, 'machines/tractor_new.html', context)
+
+def tractorCreate(request):
+    if request.method == 'POST':
+        
+        form = TractorForm(data=request.POST)
+        
+        if form.is_valid() and request.user.is_valid():
+            pending_form = form.save(commit=False)
+            pending_form.save()
+            form.save_m2m()
+            
+    return redirect('shop:tractor_detail', pk=pending_form.pk)
+
+def tractorDetail(request, pk):
+    tractor = Tractor.objects.get(pk=pk)
+    oil_changes = Maint.OilChange.objects.filter(machine=tractor)
+    
+    context = {
+        'curr_time': curr_time(),
+        'tractor': tractor,
+        'oil_changes': oil_changes,
+    }
+    
+    return render(request, 'machines/tractor_detail.html', context)
+
+def tractorEdit(request, pk):
+    tractor = Tractor.objects.get(pk=pk)
+    form = TractorForm(instance=tractor)
+    
+    context = {
+        'curr_time': curr_time(),
+        'tractor': tractor,
+        'form': form,
+    }
+    
+    return render(request, 'machines/tractor_edit.html', context)
+
+def tractorUpdate(request, pk):
+    tractor = Tractor.objects.get(pk=pk)
+    
+    if request.method == 'POST':
+        form = TractorForm(request.POST, instance=tractor)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            pending_form = form.save(commit=False)
+            pending_form.save()
+            form.save_m2m()
+            
+    return redirect('shop:tractor_detail', pk=tractor.pk)
