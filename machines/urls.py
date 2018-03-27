@@ -4,6 +4,17 @@ from . import views
 
 urlpatterns = [
     
+    url(r'^sprayer/(?P<pk>\d+)/update/', views.sprayerUpdate,
+        name="sprayer_update"),
+    url(r'^sprayer/(?P<pk>\d+)/edit/', views.sprayerEdit,
+        name="sprayer_edit"),
+    url(r'^sprayer/(?P<pk>\d+)/', views.sprayerDetail,
+        name="sprayer_detail"),
+    url(r'^sprayer/create/', views.sprayerCreate, 
+        name="sprayer_create"),
+    url(r'^sprayer/new/', views.sprayerNew, name="sprayer_new"),
+    url(r'^sprayer/', views.sprayerIndex, name="sprayer_index"),
+    
     url(r'^aerator/(?P<pk>\d+)/update/', views.aeratorUpdate,
         name="aerator_update"),
     url(r'^aerator/(?P<pk>\d+)/edit/', views.aeratorEdit,

@@ -473,3 +473,71 @@ def aeratorUpdate(request, pk):
             form.save_m2m()
             
     return redirect('shop:aerator_detail', pk=aerator.pk)
+
+def sprayerIndex(request):
+    sprayers = Sprayer.objects.all()
+    
+    context = {
+        'curr_time': curr_time(),
+        'sprayers': sprayers,
+    }
+    
+    return render(request, 'machines/sprayer_index.html', context)
+
+def sprayerNew(request):
+    form = SprayerForm()
+    
+    context = {
+        'curr_time': curr_time(),
+        'form': form,
+    }
+    
+    return render(request, 'machines/sprayer_new.html', context)
+
+def sprayerCreate(request):
+    if request.method == 'POST':
+        form = SprayerForm(data=request.POST)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            pending_form = form.save(commit=False)
+            pending_form.save()
+            form.save_m2m()
+            
+    return redirect('shop:sprayer_detail', pk=pending_form.pk)
+
+def sprayerDetail(request, pk):
+    sprayer = Sprayer.objects.get(pk=pk)
+    oil_changes = Maint.OilChange.objects.filter(machine=sprayer)[:5]
+    
+    context = {
+        'curr_time': curr_time(),
+        'sprayer': sprayer,
+        'oil_changes': oil_changes,
+    }
+    
+    return render(request, 'machines/sprayer_detail.html', context)
+
+def sprayerEdit(request, pk):
+    sprayer = Sprayer.objects.get(pk=pk)
+    form = SprayerForm(instance=sprayer)
+    
+    context = {
+        'curr_time': curr_time(),
+        'sprayer': sprayer,
+        'form': form,
+    }
+    
+    return render(request, 'machines/sprayer_edit.html', context)
+
+def sprayerUpdate(request, pk):
+    sprayer = Sprayer.objects.get(pk=pk)
+    
+    if request.method == 'POST':
+        form = SprayerForm(request.POST, instance=sprayer)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            pending_form = form.save(commit=False)
+            pending_form.save()
+            form.save_m2m()
+            
+    return redirect('shop:sprayer_detail', pk=sprayer.pk)
