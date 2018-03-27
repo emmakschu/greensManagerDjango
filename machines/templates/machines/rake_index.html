@@ -1,0 +1,49 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include "machines/shophead.html" %}
+
+<h2>Trap rakes overview:</h2>
+
+<section class="content-block content-block-full">
+
+    <a href="{% url 'shop:rake_new' %}">
+        <button>Add New</button>
+    </a>
+    
+    <h3>All Trap Rakes</h3>
+    
+    <table>
+        <thead>
+            <th>Make</th>
+            <th>Model</th>
+            <th>ID</th>
+            <th>Hours</th>
+            <th>Plow</th>
+        </thead>
+        
+        {% for r in rakes %}
+        <tr>
+            <td>{{ r.make }}</td>
+            <td>{{ r.model }}</td>
+            <td>{{ r.ident_number }}</td>
+            <td>{{ r.hours }}</td>
+            <td>
+                {% if r.plow %}
+                    Y
+                {% else %}
+                    N
+                {% endif %}
+            </td>
+            <td class="center-align">
+                <a href="{% url 'shop:rake_detail' pk=r.pk %}">
+                    <button>Detail</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+        
+    </table>
+
+</section>
+
+{% include "foot.html" %}

@@ -1,0 +1,40 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include "machines/shophead.html" %}
+
+<h2>Utility vehicles overview:</h2>
+
+<section class="content-block content-block-full">
+
+    <a href="{% url 'shop:util_new' %}">
+        <button>Add New</button>
+    </a>
+    
+    <h3>All Utility Vehicles</h3>
+    
+    <table>
+        <thead>
+            <th>Make</th>
+            <th>Model</th>
+            <th>ID</th>
+            <th>Hours</th>
+        </thead>
+        
+        {% for u in utils %}
+        <tr>
+            <td>{{ u.make }}</td>
+            <td>{{ u.model }}</td>
+            <td>{{ u.ident_number }}</td>
+            <td>{{ u.hours }}</td>
+            <td class="center-align">
+                <a href="{% url 'shop:util_detail' pk=u.pk %}">
+                    <button>Detail</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</section>
+
+{% include "foot.html" %}

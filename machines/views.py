@@ -610,3 +610,140 @@ def cartUpdate(request, pk):
             form.save_m2m()
             
     return redirect('shop:cart_detail', pk=cart.pk)
+
+def rakeIndex(request):
+    rakes = TrapRake.objects.all()
+    
+    context = {
+        'curr_time': curr_time(),
+        'rakes': rakes,
+    }
+    
+    return render(request, 'machines/rake_index.html', context)
+
+def rakeNew(request):
+    form = TrapRakeForm()
+    
+    context = {
+        'curr_time': curr_time(),
+        'form': form,
+    }
+    
+    return render(request, 'machines/rake_new.html', context)
+
+def rakeCreate(request):
+    if request.method == 'POST':
+        form = TrapRakeForm(data=request.POST)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            pending_form = form.save(commit=False)
+            pending_form.save()
+            form.save_m2m()
+            
+    return redirect('shop:rake_detail', pk=pending_form.pk)
+
+def rakeDetail(request, pk):
+    rake = TrapRake.objects.get(pk=pk)
+    oil_changes = Maint.OilChange.objects.filter(machine=rake)
+    
+    context = {
+        'curr_time': curr_time(),
+        'rake': rake,
+        'oil_changes': oil_changes,
+    }
+    
+    return render(request, 'machines/rake_detail.html', context)
+
+def rakeEdit(request, pk):
+    rake = TrapRake.objects.get(pk=pk)
+    form = TrapRakeForm(instance=rake)
+    
+    context = {
+        'curr_time': curr_time(),
+        'rake': rake,
+        'form': form,
+    }
+    
+    return render(request, 'machines/rake_edit.html', context)
+
+def rakeUpdate(request, pk):
+    rake = TrapRake.objects.get(pk=pk)
+    
+    if request.method == 'POST':
+        form = TrapRakeForm(request.POST, instance=rake)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            pending_form = form.save(commit=False)
+            pending_form.save()
+            form.save_m2m()
+            
+    return redirect('shop:rake_detail', pk=rake.pk)
+
+def utilIndex(request):
+    utils = UtilVehicle.objects.all()
+    
+    context = {
+        'curr_time': curr_time(),
+        'utils': utils,
+    }
+    
+    return render(request, 'machines/util_index.html', context)
+
+def utilNew(request):
+    form = UtilVehicleForm()
+    
+    context = {
+        'curr_time': curr_time(),
+        'form': form,
+    }
+    
+    return render(request, 'machines/util_new.html', context)
+
+def utilCreate(request):
+    if request.method == 'POST':
+        
+        form = UtilVehicleForm(data=request.POST)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            pending_form = form.save(commit=False)
+            pending_form.save()
+            form.save_m2m()
+            
+    return redirect('shop:util_detail', pk=pending_form.pk)
+
+def utilDetail(request, pk):
+    util = UtilVehicle.objects.get(pk=pk)
+    oil_changes = Maint.OilChange.objects.filter(machine=util)
+    
+    context = {
+        'curr_time': curr_time(),
+        'util': util,
+        'oil_changes': oil_changes,
+    }
+    
+    return render(request, 'machines/util_detail.html', context)
+
+def utilEdit(request, pk):
+    util = UtilVehicle.objects.get(pk=pk)
+    form = UtilVehicleForm(instance=util)
+    
+    context = {
+        'curr_time': curr_time(),
+        'util': util,
+        'form': form,
+    }
+    
+    return render(request, 'machines/util_edit.html', context)
+
+def utilUpdate(request, pk):
+    util = UtilVehicle.objects.get(pk=pk)
+    
+    if request.method == 'POST':
+        form = UtilVehicleForm(request.POST, instance=util)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            pending_form = form.save(commit=False)
+            pending_form.save()
+            form.save_m2m()
+            
+    return redirect('shop:util_detail', pk=util.pk)

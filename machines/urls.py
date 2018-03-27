@@ -4,6 +4,22 @@ from . import views
 
 urlpatterns = [
     
+    url(r'^util/(?P<pk>\d+)/update/', views.utilUpdate,
+        name="util_update"),
+    url(r'^util/(?P<pk>\d+)/edit/', views.utilEdit, name="util_edit"),
+    url(r'^util/(?P<pk>\d+)/', views.utilDetail, name="util_detail"),
+    url(r'^util/create/', views.utilCreate, name="util_create"),
+    url(r'^util/new/', views.utilNew, name="util_new"),
+    url(r'^util/', views.utilIndex, name="util_index"),
+    
+    url(r'^rake/(?P<pk>\d+)/update/', views.rakeUpdate,
+        name="rake_update"),
+    url(r'^rake/(?P<pk>\d+)/edit/', views.rakeEdit, name="rake_edit"),
+    url(r'^rake/(?P<pk>\d+)/', views.rakeDetail, name="rake_detail"),
+    url(r'^rake/create/', views.rakeCreate, name="rake_create"),
+    url(r'^rake/new/', views.rakeNew, name="rake_new"),
+    url(r'^rake/', views.rakeIndex, name="rake_index"),
+    
     url(r'^cart/(?P<pk>\d+)/update/', views.cartUpdate,
         name="cart_update"),
     url(r'^cart/(?P<pk>\d+)/edit/', views.cartEdit,
