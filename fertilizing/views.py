@@ -61,7 +61,7 @@ def createFert(request):
             pending_form = form.save(commit=False)
             
             pending_form.unit_price = \
-                pending_form.bag_size / pending_form.price_per_bag
+                pending_form.price_per_bag / pending_form.bag_size
             
             pending_form.save()
         
@@ -99,7 +99,7 @@ def fertUpdate(request, pk):
             pending_form = form.save(commit=False)
             
             pending_form.unit_price = \
-                pending_form.bag_size / pending_form.price_per_bag
+                pending_form.price_per_bag / pending_form.bag_size
             
             pending_form.save()
     
