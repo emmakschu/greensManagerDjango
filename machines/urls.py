@@ -4,6 +4,15 @@ from . import views
 
 urlpatterns = [
     
+    url(r'^cart/(?P<pk>\d+)/update/', views.cartUpdate,
+        name="cart_update"),
+    url(r'^cart/(?P<pk>\d+)/edit/', views.cartEdit,
+        name="cart_edit"),
+    url(r'^cart/(?P<pk>\d+)/', views.cartDetail, name="cart_detail"),
+    url(r'^cart/create/', views.cartCreate, name="cart_create"),
+    url(r'^cart/new/', views.cartNew, name="cart_new"),
+    url(r'^cart/', views.cartIndex, name="cart_index"),
+    
     url(r'^sprayer/(?P<pk>\d+)/update/', views.sprayerUpdate,
         name="sprayer_update"),
     url(r'^sprayer/(?P<pk>\d+)/edit/', views.sprayerEdit,

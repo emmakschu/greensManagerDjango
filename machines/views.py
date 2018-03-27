@@ -541,3 +541,72 @@ def sprayerUpdate(request, pk):
             form.save_m2m()
             
     return redirect('shop:sprayer_detail', pk=sprayer.pk)
+
+def cartIndex(request):
+    carts = Cart.objects.all()
+    
+    context = {
+        'curr_time': curr_time(),
+        'carts': carts,
+    }
+    
+    return render(request, 'machines/cart_index.html', context)
+
+def cartNew(request):
+    form = CartForm()
+    
+    context = {
+        'curr_time': curr_time(),
+        'form': form,
+    }
+    
+    return render(request, 'machines/cart_new.html', context)
+
+def cartCreate(request):
+    if request.method == 'POST':
+        
+        form = CartForm(data=request.POST)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            pending_form = form.save(commit=False)
+            pending_form.save()
+            form.save_m2m()
+            
+    return redirect('shop:cart_detail', pk=pending_form.pk)
+
+def cartDetail(request, pk):
+    cart = Cart.objects.get(pk=pk)
+    oil_changes = Maint.OilChange.objects.filter(machine=cart)
+    
+    context = {
+        'curr_time': curr_time(),
+        'cart': cart,
+        'oil_changes': oil_changes,
+    }
+    
+    return render(request, 'machines/cart_detail.html', context)
+
+def cartEdit(request, pk):
+    cart = Cart.objects.get(pk=pk)
+    form = CartForm(instance=cart)
+    
+    context = {
+        'curr_time': curr_time(),
+        'cart': cart,
+        'form': form,
+    }
+    
+    return render(request, 'machines/cart_edit.html', context)
+
+def cartUpdate(request, pk):
+    cart = Cart.objects.get(pk=pk)
+    
+    if request.method == 'POST':
+        form = CartForm(request.POST, instance=cart)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            pending_form = form.save(commit=False)
+            pending_form.save()
+            form.save_m2m()
+            
+    return redirect('shop:cart_detail', pk=cart.pk)

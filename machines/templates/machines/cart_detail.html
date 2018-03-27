@@ -1,0 +1,173 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include "machines/shophead.html" %}
+
+<h2>{{ cart }}:</h2>
+
+<section class="content-block">
+
+    <h3>Basic Info</h3>
+    
+    <table>
+        <tr>
+            <th>Make</th>
+            <td>{{ cart.make }}</td>
+        </tr>
+        
+        <tr>
+            <th>Model</th>
+            <td>{{ cart.model }}</td>
+        </tr>
+        
+        <tr>
+            <th>ID</th>
+            <td>{{ cart.ident_number }}</td>
+        </tr>
+        
+        <tr>
+            <th>Year</th>
+            <td>{{ cart.year }}</td>
+        </tr>
+        
+        <tr>
+            <th>Date Purchased</th>
+            <td>{{ cart.date_purchased }}</td>
+        </tr>
+        
+        <tr>
+            <th>Hours</th>
+            <td>{{ cart.hours }}</td>
+        </tr>
+        
+        <tr>
+            <th>In Commission</th>
+            <td>
+                {% if cart.in_commission %}
+                    Yes
+                {% else %}
+                    <strong>No</strong>
+                {% endif %}
+            </td>
+        </tr>
+        
+    </table>
+    
+    <br />
+    
+    <a href="{% url 'shop:cart_edit' pk=cart.pk %}">
+        <button>Edit</button>
+    </a>
+
+</section>
+
+<section class="content-block">
+        
+    <h3>Fluids &amp; Filters</h3>
+    
+    <table>
+        
+        <tr>
+            <th>Fuel Type</th>
+            <td>{% for f in cart.fuel_type.all %}
+                    {{ f }}<br />
+                {% endfor %}
+            </td>
+        </tr>
+        
+        <tr>
+            <th>Motor Oil</th>
+            <td>{% for o in cart.oil_type.all %}
+                    {{ o }}<br />
+                {% endfor %}
+            </td>
+        </tr>
+        
+        <tr>
+            <th>Motor Oil Capacity</th>
+            <td>{{ cart.oil_capacity }}</td>
+        </tr>
+        
+        <tr>
+            <th>Oil Filter</th>
+            <td>{% for f in cart.oil_filter.all %}
+                    {{ f }}<br />
+                {% endfor %}
+            </td>
+        </tr>
+        
+        {% if cart.hyd_oil_type %}
+        <tr>
+            <th>Hydraulic Oil</th>
+            <td>{% for o in cart.hyd_oil_type.all %}
+                    {{ o }}<br />
+                {% endfor %}
+            </td>
+        </tr>
+        
+        <tr>
+            <th>Hydraulic Oil Capacity</th>
+            <td>{{ cart.hyd_oil_capacity }}</td>
+        </tr>
+        {% endif %}
+        
+        <tr>
+            <th>Fuel Filter</th>
+            <td>{% for f in cart.fuel_filter.all %}
+                    {{ f }}<br />
+                {% endfor %}
+            </td>
+        </tr>
+        
+    </table>
+    
+    <br />
+    
+    <a href="{% url 'shop:cart_edit' pk=cart.pk %}">
+        <button>Edit</button>
+    </a>
+    
+</section>
+
+<section class="content-block">
+
+    <h3>Oil Changes</h3>
+    
+    <table>
+        <thead>
+            <th>Date</th>
+            <th>Hours</th>
+            <th>Oil</th>
+            <th>Qty.</th>
+            <th>Cost</th>
+        </thead>
+        
+        {% for o in oil_changes %}
+        <tr>
+            <td>{{ o.date_fixed }}</td>
+            <td>{{ o.hours_on_machine }}</td>
+            <td>{{ o.oil }}</td>
+            <td>{{ o.oil_qty }}</td>
+            <td>{{ o.oil_cost }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+</section>
+
+<section class="content-block">
+
+    <h3>Repairs</h3>
+    
+    <table>
+        <thead>
+            <th>Date Out</th>
+            <th>Date Fixed</th>
+            <th>Hours</th>
+            <th>Description</th>
+            <th>Cost</th>
+        </thead>
+        
+    </table>
+</section>
+
+{% include "foot.html" %}
