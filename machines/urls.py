@@ -4,6 +4,30 @@ from . import views
 
 urlpatterns = [
     
+    url(r'^aerator/(?P<pk>\d+)/update/', views.aeratorUpdate,
+        name="aerator_update"),
+    url(r'^aerator/(?P<pk>\d+)/edit/', views.aeratorEdit,
+        name="aerator_edit"),
+    url(r'^aerator/(?P<pk>\d+)/', views.aeratorDetail,
+        name="aerator_detail"),
+    url(r'^aerator/create/', views.aeratorCreate, 
+        name="aerator_create"),
+    url(r'^aerator/new/', views.aeratorNew, name="aerator_new"),
+    url(r'^aerator/', views.aeratorIndex, name="aerator_index"),
+    
+    url(r'^roller/(?P<pk>\d+)/update/', views.rollerUpdate,
+        name="roller_update"),
+    url(r'^roller/(?P<pk>\d+)/edit/', views.rollerEdit,
+        name="roller_edit"),
+    url(r'^roller/(?P<pk>\d+)/', views.rollerDetail,
+        name="roller_detail"),
+    url(r'^roller/create/', views.rollerCreate, name="roller_create"),
+    url(r'^roller/new/', views.rollerNew, name="roller_new"),
+    url(r'^roller/', views.rollerIndex, name="roller_index"),
+    
+    url(r'^mower/(?P<pk>\d+)/', views.getMower, 
+        name="get_mower"),
+    
     url(r'^roughmow/(?P<pk>\d+)/update/', views.roughmowUpdate,
         name="roughmow_update"),
     url(r'^roughmow/(?P<pk>\d+)/edit/', views.roughmowEdit,

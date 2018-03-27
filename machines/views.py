@@ -322,3 +322,154 @@ def roughmowUpdate(request, pk):
             form.save_m2m()
             
     return redirect('shop:roughmow_detail', pk=mower.pk)
+
+def getMower(request, pk):
+    
+    if TeeMower.objects.filter(pk=pk).exists():
+        return redirect('shop:teemow_detail', pk=pk)
+    elif GreensMower.objects.filter(pk=pk).exists():
+        return redirect('shop:greensmow_detail', pk=pk)
+    elif FairwayMower.objects.filter(pk=pk).exists():
+        return redirect('shop:fairwaymow_detail', pk=pk)
+    elif RoughMower.objects.filter(pk=pk).exists():
+        return redirect('shop:roughmow_detail', pk=pk)
+    else:
+        return redirect('shop:index')
+
+def rollerIndex(request):
+    rollers = Roller.objects.all()
+    
+    context = {
+        'curr_time': curr_time(),
+        'rollers': rollers,
+    }
+    
+    return render(request, 'machines/roller_index.html', context)
+
+def rollerNew(request):
+    form = RollerForm()
+    
+    context = {
+        'curr_time': curr_time(),
+        'form': form,
+    }
+    
+    return render(request, 'machines/roller_new.html', context)
+
+def rollerCreate(request):
+    if request.method == 'POST':
+        
+        form = RollerForm(data=request.POST)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            pending_form = form.save(commit=False)
+            pending_form.save()
+            form.save_m2m()
+    
+    return redirect('shop:roller_detail', pk=pending_form.pk)
+
+def rollerDetail(request, pk):
+    roller = Roller.objects.get(pk=pk)
+    oil_changes = Maint.OilChange.objects.filter(machine=roller)[:5]
+    
+    context = {
+        'curr_time': curr_time(),
+        'roller': roller,
+        'oil_changes': oil_changes,
+    }
+    
+    return render(request, 'machines/roller_detail.html', context)
+
+def rollerEdit(request, pk):
+    roller = Roller.objects.get(pk=pk)
+    form = RollerForm(instance=roller)
+    
+    context = {
+        'curr_time': curr_time(),
+        'roller': roller,
+        'form': form,
+    }
+    
+    return render(request, 'machines/roller_edit.html', context)
+
+def rollerUpdate(request, pk):
+    roller = Roller.objects.get(pk=pk)
+    
+    if request.method == 'POST':
+        form = RollerForm(request.POST, instance=roller)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            pending_form = form.save(commit=False)
+            pending_form.save()
+            form.save_m2m()
+            
+    return redirect('shop:roller_detail', pk=roller.pk)
+
+def aeratorIndex(request):
+    aerators = Aerator.objects.all()
+    
+    context = {
+        'curr_time': curr_time(),
+        'aerators': aerators,
+    }
+    
+    return render(request, 'machines/aerator_index.html', context)
+
+def aeratorNew(request):
+    form = AeratorForm()
+    
+    context = {
+        'curr_time': curr_time(),
+        'form': form,
+    }
+    
+    return render(request, 'machines/aerator_new.html', context)
+
+def aeratorCreate(request):
+    if request.method == 'POST':
+        
+        form = AeratorForm(data=request.POST)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            pending_form = form.save(commit=False)
+            pending_form.save()
+            form.save_m2m()
+            
+    return redirect('shop:aerator_detail', pk=pending_form.pk)
+
+def aeratorDetail(request, pk):
+    aerator = Aerator.objects.get(pk=pk)
+    oil_changes = Maint.OilChange.objects.filter(machine=aerator)
+    
+    context = {
+        'curr_time': curr_time(),
+        'aerator': aerator,
+        'oil_changes': oil_changes,
+    }
+    
+    return render(request, 'machines/aerator_detail.html', context)
+
+def aeratorEdit(request, pk):
+    aerator = Aerator.objects.get(pk=pk)
+    form = AeratorForm(instance=aerator)
+    
+    context = {
+        'curr_time': curr_time(),
+        'aerator': aerator,
+        'form': form,
+    }
+    
+    return render(request, 'machines/aerator_edit.html', context)
+
+def aeratorUpdate(request, pk):
+    aerator = Aerator.objects.get(pk=pk)
+    
+    if request.method == 'POST':
+        form = AeratorForm(request.POST, instance=aerator)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            pending_form = form.save(commit=False)
+            pending_form.save()
+            form.save_m2m()
+            
+    return redirect('shop:aerator_detail', pk=aerator.pk)
