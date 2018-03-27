@@ -253,5 +253,72 @@ def fairwaymowUpdate(request, pk):
             form.save_m2m()
     
     return redirect('shop:fairwaymow_detail', pk=mower.pk)
+
+def roughmowIndex(request):
+    mowers = RoughMower.objects.all()
     
+    context = {
+        'curr_time': curr_time(),
+        'mowers': mowers,
+    }
     
+    return render(request, 'machines/roughmow_index.html', context)
+
+def roughmowNew(request):
+    form = RoughMowerForm()
+    
+    context = {
+        'curr_time': curr_time(),
+        'form': form,
+    }
+    
+    return render(request, 'machines/roughmow_new.html', context)
+
+def roughmowCreate(request):
+    if request.method == 'POST':
+        
+        form = RoughMowerForm(data=request.POST)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            pending_form = form.save(commit=False)
+            pending_form.save()
+            form.save_m2m()
+            
+    return redirect('shop:roughmow_detail', pk=pending_form.pk)
+
+def roughmowDetail(request, pk):
+    mower = RoughMower.objects.get(pk=pk)
+    oil_changes = Maint.OilChange.objects.filter(machine=mower)[:5]
+    
+    context = {
+        'curr_time': curr_time(),
+        'mower': mower,
+        'oil_changes': oil_changes,
+    }
+    
+    return render(request, 'machines/roughmow_detail.html', context)
+
+def roughmowEdit(request, pk):
+    mower = RoughMower.objects.get(pk=pk)
+    form = RoughMowerForm(instance=mower)
+    
+    context = {
+        'curr_time': curr_time(),
+        'mower': mower,
+        'form': form,
+    }
+    
+    return render(request, 'machines/roughmow_edit.html', context)
+
+def roughmowUpdate(request, pk):
+    mower = RoughMower.objects.get(pk=pk)
+    
+    if request.method == 'POST':
+        form = RoughMowerForm(request.POST, instance=mower)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            pending_form = form.save(commit=False)
+            pending_form.save()
+            form.save_m2m()
+            
+    return redirect('shop:roughmow_detail', pk=mower.pk)

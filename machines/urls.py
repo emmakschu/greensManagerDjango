@@ -4,6 +4,17 @@ from . import views
 
 urlpatterns = [
     
+    url(r'^roughmow/(?P<pk>\d+)/update/', views.roughmowUpdate,
+        name="roughmow_update"),
+    url(r'^roughmow/(?P<pk>\d+)/edit/', views.roughmowEdit,
+        name="roughmow_edit"),
+    url(r'^roughmow/(?P<pk>\d+)/', views.roughmowDetail,
+        name="roughmow_detail"),
+    url(r'^roughmow/create/', views.roughmowCreate,
+        name="roughmow_create"),
+    url(r'^roughmow/new/', views.roughmowNew, name="roughmow_new"),
+    url(r'^roughmow/', views.roughmowIndex, name="roughmow_index"),
+    
     url(r'^fairwaymow/(?P<pk>\d+)/update/', views.fairwaymowUpdate,
         name="fairwaymow_update"),
     url(r'^fairwaymow/(?P<pk>\d+)/edit/', views.fairwaymowEdit,
