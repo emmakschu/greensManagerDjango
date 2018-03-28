@@ -25,6 +25,14 @@
         </tr>
         
         <tr>
+            <th>Spreader(s)</th>
+            <td>{% for s in roughs_fert.spreader.all %}
+                    {{ s }}<br />
+                {% endfor %}
+            </td>
+        </tr>
+        
+        <tr>
             <th colspan="2">
             <a href="{% url 'fert:fert_detail' pk=roughs_fert.fertilizer.pk %}"> Fertilizer</th> 
         </tr>
