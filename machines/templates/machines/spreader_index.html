@@ -1,0 +1,41 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include "machines/shophead.html" %}
+
+<h2>Fert spreaders overview:</h2>
+
+<section class="content-block content-block-full">
+
+    <a href="{% url 'shop:spreader_new' %}">
+        <button>Add New</button>
+    </a>
+    
+    <h3>All Fertilizer Spreaders</h3>
+    
+    <table>
+        <thead>
+            <th>Make</th>
+            <th>Model</th>
+            <th>ID</th>
+            <th>Capacity</th>
+        </thead>
+        
+        {% for s in spreaders %}
+        <tr>
+            <td>{{ s.make }}</td>
+            <td>{{ s.model }}</td>
+            <td>{{ s.ident_number }}</td>
+            <td>{{ s.capacity }}</td>
+            <td class="center-align">
+                <a href="{% url 'shop:spreader_detail' pk=s.pk %}">
+                    <button>Detail</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    
+    </table>
+
+</section>
+
+{% include "foot.html" %}

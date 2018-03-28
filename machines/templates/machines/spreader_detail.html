@@ -1,0 +1,77 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include "machines/shophead.html" %}
+
+<h2>{{ spreader }}:</h2>
+
+<section class="content-block">
+
+    <h3>Basic Info</h3>
+    
+    <table>
+        <tr>
+            <th>Make</th>
+            <td>{{ spreader.make }}</td>
+        </tr>
+        
+        <tr>
+            <th>Model</th>
+            <td>{{ spreader.model }}</td>
+        </tr>
+        
+        <tr>
+            <th>ID</th>
+            <td>{{ spreader.ident_number }}</td>
+        </tr>
+        
+        <tr>
+            <th>Date Purchased</th>
+            <td>{{ spreader.date_purchased }}</td>
+        </tr>
+        
+        <tr>
+            <th>In Commission</th>
+            <td>
+                {% if spreader.in_commission %}
+                    Yes
+                {% else %}
+                    <strong>No</strong>
+                {% endif %}
+            </td>
+        </tr>
+        
+        <tr>
+            <th>Spreader Capacity</th>
+            <td>{{ spreader.capacity }}</td>
+        </tr>
+        
+        {% if spreader.notes != 'none' %}
+        <tr>
+            <th>Notes</th>
+            <td>{{ spreader.notes }}</td>
+        </tr>
+        {% endif %}
+        
+    </table>
+    
+    <br />
+    
+    <a href="{% url 'shop:spreader_edit' pk=spreader.pk %}">
+        <button>Edit</button>
+    </a>
+
+</section>
+
+<section class="content-block">
+
+    <h3>Calibration Records</h3>
+
+</section>
+
+<section class="content-block">
+
+    <h3>Repairs</h3>
+
+</section>
+
+{% include "foot.html" %}

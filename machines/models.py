@@ -224,6 +224,10 @@ class FertSpreader(models.Model):
     ident_number = models.CharField(max_length = 16,
                                     blank = True,
                                     null = True)
+    
+    date_purchased = models.DateField()
+    in_commission = models.BooleanField(default=True)
+    
     # Capacity, in preferred local units. Should conform to units
     # used in the Fertilizing app
     capacity = models.FloatField()

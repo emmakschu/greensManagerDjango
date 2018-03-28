@@ -773,7 +773,7 @@ def tractorCreate(request):
         
         form = TractorForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_valid():
+        if form.is_valid() and request.user.is_authenticated():
             pending_form = form.save(commit=False)
             pending_form.save()
             form.save_m2m()
@@ -816,3 +816,68 @@ def tractorUpdate(request, pk):
             form.save_m2m()
             
     return redirect('shop:tractor_detail', pk=tractor.pk)
+
+def spreaderIndex(request):
+    spreaders = FertSpreader.objects.all()
+    
+    context = {
+        'curr_time': curr_time(),
+        'spreaders': spreaders,
+    }
+    
+    return render(request, 'machines/spreader_index.html', context)
+
+def spreaderNew(request):
+    form = FertSpreaderForm()
+    
+    context = {
+        'curr_time': curr_time(),
+        'form': form,
+    }
+    
+    return render(request, 'machines/spreader_new.html', context)
+
+def spreaderCreate(request):
+    if request.method == 'POST':
+        
+        form = FertSpreaderForm(data=request.POST)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            pending_form = form.save(commit=False)
+            pending_form.save()
+            
+    return redirect('shop:spreader_detail', pk=pending_form.pk)
+
+def spreaderDetail(request, pk):
+    spreader = FertSpreader.objects.get(pk=pk)
+    
+    context = {
+        'curr_time': curr_time(),
+        'spreader': spreader,
+    }
+    
+    return render(request, 'machines/spreader_detail.html', context)
+
+def spreaderEdit(request, pk):
+    spreader = FertSpreader.objects.get(pk=pk)
+    form = FertSpreaderForm(instance=spreader)
+    
+    context = {
+        'curr_time': curr_time(),
+        'spreader': spreader,
+        'form': form,
+    }
+    
+    return render(request, 'machines/spreader_edit.html', context)
+
+def spreaderUpdate(request, pk):
+    spreader = FertSpreader.objects.get(pk=pk)
+    
+    if request.method == 'POST':
+        form = FertSpreaderForm(request.POST, instance=spreader)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            pending_form = form.save(commit=False)
+            pending_form.save()
+            
+    return redirect('shop:spreader_detail', pk=spreader.pk)
