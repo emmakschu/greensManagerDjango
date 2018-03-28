@@ -4,6 +4,10 @@ from django.db import models
 
 class Fluid(models.Model):
     name = models.TextField()
+    price = models.DecimalField(decimal_places=2,
+                                max_digits=10)
+    unit_size = models.DecimalField(decimal_places=2,
+                                    max_digits=10)
     price_per_unit = models.DecimalField(decimal_places = 2,
                                          max_digits = 10)
     created_at = models.DateTimeField(auto_now_add=True)

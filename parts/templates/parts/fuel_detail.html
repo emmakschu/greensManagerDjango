@@ -1,0 +1,51 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include "machines/shophead.html" %}
+
+<h2>{{ fuel }}:</h2>
+
+<section class="content-block">
+
+    <h3>Basic Info</h3>
+    
+    <table>
+        <tr>
+            <th>Name</th>
+            <td>{{ fuel.name }}</td>
+        </tr>
+        
+        <tr>
+            <th>Price</th>
+            <td>{{ fuel.price }}</td>
+        </tr>
+        
+        <tr>
+            <th>Unit Size</th>
+            <td>{{ fuel.unit_size }}</td>
+        </tr>
+        
+        <tr>
+            <th>Unit Price</th>
+            <td>{{ fuel.price_per_unit }}</td>
+        </tr>
+        
+        <tr>
+            <th>Added to Database</th>
+            <td>{{ fuel.created_at }}</td>
+        </tr>
+        
+        <tr>
+            <th>Last Updated</th>
+            <td>{{ fuel.updated_at }}</td>
+        </tr>
+    </table>
+    
+    <br />
+    
+    <a href="{% url 'parts:fuel_edit' pk=fuel.pk %}">
+        <button>Edit</button>
+    </a>
+
+</section>
+
+{% include "foot.html" %}
