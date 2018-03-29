@@ -4,6 +4,25 @@ from . import views
 
 urlpatterns = [
     
+    url(r'^filter/(?P<pk>\d+)/update/', views.filterUpdate,
+        name="filter_update"),
+    url(r'^filter/(?P<pk>\d+)/edit/', views.filterEdit,
+        name="filter_edit"),
+    url(r'^filter/(?P<pk>\d+)/', views.filterDetail, 
+        name="filter_detail"),
+    url(r'^filter/create/', views.filterCreate, name="filter_create"),
+    url(r'^filter/new/', views.filterNew, name="filter_new"),
+    url(r'^filter/', views.filterIndex, name="filter_index"),
+    
+    url(r'^part/(?P<pk>\d+)/update/', views.partUpdate,
+        name="part_update"),
+    url(r'^part/(?P<pk>\d+)/edit/', views.partEdit,
+        name="part_edit"),
+    url(r'^part/(?P<pk>\d+)/', views.partDetail, name="part_detail"),
+    url(r'^part/create/', views.partCreate, name="part_create"),
+    url(r'^part/new/', views.partNew, name="part_new"),
+    url(r'^part/', views.partIndex, name="part_index"),
+    
     url(r'^oil/(?P<pk>\d+)/update/', views.oilUpdate, 
         name="oil_update"),
     url(r'^oil/(?P<pk>\d+)/edit/', views.oilEdit, name="oil_edit"),

@@ -1,0 +1,41 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include "machines/shophead.html" %}
+
+<h2>Filters overview:</h2>
+
+<section class="content-block content-block-full">
+
+    <a href="{% url 'parts:filter_new' %}">
+        <button>Add New</button>
+    </a>
+    
+    <h3>Recently Updated Filters</h3>
+    
+    <table>
+        <thead>
+            <th>Part #</th>
+            <th>Make</th>
+            <th>Description</th>
+            <th>In Stock</th>
+        </thead>
+        
+        {% for f in filters %}
+        <tr>
+            <td>{{ f.part_no }}</td>
+            <td>{{ f.make }}</td>
+            <td>{{ f.description }}</td>
+            <td>{{ f.in_stock }}</td>
+            <td class="center-align">
+                <a href="{% url 'parts:filter_detail' pk=f.pk %}">
+                    <button>Detail</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+        
+    </table>
+
+</section>
+
+{% include "foot.html" %}

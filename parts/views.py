@@ -173,3 +173,132 @@ def oilUpdate(request, pk):
             pending_form.save()
             
     return redirect('parts:oil_detail', pk=oil.pk)
+
+def partIndex(request):
+    parts = Part.objects.all().order_by('-updated_at')[:40]
+    
+    context = {
+        'curr_time': curr_time(),
+        'parts': parts,
+    }
+    
+    return render(request, 'parts/part_index.html', context)
+
+def partNew(request):
+    form = PartForm()
+    
+    context = {
+        'curr_time': curr_time(),
+        'form': form,
+    }
+    
+    return render(request, 'parts/part_new.html', context)
+
+def partCreate(request):
+    if request.method == 'POST':
+        form = PartForm(data=request.POST)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            pending_form = form.save(commit=False)
+            pending_form.save()
+        
+    return redirect('parts:part_detail', pk=pending_form.pk)
+
+def partDetail(request, pk):
+    part = Part.objects.get(pk=pk)
+    
+    context = {
+        'curr_time': curr_time(),
+        'part': part,
+    }
+    
+    return render(request, 'parts/part_detail.html', context)
+
+def partEdit(request, pk):
+    part = Part.objects.get(pk=pk)
+    form = PartForm(instance=part)
+    
+    context = {
+        'curr_time': curr_time(),
+        'part': part,
+        'form': form,
+    }
+    
+    return render(request, 'parts/part_edit.html', context)
+
+def partUpdate(request, pk):
+    part = Part.objects.get(pk=pk)
+    
+    if request.method == 'POST':
+        form = PartForm(request.POST, instance=part)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            pending_form = form.save(commit=False)
+            pending_form.save()
+            
+    return redirect('parts:part_detail', pk=part.pk)
+
+def filterIndex(request):
+    filters = Filter.objects.all().order_by('-updated_at')[:20]
+    
+    context = {
+        'curr_time': curr_time(),
+        'filters': filters,
+    }
+    
+    return render(request, 'parts/filter_index.html', context)
+
+def filterNew(request):
+    form = FilterForm()
+    
+    context = {
+        'curr_time': curr_time(),
+        'form': form,
+    }
+    
+    return render(request, 'parts/filter_new.html', context)
+
+def filterCreate(request):
+    if request.method == 'POST':
+        
+        form = FilterForm(data=request.POST)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            pending_form = form.save(commit=False)
+            pending_form.save()
+            
+    return redirect('parts:filter_detail', pk=pending_form.pk)
+
+def filterDetail(request, pk):
+    filt = Filter.objects.get(pk=pk)
+    
+    context = {
+        'curr_time': curr_time(),
+        'filter': filt,
+    }
+    
+    return render(request, 'parts/filter_detail.html', context)
+
+def filterEdit(request, pk):
+    filt = Filter.objects.get(pk=pk)
+    form = FilterForm(instance=filt)
+    
+    context = {
+        'curr_time': curr_time(),
+        'filter': filt,
+        'form': form,
+    }
+    
+    return render(request, 'parts/filter_edit.html', context)
+
+def filterUpdate(request, pk):
+    filt = Filter.objects.get(pk=pk)
+    
+    if request.method == 'POST':
+        form = FilterForm(request.POST, instance=filt)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            pending_form = form.save(commit=False)
+            pending_form.save()
+    
+    return redirect('parts:filter_detail', pk=filt.pk)

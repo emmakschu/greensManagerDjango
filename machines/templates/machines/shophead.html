@@ -96,7 +96,35 @@
             </div>
 
             <div class="parent-menu">
-                <li>Add Part</li>
+                <li>Parts
+                    <ul class="child-menu">
+                    
+                        <li>
+                            <a href="{% url 'parts:part_index' %}">
+                                All Parts
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="{% url 'parts:filter_index' %}">
+                                Filters
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="{% url 'parts:oil_index' %}">
+                                Oils
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="{% url 'parts:fuel_index' %}">
+                                Fuels
+                            </a>
+                        </li>
+                
+                    </ul>
+                </li>
             </div>
 
             <div class="parent-menu">
