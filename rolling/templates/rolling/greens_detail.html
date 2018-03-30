@@ -1,0 +1,43 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include "head.html" %}
+
+<h2>{{ rolling }}:</h2>
+
+<section class="content-block">
+
+    <h3>Basic Info</h3>
+    
+    <table>
+        <tr>
+            <th>Date</th>
+            <td>{{ rolling.roll_date }}</td>
+        </tr>
+        
+        <tr>
+            <th>Roller</th>
+            <td>{% for r in rolling.roller.all %}
+                    {{ r }}<br />
+                {% endfor %}
+            </td>
+        </tr>
+        
+        <tr>
+            <th>Greens</th>
+            <td>{% for g in rolling.green.all %}
+                    {{ g }}<br />
+                {% endfor %}
+            </td>
+        </tr>
+        
+    </table>
+    
+    <br />
+    
+    <a href="{% url 'roll:greens_edit' pk=rolling.pk %}">
+        <button>Edit</button>
+    </a>
+
+</section>
+
+{% include "foot.html" %}

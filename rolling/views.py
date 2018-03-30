@@ -25,3 +25,61 @@ def greensIndex(request):
     }
     
     return render(request, 'rolling/greens_index.html', context)
+
+def greensNew(request):
+    form = GreensRollingForm()
+    
+    context = {
+        'curr_time': curr_time(),
+        'form': form,
+    }
+    
+    return render(request, 'rolling/greens_new.html', context)
+
+def greensCreate(request):
+    if request.method == 'POST':
+        form = GreensRollingForm(data=request.POST)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            pending_form = form.save(commit=False)
+            
+            pending_form.save()
+            form.save_m2m()
+            
+    return redirect('roll:greens_detail', pk=pending_form.pk)
+
+def greensDetail(request, pk):
+    rolling = GreensRolling.objects.get(pk=pk)
+    
+    context = {
+        'curr_time': curr_time(),
+        'rolling': rolling,
+    }
+    
+    return render(request, 'rolling/greens_detail.html', context)
+
+def greensEdit(request, pk):
+    rolling = GreensRolling.objects.get(pk=pk)
+    form = GreensRollingForm(instance=rolling)
+    
+    context = {
+        'curr_time': curr_time(),
+        'rolling': rolling,
+        'form': form,
+    }
+    
+    return render(request, 'rolling/greens_edit.html', context)
+
+def greensUpdate(request, pk):
+    rolling = GreensRolling.objects.get(pk=pk)
+    
+    if request.method == 'POST':
+        form = GreensRollingForm(request.POST, instance=rolling)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            pending_form = form.save(commit=False)
+            
+            pending_form.save()
+            form.save_m2m()
+            
+    return redirect('roll:greens_detail', pk=rolling.pk)
