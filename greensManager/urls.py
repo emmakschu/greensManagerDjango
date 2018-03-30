@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^irrigation/', include('irrigation.urls', namespace="irr")),
     url(r'^shop/', include('machines.urls', namespace="shop")),
     url(r'^mow/', include('mowing.urls', namespace="mow")),
+    url(r'^roll/', include('rolling.urls', namespace="roll")),
     url(r'^parts/', include('parts.urls', namespace="parts")),
     url(r'^maint/', include('maintenance.urls', namespace="maint")),
     url(r'^turfs/', include('turfs.urls', namespace="turfs")),
