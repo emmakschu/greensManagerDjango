@@ -1,5 +1,12 @@
 from django import forms
 
+from .models import (
+    GreensMowing,
+    TeeMowing,
+    FairwayMowing,
+    RoughMowing,
+)
+
 """
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -29,3 +36,35 @@ For fairways
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 """
+
+class GreensMowingForm(forms.ModelForm):
+    class Meta:
+        model = GreensMowing
+        exclude = [
+            'created_at',
+            'updated_at'
+        ]
+        
+class TeeMowingForm(forms.ModelForm):
+    class Meta:
+        model = TeeMowing
+        exclude = [
+            'created_at',
+            'updated_at',
+        ]
+        
+class FairwayMowingForm(forms.ModelForm):
+    class Meta:
+        model = FairwayMowing
+        exclude = [
+            'created_at',
+            'updated_at'
+        ]
+        
+class RoughMowingForm(forms.ModelForm):
+    class Meta:
+        model = RoughMowing
+        exclude = [
+            'created_at',
+            'updated_at'
+        ]

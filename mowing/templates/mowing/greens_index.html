@@ -1,0 +1,46 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include "head.html" %}
+
+<h2>Greens mowing overview:</h2>
+
+<section class="content-block content-block-full">
+
+    <a href="{% url 'mow:greens_new' %}">
+        <button>Add New</button>
+    </a>
+    
+    <h3>Recent Greens Mowing</h3>
+    
+    <table>
+        <thead>
+            <th>Date</th>
+            <th>Mower(s)</th>
+            <th>Green(s)</th>
+        </thead>
+        
+        {% for m in mowings %}
+        <tr>
+            <td>{{ m.mow_date }}</td>
+            <td>{% for mow in m.mower.all %}
+                    {{ mow }}<br />
+                {% endfor %}
+            </td>
+            <td>
+                {% for g in m.green.all %}
+                    {{ g }}<br />
+                {% endfor %}
+            </td>
+            <td class="center-align">
+                <a href="{% url 'mow:greens_detail' pk=m.pk %}">
+                    <button>Detail</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+        
+    </table>
+
+</section>
+
+{% include "foot.html" %}
