@@ -1,0 +1,41 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include "machines/shophead.html" %}
+
+<h2>Oil changes overview:</h2>
+
+<section class="content-block content-block-full">
+
+    <a href="{% url 'maint:oilchange_new' %}">
+        <button>Add New</button>
+    </a>
+
+    <h3>Most Recent Oil Changes</h3>
+    
+    <table>
+        <thead>
+            <th>Date</th>
+            <th>Machine</th>
+            <th>Hours</th>
+            <th>Oil</th>
+        </thead>
+        
+        {% for o in oilchanges %}
+        <tr>
+            <td>{{ o.date_fixed }}</td>
+            <td>{{ o.machine }}</td>
+            <td>{{ o.hours_on_machine }}</td>
+            <td>{{ o.oil }}</td>
+            <td class="center-align">
+                <a href="{% url 'maint:oilchange_detail' pk=o.pk %}">
+                    <button>Detail</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+        
+    </table>
+
+</section>
+
+{% include "foot.html" %}

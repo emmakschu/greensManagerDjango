@@ -1,0 +1,66 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include "machines/shophead.html" %}
+
+<h2>Service record details:</h2>
+
+<section class="content-block content-block-full">
+
+    <h3>Oil Change</h3>
+    
+    <table>
+        <tr>
+            <th>Date</th>
+            <td>{{ oilchange.date_fixed }}</td>
+        </tr>
+        
+        <tr>
+            <th>Machine</th>
+            <td>{{ oilchange.machine }}</td>
+        </tr>
+        
+        <tr>
+            <th>Hours</th>
+            <td>{{ oilchange.hours_on_machine }}</td>
+        </tr>
+        
+        <tr>
+            <th>Oil Used</th>
+            <td>{{ oilchange.oil }}</td>
+        </tr>
+        
+        <tr>
+            <th>Oil Quantity</th>
+            <td>{{ oilchange.oil_qty }}</td>
+        </tr>
+        
+        <tr>
+            <th>Cost of Oil</th>
+            <td>{{ oilchange.oil_cost }}</td>
+        </tr>
+        
+        {% if oilchange.parts_used != none %}
+        <tr>
+            <th>Parts Used</th>
+            <td>{% for p in oilchange.parts_used.all %}
+                    {{ p }}<br />
+                {% endfor %}
+            </td>
+        </tr>
+        
+        <tr>
+            <th>Total Cost</th>
+            <td>{{ oilchange.total_cost }}</td>
+        </tr>
+        {% endfor %}
+        
+        <tr>
+            <th>Mechanic</th>
+            <td>{{ oilchange.acked }}</td>
+        </tr>
+        
+    </table>
+
+</section>
+
+{% include "foot.html" %}

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.timezone import now
 
 class RepairPart(models.Model):
     repair = models.ForeignKey('Maintenance')
@@ -19,6 +20,13 @@ class Maintenance(models.Model):
                                      max_digits=12,
                                      blank=True,
                                      null=True)
+    
+    shipping_cost = models.DecimalField(decimal_places=2,
+                                        max_digits=12,
+                                        blank=True,
+                                        default=0)
+    total_cost = models.DecimalField(decimal_places=2,
+                                     max_digits=12)
     acked = models.ForeignKey(User)
     updated_at = models.DateTimeField(auto_now=True)
 
