@@ -2,15 +2,15 @@
 
 {% include "machines/shophead.html" %}
 
-<h2>Add new oil:</h2>
+<h2>Add new repair record:</h2>
 
 <section class="content-block content-block-full">
 
-    <h3>New Oil</h3>
+    <h2>New Repair</h2>
     
-    <form id="oilForm"
+    <form id="repairForm"
           method="POST"
-          action="{% url 'parts:oil_create' %}">
+          action="{% url 'maint:repair_create' %}">
         
         {% csrf_token %}
         
@@ -21,7 +21,7 @@
         <input type="submit" value="Save" />
         
     </form>
-    
+
 </section>
 
 {% include "foot.html" %}

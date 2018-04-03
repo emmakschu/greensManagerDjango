@@ -45,9 +45,6 @@ def index(request):
         Machines.Machine.objects.filter(in_commission=False) \
             .order_by('-updated_at')[:5]
 
-    greens_mow_dir = greens_mow_direction()
-    tee_mow_dir = tee_mow_direction()
-    fairway_mow_dir = fairway_mow_direction()
 
     try:
         daily_notes = \
@@ -88,9 +85,6 @@ def index(request):
         'daily_form': daily_form,
         'weekly_notes': weekly_notes,
         'weekly_form': weekly_form,
-        'greens_mow_dir': greens_mow_dir,
-        'tee_mow_dir': tee_mow_dir,
-        'fairway_mow_dir': fairway_mow_dir,
     }
 
     return render(request, 'welcome/index.html', context)

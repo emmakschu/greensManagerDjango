@@ -3,9 +3,9 @@ from django.contrib.auth.models import User
 from django.utils.timezone import now
 
 class RepairPart(models.Model):
-    repair = models.ForeignKey('Maintenance')
     part = models.ForeignKey('parts.Part')
-    qty = models.IntegerField(default=1)
+    repair = models.ForeignKey(Maintenance)
+    qty = models.IntegerField()
 
 class Maintenance(models.Model):
     date_ooc = models.DateTimeField(auto_now_add=True)
@@ -13,14 +13,12 @@ class Maintenance(models.Model):
     machine = models.ForeignKey('machines.Machine')
     hours_on_machine = models.FloatField()
     description = models.TextField()
-    parts_used = models.ManyToManyField('parts.Part',
-                                        through=RepairPart,
-                                        blank = True)
+    parts_used = models.ManyToManyField(RepairPart,
+                                        blank=True)
     parts_cost = models.DecimalField(decimal_places=2,
                                      max_digits=12,
                                      blank=True,
                                      null=True)
-    
     shipping_cost = models.DecimalField(decimal_places=2,
                                         max_digits=12,
                                         blank=True,
@@ -28,7 +26,9 @@ class Maintenance(models.Model):
     total_cost = models.DecimalField(decimal_places=2,
                                      max_digits=12)
     acked = models.ForeignKey(User)
+    created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
 
 class OilChange(Maintenance):
     oil = models.ForeignKey('parts.Oil')

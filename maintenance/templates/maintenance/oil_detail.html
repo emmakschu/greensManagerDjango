@@ -25,6 +25,11 @@
         </tr>
         
         <tr>
+            <th>Description</th>
+            <td>{{ oilchange.description }}</td>
+        </tr>
+        
+        <tr>
             <th>Oil Used</th>
             <td>{{ oilchange.oil }}</td>
         </tr>
@@ -39,11 +44,10 @@
             <td>{{ oilchange.oil_cost }}</td>
         </tr>
         
-        {% if oilchange.parts_used != none %}
         <tr>
             <th>Parts Used</th>
             <td>{% for p in oilchange.parts_used.all %}
-                    {{ p }}<br />
+                    {{ p }} ({{ p.price }})<br />
                 {% endfor %}
             </td>
         </tr>
@@ -52,7 +56,6 @@
             <th>Total Cost</th>
             <td>{{ oilchange.total_cost }}</td>
         </tr>
-        {% endfor %}
         
         <tr>
             <th>Mechanic</th>
@@ -60,6 +63,12 @@
         </tr>
         
     </table>
+    
+    <br />
+    
+    <a href="{% url 'maint:oilchange_edit' pk=oilchange.pk %}">
+        <button>Edit</button>
+    </a>
 
 </section>
 

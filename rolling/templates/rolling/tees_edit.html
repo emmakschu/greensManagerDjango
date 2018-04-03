@@ -1,16 +1,16 @@
 <!-- vim: set ft=htmldjango: -->
 
-{% include "machines/shophead.html" %}
+{% include "head.html" %}
 
-<h2>Add new oil:</h2>
+<h2>Edit tee rolling record:</h2>
 
 <section class="content-block content-block-full">
 
-    <h3>New Oil</h3>
+    <h3>Edit {{ rolling }}</h3>
     
-    <form id="oilForm"
+    <form id="rollForm"
           method="POST"
-          action="{% url 'parts:oil_create' %}">
+          action="{% url 'roll:tees_update' pk=rolling.pk %}">
         
         {% csrf_token %}
         
@@ -21,7 +21,7 @@
         <input type="submit" value="Save" />
         
     </form>
-    
+
 </section>
 
 {% include "foot.html" %}

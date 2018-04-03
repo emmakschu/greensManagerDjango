@@ -1,18 +1,11 @@
 from django import forms
+from django.contrib.admin.widgets import AdminDateWidget
 
 from .models import (
     OilChange,
     Repair,
-    RepairPart
+    RepairPart,
 )
-
-class RepairPartForm(forms.ModelForm):
-    class Meta:
-        model = RepairPart
-        exclude = [
-            'repair',
-            'qty',
-        ]
 
 class OilChangeForm(forms.ModelForm):
     class Meta:
@@ -23,6 +16,9 @@ class OilChangeForm(forms.ModelForm):
             'total_cost',
             'updated_at',
         ]
+        widgets = {
+            'date_fixed': AdminDateWidget,
+        }
         
 class RepairForm(forms.ModelForm):
     class Meta:
@@ -31,4 +27,17 @@ class RepairForm(forms.ModelForm):
             'parts_cost',
             'total_cost',
             'updated_at',
+        ]
+
+class RepairRequestForm(forms.ModelForm):
+    class Meta:
+        model = Repair
+        exclude = [
+            'date_fixed',
+            'parts_used',
+            'parts_cost',
+            'shipping_cost',
+            'total_cost',
+            'created_at',
+            'updated_at'
         ]
