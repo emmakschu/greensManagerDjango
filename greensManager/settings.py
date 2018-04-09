@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'mowing.apps.MowingConfig',
     'rolling.apps.RollingConfig',
     'fertilizing.apps.FertilizingConfig',
+    'aerating.apps.AeratingConfig',
     'maintenance.apps.MaintenanceConfig',
     'notes.apps.NotesConfig',
     'greensManager',

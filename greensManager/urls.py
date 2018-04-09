@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^maint/', include('maintenance.urls', namespace="maint")),
     url(r'^turfs/', include('turfs.urls', namespace="turfs")),
     url(r'^fert/', include('fertilizing.urls', namespace="fert")),
+    url(r'^aerate/', include('aerating.urls', namespace="aerate")),
     url(r'^notes/', include('notes.urls', namespace="notes")),
     url(r'^admin/', admin.site.urls),
     url(r'^', include('welcome.urls', namespace="welcome"))
