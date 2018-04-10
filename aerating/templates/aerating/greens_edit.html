@@ -1,0 +1,27 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include "head.html" %}
+
+<h2>Edit greens aerating record:</h2>
+
+<section class="content-block content-block-full">
+
+    <h3>Edit {{ aerating }}</h3>
+    
+    <form id="aerateForm"
+          method="POST"
+          action="{% url 'aerate:greens_update' pk=aerating.pk %}">
+        
+        {% csrf_token %}
+        
+        <table>
+            {{ form.as_table }}
+        </table>
+        
+        <input type="submit" value="Save" />
+        
+    </form>
+
+</section>
+
+{% include "foot.html" %}

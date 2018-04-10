@@ -1,0 +1,44 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include "head.html" %}
+
+<h2>{{ aerating }}:</h2>
+
+<section class="content-block">
+
+    <h3>Basic Info</h3>
+    
+    <table>
+        <tr>
+            <th>Date</th>
+            <td>{{ aerating.aerate_date }}</td>
+        </tr>
+        
+        <tr>
+            <th>Greens</th>
+            <td>{% for g in aerating.green.all %}
+                    {{ g }}<br />
+                {% endfor %}
+            </td>
+        </tr>
+        
+        <tr>
+            <th>Aerator</th>
+            <td>{{ aerating.aerator }}</td>
+        </tr>
+        
+        <tr>
+            <th>Added to Database</th>
+            <td>{{ aerating.created_at }}</td>
+        </tr>
+        
+        <tr>
+            <th>Last Updated</th>
+            <td>{{ aerating.updated_at }}</td>
+        </tr>
+        
+    </table>
+
+</section>
+
+{% include "foot.html" %}
