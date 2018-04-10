@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'aerating.apps.AeratingConfig',
     'maintenance.apps.MaintenanceConfig',
     'notes.apps.NotesConfig',
+    'building.apps.BuildingConfig',
     'greensManager',
 ]
 

@@ -1,3 +1,13 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import (
+    GreensAerating,
+    TeeAerating,
+    FairwayAerating,
+    RoughAerating
+)
+
+admin.site.register(GreensAerating)
+admin.site.register(TeeAerating)
+admin.site.register(FairwayAerating)
+admin.site.register(RoughAerating)

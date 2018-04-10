@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^fert/', include('fertilizing.urls', namespace="fert")),
     url(r'^aerate/', include('aerating.urls', namespace="aerate")),
     url(r'^notes/', include('notes.urls', namespace="notes")),
+    url(r'^build/', include('building.urls', namespace="build")),
     url(r'^admin/', admin.site.urls),
     url(r'^', include('welcome.urls', namespace="welcome"))
 ]
