@@ -5,12 +5,14 @@ from .models import (
     Maintenance,
     OilChange,
     Repair,
+    RepairPart
 )
 
 from .forms import (
     OilChangeForm,
     RepairForm,
     RepairRequestForm,
+    RepairPartForm
 )
 
 import parts.models as Parts
@@ -18,6 +20,34 @@ import machines.models as Machines
 
 def curr_time():
     return now()
+    
+def partsNew(request, repair):
+    repair = Maintenance.objects.get(pk=repair)
+    form = RepairPartForm(repair=repair)
+    
+    context = {
+        'curr_time': curr_time(),
+        'repair': repair,
+        'form': form,
+    }
+    
+    return render(request, 'maintenance/parts.html', context)
+
+def partsCreate(request, repair):
+    repair = Maintenance.objects.get(pk=repair)
+    
+    if request.method == 'POST':
+        form = RepairPartForm(data=request.POST)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            pending_form = form.save()
+            
+            pending_form.save()
+            
+    if OilChange.objects.filter(pk=repair.pk).exists():
+        return redirect('maint:oilchange_detail', pk=repair.pk)
+    elif Repair.objects.filter(pk=repair.pk).exists():
+        return redirect('maint:repair_detail', pk=repair.pk)
 
 def oilchangeIndex(request):
     oilchanges = OilChange.objects.all().order_by('-updated_at')[:20]
@@ -31,10 +61,12 @@ def oilchangeIndex(request):
 
 def oilchangeNew(request):
     form = OilChangeForm()
+    part_form = RepairPartForm()
     
     context = {
         'curr_time': curr_time(),
         'form': form,
+        'part_form': part_form,
     }
     
     return render(request, 'maintenance/oil_new.html', context)
@@ -62,7 +94,7 @@ def oilchangeCreate(request):
                 
             pending_form.save()
             
-    return redirect('maint:oilchange_detail', pk=pending_form.pk)
+    return redirect('maint:parts_new', repair=pending_form.pk)
                 
 def oilchangeDetail(request, pk):
     oilchange = OilChange.objects.get(pk=pk)

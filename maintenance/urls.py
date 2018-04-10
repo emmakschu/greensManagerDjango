@@ -4,6 +4,11 @@ from . import views
 
 urlpatterns = [
     
+    url(r'^(?P<repair>\d+)/parts/create', views.partsCreate,
+        name="parts_create"),
+    url(r'^(?P<repair>\d+)/parts/', views.partsNew, 
+        name="parts_new"),
+        
     url(r'^request/submit', views.repairRequest,
         name="repair_request"),
     url(r'^request/', views.repairNeeded, name="repair_needed"),

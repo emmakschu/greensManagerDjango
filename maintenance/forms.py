@@ -12,6 +12,7 @@ class OilChangeForm(forms.ModelForm):
         model = OilChange
         exclude = [
             'oil_cost',
+            'parts_used',
             'parts_cost',
             'total_cost',
             'updated_at',
@@ -24,6 +25,7 @@ class RepairForm(forms.ModelForm):
     class Meta:
         model = Repair
         exclude = [
+            'parts_used',
             'parts_cost',
             'total_cost',
             'updated_at',
@@ -45,4 +47,6 @@ class RepairRequestForm(forms.ModelForm):
 class RepairPartForm(forms.ModelForm):
     class Meta:
         model = RepairPart
-        fields = '__all__'
+        exclude = [
+            'repair'
+        ]
