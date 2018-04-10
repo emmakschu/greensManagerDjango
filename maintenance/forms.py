@@ -41,3 +41,8 @@ class RepairRequestForm(forms.ModelForm):
             'created_at',
             'updated_at'
         ]
+
+class RepairPartForm(forms.ModelForm):
+    class Meta:
+        model = RepairPart
+        fields = '__all__'

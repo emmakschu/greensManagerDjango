@@ -2,28 +2,28 @@
 
 {% include "head.html" %}
 
-<h2>Greens building overview:</h2>
+<h2>Bunker building overview:</h2>
 
 <section class="content-block content-block-full">
 
-    <a href="{% url 'build:green_new' %}">
+    <a href="{% url 'build:bunker_new' %}">
         <button>Add New</button>
     </a>
     
-    <h3>Recent Greens Builds</h3>
+    <h3>Recent Bunker Builds</h3>
     
     <table>
         <thead>
             <th>Date</th>
-            <th>Green</th>
+            <th>Bunker</th>
         </thead>
         
         {% for b in builds %}
         <tr>
             <td>{{ b.build_date }}</td>
-            <td>{{ b.green }}</td>
-            <td><a href="{% url 'build:green_detail' pk=b.pk %}">
-                    <button>Detail</button>
+            <td>{{ b.bunker }}</td>
+            <td><a href="{% url 'build:bunker_detail' pk=b.pk %}">
+                    <button>Details</button>
                 </a>
             </td>
         </tr>

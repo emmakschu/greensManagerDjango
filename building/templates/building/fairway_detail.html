@@ -1,0 +1,64 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include "head.html" %}
+
+<h2>{{ build }}:</h2>
+
+<section class="content-block">
+
+    <h3>Basic Info</h3>
+    
+    <table>
+        <tr>
+            <th>Build Date</th>
+            <td>{{ build.build_date }}</td>
+        </tr>
+        
+        <tr>
+            <th>Fairway</th>
+            <td>{{ build.fairway }}</td>
+        </tr>
+        
+        {% if build.soil_type != None %}
+        <tr>
+            <th>Soil Type</th>
+            <td>{{ build.soil_type }}</td>
+        </tr>
+        {% endif %}
+        
+        {% if build.cultivar != None %}
+        <tr>
+            <th>Cultivar</th>
+            <td>{{ build.cultivar }}</td>
+        </tr>
+        {% endif %}
+        
+        <tr>
+            <th>Species</th>
+            <td>{{ build.species }}</td>
+        </tr>
+        
+        <tr>
+            <th>Notes</th>
+            <td>{{ build.details }}</td>
+        </tr>
+        
+        <tr>
+            <th>Added to Database</th>
+            <td>{{ build.created_at }}</td>
+        </tr>
+        
+        <tr>
+            <th>Last Updated</th>
+            <td>{{ build.updated_at }}</td>
+        </tr>
+        
+    </table>
+    
+    <a href="{% url 'build:fairway_edit' pk=build.pk %}">
+        <button>Edit</button>
+    </a>
+
+</section>
+
+{% include "foot.html" %}
