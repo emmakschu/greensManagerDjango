@@ -19,6 +19,10 @@ class BuildGreen(Build):
                                 blank=True,
                                 null=True)
     
+    def __str__(self):
+        return "Greens build %s on %s" % (self.green,
+                                          self.build_date)
+    
 class BuildTee(Build):
     tee = models.ForeignKey('courses.Tee')
     soil_type = models.ForeignKey('turfs.SoilType',
