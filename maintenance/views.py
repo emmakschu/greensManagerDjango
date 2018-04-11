@@ -43,6 +43,7 @@ def partsCreate(request, repair):
             pending_form = form.save()
             
             pending_form.save()
+            form.save_m2m()
             
     if OilChange.objects.filter(pk=repair.pk).exists():
         return redirect('maint:oilchange_detail', pk=repair.pk)
@@ -74,34 +75,50 @@ def oilchangeNew(request):
 def oilchangeCreate(request):
     if request.method == 'POST':
         form = OilChangeForm(data=request.POST)
+        part_form = RepairPartForm(request.POST)
         
         if form.is_valid() and request.user.is_authenticated():
             pending_form = form.save(commit=False)
+            pending_part = part_form.save(commit=False)
+            pending_part.repair = pending_form
             
-            pending_form.oil_cost = pending_form.oil.price_per_unit * \
-                pending_form.oil_qty
-            
+            pending_form.oil_cost = pending_form.oil.price_per_unit \
+                * pending_form.oil_qty
             pending_form.total_cost = pending_form.oil_cost
             
             pending_form.save()
             form.save_m2m()
             
-            for p in pending_form.parts_used.all():
-                pending_form.total_cost += p.price
-                part = Parts.Part.objects.get(pk=p.pk)
-                part.in_stock -= 1
-                part.save()
+        pending_part = part_form.save(commit=False)
+        pending_part.repair = pending_form
+        pending_part.save()
+        part_form.save_m2m()
                 
-            pending_form.save()
+        pending_form.total_cost += \
+            pending_part.part.price * pending_part.qty
+        part = Parts.Part.objects.get(pk=pending_part.part.pk)
+        part.in_stock -= pending_part.qty
+        part.save()
+        
+        machine = Machines.Machine.objects.get(
+            pk=pending_form.machine.pk)
+        machine.hours = pending_form.hours_on_machine
+        # machine.oil_type = pending_form.oil
+        machine.save()
             
-    return redirect('maint:parts_new', repair=pending_form.pk)
+        pending_form.save()
+                
+            
+    return redirect('maint:oilchange_detail', pk=pending_form.pk)
                 
 def oilchangeDetail(request, pk):
     oilchange = OilChange.objects.get(pk=pk)
+    parts = RepairPart.objects.filter(repair=oilchange)
     
     context = {
         'curr_time': curr_time(),
         'oilchange': oilchange,
+        'parts': parts,
     }
     
     return render(request, 'maintenance/oil_detail.html', context)

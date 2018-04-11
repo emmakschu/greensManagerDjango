@@ -18,17 +18,13 @@
             {{ form.as_table }}
         </table>
         
-        <input type="submit" 
-               name="{{ oilchangeForm.prefix }}"
-               value="Save" />
+        <h4>Parts</h4>
         
-    </form>
-    
-    <form id="partForm"
-          method="POST"
-          action="{% url 'maint:oilchange_create' %}">
+        <table>
+            {{ part_form.as_table }}
+        </table>
         
-        {% csrf_token %}
+        <input type="submit" value="Save" />
         
     </form>
     

@@ -46,8 +46,9 @@
         
         <tr>
             <th>Parts Used</th>
-            <td>{% for p in oilchange.parts_used.all %}
-                    {{ p }} ({{ p.price }})<br />
+            <td>{% for p in parts %}
+                    {{ p.part }} 
+                    ({{ p.qty }} &#64; {{ p.part.price }})<br />
                 {% endfor %}
             </td>
         </tr>
