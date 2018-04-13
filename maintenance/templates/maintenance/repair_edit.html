@@ -18,10 +18,32 @@
             {{ form.as_table }}
         </table>
         
+        <h4 id="startParts">Parts Used</h4>
+        
+        <table>
+            {{ part_form.as_table }}
+        </table>
+        
         <input type="submit" value="Save" />
     
     </form>
+    
+    <button id="addMore">+ Add another</button>
 
 </section>
+
+<script type="text/javascript">
+
+    var $newPart = `
+        <table>
+            {{ part_form.as_table }}
+        </table>
+    `;
+
+    $('#addMore').on('click', function(){
+        $('#startParts').after($newPart);
+    });
+
+</script>
 
 {% include "foot.html" %}

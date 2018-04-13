@@ -75,12 +75,9 @@ def oilchangeNew(request):
 def oilchangeCreate(request):
     if request.method == 'POST':
         form = OilChangeForm(data=request.POST)
-        part_form = RepairPartForm(request.POST)
         
         if form.is_valid() and request.user.is_authenticated():
             pending_form = form.save(commit=False)
-            pending_part = part_form.save(commit=False)
-            pending_part.repair = pending_form
             
             pending_form.oil_cost = pending_form.oil.price_per_unit \
                 * pending_form.oil_qty
@@ -89,16 +86,22 @@ def oilchangeCreate(request):
             pending_form.save()
             form.save_m2m()
             
-        pending_part = part_form.save(commit=False)
-        pending_part.repair = pending_form
-        pending_part.save()
-        part_form.save_m2m()
-                
-        pending_form.total_cost += \
-            pending_part.part.price * pending_part.qty
-        part = Parts.Part.objects.get(pk=pending_part.part.pk)
-        part.in_stock -= pending_part.qty
-        part.save()
+        try:
+            part_form = RepairPartForm(request.POST)
+            
+            if part_form.is_valid():
+                pending_part = part_form.save(commit=False)
+                pending_part.repair = pending_form
+                pending_part.save()
+                part_form.save_m2m()
+                    
+                pending_form.total_cost += \
+                    pending_part.part.price * pending_part.qty
+                part = Parts.Part.objects.get(pk=pending_part.part.pk)
+                part.in_stock -= pending_part.qty
+                part.save()
+        except Exception:
+            part_form = None
         
         machine = Machines.Machine.objects.get(
             pk=pending_form.machine.pk)
@@ -125,12 +128,18 @@ def oilchangeDetail(request, pk):
 
 def oilchangeEdit(request, pk):
     oilchange = OilChange.objects.get(pk=pk)
+    parts = RepairPart.objects.filter(repair=oilchange)
     form = OilChangeForm(instance=oilchange)
+    part_forms = []
+    
+    for p in parts:
+        part_forms.append(RepairPartForm(instance=p))
     
     context = {
         'curr_time': curr_time(),
         'oilchange': oilchange,
         'form': form,
+        'part_forms': part_forms,
     }
     
     return render(request, 'maintenance/oil_edit.html', context)
@@ -171,10 +180,12 @@ def repairIndex(request):
 
 def repairNew(request):
     form = RepairForm()
+    part_form = RepairPartForm()
     
     context = {
         'curr_time': curr_time(),
         'form': form,
+        'part_form': part_form,
     }
     
     return render(request, 'maintenance/repair_new.html', context)
@@ -202,6 +213,7 @@ def repairRequest(request):
             machine = Machines.Machine.objects.get(
                     pk=pending_form.machine.pk)
             machine.in_commission = False
+            machine.hours = pending_form.hours_on_machine
             machine.save()
             
     return redirect('maint:repair_detail', pk=pending_form.pk)
@@ -247,11 +259,13 @@ def repairDetail(request, pk):
 def repairEdit(request, pk):
     repair = Repair.objects.get(pk=pk)
     form = RepairForm(instance=repair)
+    part_form = RepairPartForm()
     
     context = {
         'curr_time': curr_time(),
         'repair': repair,
         'form': form,
+        'part_form': part_form,
     }
     
     return render(request, 'maintenance/repair_edit.html', context)
@@ -267,23 +281,16 @@ def repairUpdate(request, pk):
             
             pending_form.save()
             
-            for p in pending_form.parts_used.all():
-                pending_form.total_cost += p.price
-                part = Parts.Part.objects.get(pk=p.pk)
-                part.in_stock -= 1
-                part.save()
+            machine = Machines.Machine.objects.get(
+                pk=pending_form.machine.pk)
             
             if pending_form.date_fixed == None:
-                machine = Machines.Machine.objects.get(
-                        pk=pending_form.machine.pk)
                 machine.in_commission = False
-                machine.save()
             
             else:
-                machine = Machines.Machine.objects.get(
-                    pk=pending_form.machine.pk)
                 machine.in_commission = True
-                machine.save()
+                
+            machine.save()
                 
             pending_form.save()
                 

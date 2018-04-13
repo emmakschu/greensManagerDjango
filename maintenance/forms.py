@@ -29,6 +29,7 @@ class RepairForm(forms.ModelForm):
             'parts_cost',
             'total_cost',
             'updated_at',
+            'created_at',
         ]
 
 class RepairRequestForm(forms.ModelForm):

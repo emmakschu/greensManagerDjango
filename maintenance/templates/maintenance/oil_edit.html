@@ -18,10 +18,22 @@
             {{ form.as_table }}
         </table>
         
+        <h4 id="startParts">Parts Used</h4>
+        
+        {% for p in part_forms %}
+        <table>
+            {{ p.as_table }}
+        </table>
+        {% endfor %}
+        
         <input type="submit" value="Save" />
         
     </form>
+    
+    <button id="addMore">+ Add another</button>
 
 </section>
+
+
 
 {% include "foot.html" %}
