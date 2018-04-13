@@ -150,7 +150,8 @@ def teemowCreate(request):
 
 def teemowDetail(request, pk):
     mower = TeeMower.objects.get(pk=pk)
-    oil_changes = Maint.OilChange.objects.filter(machine=mower)[:5]
+    oil_changes = Maint.OilChange.objects.filter(
+        machine=mower).order_by('date_fixed')[:20]
     
     context = {
         'curr_time': curr_time(),
