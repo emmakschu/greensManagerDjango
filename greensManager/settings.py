@@ -24,8 +24,7 @@ SECRET_KEY = 'um*ue=x=3&)2n$cy6grq^(j50eo_-n3pt@%@dsy$v0ii6464yx'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.1.114', 
-                 '192.168.1.146',]
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '72.14.181.152']
 
 
 # Application definition
@@ -89,8 +88,10 @@ WSGI_APPLICATION = 'greensManager.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+            'read_default_file': '/home/mschumacher/my.cnf',
+        },
     }
 }
 
