@@ -117,6 +117,7 @@ class Tee(TurfFeature):
     """
 
     hole = models.ForeignKey(Hole, related_name='tee')
+    notes = models.CharField(max_length=256)
 
     def __str__(self):
         return "%s tee" % (self.hole)
