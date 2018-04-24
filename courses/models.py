@@ -120,7 +120,8 @@ class Tee(TurfFeature):
     notes = models.CharField(max_length=256)
 
     def __str__(self):
-        return "%s tee" % (self.hole)
+        return "%s %s" % (self.hole,
+                          self.notes)
 
 class Fairway(TurfFeature):
     """
