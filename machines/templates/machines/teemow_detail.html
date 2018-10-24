@@ -2,7 +2,12 @@
 
 {% include "machines/shophead.html" %}
 
-<h2>{{ mower }}</h2>
+<h2>{{ mower }}:
+	&nbsp;
+	<a href="{% url 'maint:repair_needed' machine=mower.pk %}">
+		<button>Report Breakdown</button>
+	</a>
+</h2>
 
 <section class="content-block">
 
@@ -147,7 +152,7 @@
         
         {% for o in oil_changes %}
         <tr>
-            <td>{{ o.date_fixed }}</td>
+            <td>{{ o.date_fixed | date:"M d, Y" }}</td>
             <td>{{ o.hours_on_machine }}</td>
             <td>{{ o.oil }}</td>
             <td>{{ o.oil_qty }}</td>
@@ -174,5 +179,25 @@
     </table>
 </section>
 
+<section class="content-block">
 
+		<h3>Hour Benchmarks</h3>
+
+		<table>
+				<thead>
+						<th>Date</th>
+						<th>Hours</th>
+						<th>Notes</th>
+				</thead>
+
+				{% for h in hour_reads %}
+				<tr>
+						<td>{{ h.date }}</td>
+						<td>{{ h.hours }}</td>
+						<td>{{ h.notes }}</td>
+				</tr>
+				{% endfor %}
+		</table>
+
+</section>
 {% include "foot.html" %}

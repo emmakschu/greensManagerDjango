@@ -1,3 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.utils.timezone import now
 
-# Create your views here.
+from .models import (
+
+)
+
+
+def index(request):
+    return render(request, 'labor/index.html')
+
+def mowIndex(request):
+    mowing = Mow

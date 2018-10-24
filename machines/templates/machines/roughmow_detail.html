@@ -2,7 +2,12 @@
 
 {% include "machines/shophead.html" %}
 
-<h2>{{ mower }}:</h2>
+<h2>{{ mower }}:
+	&nbsp;
+	<a href="{% url 'maint:repair_needed' machine=mower.pk %}">
+		<button>Report Breakdown</button>
+	</a>
+</h2>
 
 <section class="content-block">
 
@@ -88,7 +93,7 @@
         
         <tr>
             <th>Motor Oil Capacity</th>
-            <td>{{ mower.oil_capacity }}</td>
+						<td>{{ mower.oil_capacity }} {{ mower.oil_units }}</td>
         </tr>
         
         <tr>
@@ -147,7 +152,11 @@
         
         {% for o in oil_changes %}
         <tr>
-            <td>{{ o.date_fixed }}</td>
+            <td>
+							<a href="{% url 'maint:oilchange_detail' pk=o.pk %}">
+								{{ o.date_fixed | date:"M d, Y" }}
+							</a>
+						</td>
             <td>{{ o.hours_on_machine }}</td>
             <td>{{ o.oil }}</td>
             <td>{{ o.oil_qty }}</td>
@@ -170,8 +179,43 @@
             <th>Description</th>
             <th>Cost</th>
         </thead>
+
+				{% for r in repairs %}
+				<tr>
+					<td>{{ r.date_ooc }}</td>
+					<td>{{ r.date_fixed }}</td>
+					<td>{{ r.hours_on_machine }}</td>
+					<td>
+						<a href="{% url 'maint:repair_detail' pk=r.pk %}">
+							{{ r.description }}
+						</a>
+					</td>
+					<td>{{ r.total_cost }}</td>
+				</tr>
+				{% endfor %}
         
     </table>
 </section>
 
+<section class="content-block">
+
+		<h3>Hour Benchmarks</h3>
+
+		<table>
+				<thead>
+						<th>Date</th>
+						<th>Hours</th>
+						<th>Notes</th>
+				</thead>
+
+				{% for h in hour_reads %}
+				<tr>
+						<td>{{ h.date }}</td>
+						<td>{{ h.hours }}</td>
+						<td>{{ h.notes }}</td>
+				</tr>
+				{% endfor %}
+		</table>
+
+</section>
 {% include "foot.html" %}

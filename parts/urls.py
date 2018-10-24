@@ -3,6 +3,8 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
+
+    url(r'^search/', views.partsSearch, name="parts_search"),
     
     url(r'^filter/(?P<pk>\d+)/update/', views.filterUpdate,
         name="filter_update"),

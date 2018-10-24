@@ -4,10 +4,10 @@
 
 <h2>{{ mowing }}:</h2>
 
-<section class="content-block">
+<section class="content-block content-block-full">
 
     <h3>Basic Info</h3>
-    
+
     <table>
         <tr>
             <th>Date</th>
@@ -32,11 +32,10 @@
         
     </table>
     
-    <br />
-    
     <a href="{% url 'mow:fairways_edit' pk=mowing.pk %}">
         <button>Edit</button>
     </a>
+
 
 </section>
 

@@ -1,0 +1,46 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include 'head.html' %}
+
+<h2>Quadra-Tining:</h2>
+
+<section class="content-block content-block-full">
+
+	<a href="{% url 'aerate:qt_new' %}">
+		<button>Add New</button>
+	</a>
+
+	<h3>Recently Updated Quadra-Tining</h3>
+
+	<table>
+		<thead>
+			<th>Date</th>
+			<th>Greens</th>
+			<th>Aerator</th>
+		</thead>
+
+		{% for a in aeratings %}
+		<tr>
+			<td>{{ a.aerate_date }}</td>
+			<td>{% for g in a.green.all %}
+						{{ g }}<br />
+					{% endfor %}
+			</td>
+			<td>{{ a.aerator }}</td>
+			<td class="center-align">
+				<a href="{% url 'aerate:greens_detail' pk=a.pk %}">
+					<button>Detail</button>
+				</a>
+			</td>
+			<td class="center-align">
+				<a href="{% url 'aerate:greens_edit' pk=a.pk %}">
+					<button>Edit</button>
+				</a>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+
+</section>
+
+{% include 'foot.html' %}

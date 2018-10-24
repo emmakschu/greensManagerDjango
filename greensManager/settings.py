@@ -24,7 +24,8 @@ SECRET_KEY = 'um*ue=x=3&)2n$cy6grq^(j50eo_-n3pt@%@dsy$v0ii6464yx'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '72.14.181.152']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '72.14.181.152',
+        'pvgcgreens.com',]
 
 
 # Application definition
@@ -36,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
     'welcome.apps.WelcomeConfig',
     'turfs.apps.TurfsConfig',
     'courses.apps.CoursesConfig',
@@ -49,6 +51,10 @@ INSTALLED_APPS = [
     'maintenance.apps.MaintenanceConfig',
     'notes.apps.NotesConfig',
     'building.apps.BuildingConfig',
+    'stimping.apps.StimpingConfig',
+    'measures.apps.MeasuresConfig',
+    'spraying.apps.SprayingConfig',
+    'blog.apps.BlogConfig',
     'greensManager',
 ]
 

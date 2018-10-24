@@ -33,6 +33,10 @@ class Machine(models.Model):
     # Machine must have a year (model year, or year of production)
     year = models.IntegerField()
 
+    serial = models.CharField(max_length=128,
+                              blank=True,
+                              null=True)
+
     # Often facilities have multiple machines of the same type which
     # are identified by an alphanumeric tag/sticker. Can be blank if
     # not applicable
@@ -41,6 +45,10 @@ class Machine(models.Model):
                                     null = True)
     # Date the machine was purchased/acquired
     date_purchased = models.DateField()
+    purchase_price = models.DecimalField(decimal_places=2,
+                                         max_digits=16,
+                                         blank=True,
+                                         null=True)
     # Hours on the machine. Not automatically updated, of course, so
     # should be updated at regular intervals by relevant staff
     hours = models.FloatField()
@@ -50,7 +58,7 @@ class Machine(models.Model):
     in_commission = models.BooleanField(default = True)
     fuel_type = models.ManyToManyField('parts.Fuel', 
                                        blank = True,
-                                       related_name = '+')
+                                       related_name = 'machine_fuel')
 
 
     # Mechanics/Supers can optionally set the fluids and filters 
@@ -61,26 +69,39 @@ class Machine(models.Model):
     # going out on the course to mow.
     oil_type = models.ManyToManyField('parts.Oil', 
                                       blank = True,
-                                      related_name = '+')
+                                      related_name = 'machine_oil')
     oil_capacity = models.FloatField(blank = True, null = True)
+    oil_units = models.ForeignKey('measures.VolumeUnit', blank=True,
+                                  null=True,
+                                  related_name="mach_oil_units")
     hyd_oil_type = models.ManyToManyField('parts.Oil', 
                                           blank = True,
-                                          related_name = '+')
+                                          related_name = 'mach_hyd_oil')
     hyd_oil_capacity = models.FloatField(blank = True, null = True)
+    hyd_oil_units = models.ForeignKey('measures.VolumeUnit',
+                                      blank=True,
+                                      null=True,
+                                      related_name="mach_hyd_unit")
     oil_filter = models.ManyToManyField('parts.Filter', 
                                         blank = True,
-                                        related_name = '+')
+                                        related_name = 'mach_oil_filter')
     hyd_oil_filter = models.ManyToManyField('parts.Filter', 
                                             blank = True,
-                                            related_name = '+')
+                                            related_name = 'mach_hyd_oil_filter')
     fuel_filter = models.ManyToManyField('parts.Filter', 
                                          blank = True,
-                                         related_name = '+')
+                                         related_name = 'mach_fuel_filter')
+    air_filter = models.ManyToManyField('parts.Filter',
+                                        blank=True,
+                                        related_name='mach_air_filter')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "%s %s" % (self.model, self.ident_number)
+        if self.ident_number != None:
+            return "%s %s" % (self.model, self.ident_number)
+        else:
+            return "%s %s" % (self.make, self.model)
     
 class Mower(Machine):
     """
@@ -99,6 +120,10 @@ class Mower(Machine):
     # preferred, but MUST BE IN DECIMAL FORMAT (e.g. 0.125 instead
     # of 1/8 inch).
     cut_height = models.FloatField()
+    height_units = models.ForeignKey('measures.DistanceUnit',
+                                     blank=True,
+                                     null=True,
+                                     related_name="height_unit")
 
 class GreensMower(Mower):
     """
@@ -143,6 +168,10 @@ class Roller(Machine):
     # when facilities have both the single roller and newer-gen
     # triple-rollers on hand
     roll_width = models.FloatField(blank = True, null = True)
+    width_units = models.ForeignKey('measures.DistanceUnit',
+                                    blank=True,
+                                    null=True,
+                                    related_name="width_unit")
 
 class Aerator(Machine):
     """
@@ -163,6 +192,10 @@ class Sprayer(Machine):
     # be consistent with those used in the Spraying app in order to
     # have accurate calculations
     tank_capacity = models.IntegerField()
+    tank_units = models.ForeignKey('measures.VolumeUnit',
+                                   blank=True,
+                                   null=True,
+                                   related_name="tank_unit")
 
 class Cart(Machine):
     """
@@ -197,6 +230,10 @@ class UtilVehicle(Machine):
 
     # Bed size in preferred cubic units
     bed_size = models.FloatField(blank = True, null = True)
+    bed_units = models.ForeignKey('measures.Unit',
+                                  blank=True,
+                                  null=True,
+                                  related_name="bed_unit")
 
 class Tractor(Machine):
     """
@@ -230,7 +267,11 @@ class FertSpreader(models.Model):
     
     # Capacity, in preferred local units. Should conform to units
     # used in the Fertilizing app
-    capacity = models.FloatField()
+    capacity = models.FloatField(blank=True, null=True)
+    units = models.ForeignKey('measures.Unit',
+                              blank=True,
+                              null=True,
+                              related_name="cap_unit")
     # Notes, e.g.: "Should be set to H for tees", etc.
     notes = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -238,3 +279,70 @@ class FertSpreader(models.Model):
     
     def __str__(self):
         return "%s %s spreader" % (self.make, self.ident_number)
+
+class Truck(models.Model):
+    make = models.CharField(max_length=128)
+    model = models.CharField(max_length=128)
+    year = models.IntegerField()
+    mileage = models.FloatField()
+    # Date the machine was purchased/acquired
+    date_purchased = models.DateField()
+    purchase_price = models.DecimalField(decimal_places=2,
+                                         max_digits=16,
+                                         blank=True,
+                                         null=True)
+    serial = models.CharField(max_length=128,
+                              blank=True,
+                              null=True)
+    fuel_type = models.ManyToManyField('parts.Fuel', 
+                                       blank = True,
+                                       related_name = 'truck_fuel')
+
+
+    # Mechanics/Supers can optionally set the fluids and filters 
+    # used on a machine so that lower level staff can maintain them
+    # without having to seek a mechanic. E.g. a greenskeeper can 
+    # notice that the oil is a bit low on a particular mower, find
+    # it on the app, and be sure to add the correct type before
+    # going out on the course to mow.
+    oil_type = models.ManyToManyField('parts.Oil', 
+                                      blank = True,
+                                      related_name = 'truck_oil')
+    oil_capacity = models.FloatField(blank = True, null = True)
+    oil_units = models.ForeignKey('measures.VolumeUnit',
+                                  blank=True,
+                                  null=True,
+                                  related_name="truck_oil_unit")
+    hyd_oil_type = models.ManyToManyField('parts.Oil', 
+                                          blank = True,
+                                          related_name = 'truck_hyd')
+    hyd_oil_capacity = models.FloatField(blank = True, null = True)
+    hyd_oil_units = models.ForeignKey('measures.VolumeUnit',
+                                      blank=True,
+                                      null=True,
+                                      related_name="truck_hyd_unit")
+    oil_filter = models.ManyToManyField('parts.Filter', 
+                                        blank = True,
+                                        related_name = 'truck_oil_filter')
+    hyd_oil_filter = models.ManyToManyField('parts.Filter', 
+                                            blank = True,
+                                            related_name = 'truck_hyd_filter')
+    fuel_filter = models.ManyToManyField('parts.Filter', 
+                                         blank = True,
+                                         related_name = 'truck_fuel_filter')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class HourReading(models.Model):
+    """
+    Class HourReading
+
+    Keeps track of regular readings of hour meters
+    """
+
+    machine = models.ForeignKey(Machine)
+    hours = models.FloatField()
+    date = models.DateField(auto_now=True)
+    notes = models.TextField(blank=True, null=True)
+
+

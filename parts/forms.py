@@ -42,3 +42,9 @@ class FilterForm(forms.ModelForm):
             'created_at',
             'updated_at',
         ]
+
+class PartsSearchForm(forms.Form):
+    part_no = forms.CharField(required=False)
+    make = forms.CharField(required=False)
+    description = forms.CharField(required=False)
+    location = forms.CharField(required=False)

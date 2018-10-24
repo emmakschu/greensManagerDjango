@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.utils.timezone import now
+from django.db.models import Q
 
 from .models import (
     Maintenance,
@@ -15,6 +16,8 @@ from .forms import (
     RepairPartForm
 )
 
+from parts.forms import PartsSearchForm
+
 import parts.models as Parts
 import machines.models as Machines
 
@@ -23,15 +26,57 @@ def curr_time():
     
 def partsNew(request, repair):
     repair = Maintenance.objects.get(pk=repair)
-    form = RepairPartForm(repair=repair)
-    
+    form = RepairPartForm()
+    search_form = PartsSearchForm()
+
+    if 'filter' in request.GET:
+        search_form = PartsSearchForm(request.GET)
+        partNo = search_form['part_no'].value()
+        make = search_form['make'].value()
+        desc = search_form['description'].value()
+        loc = search_form['location'].value()
+
+        form.fields['part'].queryset = Parts.Part.objects.filter(
+                (Q(part_no__icontains=partNo) |
+                Q(alt_part_no__icontains=partNo)) &
+                Q(make__icontains=make) &
+                Q(description__icontains=desc) &
+                Q(location__icontains=loc))
+
+    if request.method == 'POST':
+        form = RepairPartForm(data=request.POST)
+        
+        if form.is_valid() and request.user.is_authenticated():
+            pending_form = form.save(commit=False)
+            pending_form.repair_id = repair.pk
+
+            part = Parts.Part.objects.get(pk=pending_form.part.pk)
+            part.in_stock -= pending_form.qty
+
+            added_cost = part.price * pending_form.qty
+            if repair.parts_cost != None:
+                repair.parts_cost += added_cost
+            else:
+                repair.parts_cost = added_cost
+            if repair.total_cost != None:
+                repair.total_cost += added_cost
+            else:
+                repair.total_cost = added_cost
+            repair.save(update_fields=['parts_cost', 'total_cost'])
+            part.save(update_fields=['in_stock',])
+            pending_form.save()
+
     context = {
         'curr_time': curr_time(),
         'repair': repair,
         'form': form,
+        'search_form': search_form,
     }
-    
-    return render(request, 'maintenance/parts.html', context)
+
+    if request.method == 'POST' and 'done' in request.POST:
+        return redirect('maint:repair_detail', pk=repair.pk)
+    else:
+        return render(request, 'maintenance/add_repair_part.html', context)
 
 def partsCreate(request, repair):
     repair = Maintenance.objects.get(pk=repair)
@@ -40,10 +85,18 @@ def partsCreate(request, repair):
         form = RepairPartForm(data=request.POST)
         
         if form.is_valid() and request.user.is_authenticated():
-            pending_form = form.save()
+            pending_form = form.save(commit=False)
             
+            part = Parts.Part.objects.filter(pending_form.part)
+            part.in_stock -= pending_form.qty
+
+            added_cost = part.price * pending_form.qty
+            repair.parts_cost += added_cost
+            repair.total_cost += added_cost
+
+            part.save(update_fields=['in_stock',])
+            repair.save(update_fields=['parts_cost', 'total_cost'])
             pending_form.save()
-            form.save_m2m()
             
     if OilChange.objects.filter(pk=repair.pk).exists():
         return redirect('maint:oilchange_detail', pk=repair.pk)
@@ -51,7 +104,7 @@ def partsCreate(request, repair):
         return redirect('maint:repair_detail', pk=repair.pk)
 
 def oilchangeIndex(request):
-    oilchanges = OilChange.objects.all().order_by('-updated_at')[:20]
+    oilchanges = OilChange.objects.all().order_by('-date_fixed')[:20]
     
     context = {
         'curr_time': curr_time(),
@@ -62,12 +115,10 @@ def oilchangeIndex(request):
 
 def oilchangeNew(request):
     form = OilChangeForm()
-    part_form = RepairPartForm()
     
     context = {
         'curr_time': curr_time(),
         'form': form,
-        'part_form': part_form,
     }
     
     return render(request, 'maintenance/oil_new.html', context)
@@ -83,36 +134,18 @@ def oilchangeCreate(request):
                 * pending_form.oil_qty
             pending_form.total_cost = pending_form.oil_cost
             
-            pending_form.save()
-            form.save_m2m()
-            
-        try:
-            part_form = RepairPartForm(request.POST)
-            
-            if part_form.is_valid():
-                pending_part = part_form.save(commit=False)
-                pending_part.repair = pending_form
-                pending_part.save()
-                part_form.save_m2m()
-                    
-                pending_form.total_cost += \
-                    pending_part.part.price * pending_part.qty
-                part = Parts.Part.objects.get(pk=pending_part.part.pk)
-                part.in_stock -= pending_part.qty
-                part.save()
-        except Exception:
-            part_form = None
-        
         machine = Machines.Machine.objects.get(
             pk=pending_form.machine.pk)
         machine.hours = pending_form.hours_on_machine
-        # machine.oil_type = pending_form.oil
-        machine.save()
+        machine.save(update_fields=['hours'])
             
         pending_form.save()
+        form.save_m2m()
                 
-            
-    return redirect('maint:oilchange_detail', pk=pending_form.pk)
+    if 'done' in request.POST:
+        return redirect('maint:oilchange_detail', pk=pending_form.pk)
+    elif 'add_part' in request.POST:
+        return redirect('maint:add_part', repair=pending_form.pk)
                 
 def oilchangeDetail(request, pk):
     oilchange = OilChange.objects.get(pk=pk)
@@ -190,8 +223,12 @@ def repairNew(request):
     
     return render(request, 'maintenance/repair_new.html', context)
 
-def repairNeeded(request):
-    form = RepairRequestForm()
+def repairNeeded(request, machine):
+    machine = Machines.Machine.objects.get(pk=machine)
+    form = RepairRequestForm(initial={
+        'machine': machine,
+        'acked': request.user
+    })
     
     context = {
         'curr_time': curr_time(),
@@ -207,14 +244,15 @@ def repairRequest(request):
         if form.is_valid() and request.user.is_authenticated():
             pending_form = form.save(commit=False)
             pending_form.total_cost = 0
-            pending_form.save()
-            form.save_m2m()
-            
+
             machine = Machines.Machine.objects.get(
                     pk=pending_form.machine.pk)
-            machine.in_commission = False
             machine.hours = pending_form.hours_on_machine
-            machine.save()
+            machine.in_commission = False
+            machine.save(update_fields=['hours', 'in_commission'])
+
+            pending_form.save()
+            form.save_m2m()
             
     return redirect('maint:repair_detail', pk=pending_form.pk)
 
@@ -230,28 +268,30 @@ def repairCreate(request):
             pending_form.save()
             form.save_m2m()
             
-            for p in pending_form.parts_used.all():
-                pending_form.total_cost += p.price
-                part = Parts.Part.objects.get(pk=p.pk)
-                part.in_stock -= 1
-                part.save()
-            
             if pending_form.date_fixed == None:
                 machine = Machines.Machine.objects.get(
                         pk=pending_form.machine.pk)
                 machine.in_commission = False
-                machine.save()
+                machine.save(update_fields=['in_commission'])
                 
-        pending_form.save()
+            pending_form.save()
         
-    return redirect('maint:repair_detail', pk=pending_form.pk)
+    if 'done' in request.POST:
+        return redirect('maint:repair_detail', pk=pending_form.pk)
+    elif 'add_part' in request.POST:
+        return redirect('maint:add_part', repair=pending_form.pk)
 
 def repairDetail(request, pk):
-    repair = Repair.objects.get(pk=pk)
+    if Repair.objects.filter(pk=pk).exists():
+        repair = Repair.objects.get(pk=pk)
+    elif OilChange.objects.filter(pk=pk).exists():
+        return redirect('maint:oilchange_detail', pk=pk)
+    parts = RepairPart.objects.filter(repair=repair)
     
     context = {
         'curr_time': curr_time(),
         'repair': repair,
+        'parts': parts,
     }
     
     return render(request, 'maintenance/repair_detail.html', context)
@@ -290,9 +330,21 @@ def repairUpdate(request, pk):
             else:
                 machine.in_commission = True
                 
-            machine.save()
+            machine.save(update_fields=['in_commission'])
                 
             pending_form.save()
-                
-    return redirect('maint:repair_detail', pk=pending_form.pk)
+
+    if 'done' in request.POST:
+        return redirect('maint:repair_detail', pk=pending_form.pk)
+    elif 'add_part' in request.POST:
+        return redirect('maint:add_part', repair=repair.pk)
             
+def repairPending(request):
+    repairs = Repair.objects.filter(date_fixed=None)
+
+    context = {
+        'curr_time': curr_time(),
+        'repairs': repairs,
+    }
+
+    return render(request, 'maintenance/repair_pending.html', context)

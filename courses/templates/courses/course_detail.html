@@ -64,25 +64,28 @@
 <section class="content-block">
 	<h3>Tees</h3>
 
-	<table>
-		<thead>
-			<th>#</th>
-			<th>Soil</th>
-			<th>Species</th>
-			<th>Cultivar</th>
-		</thead>
+	<div class="scroll-container">
 
-		{% for h in course.hole.all %}
-			{% for t in h.tee.all %}
-			<tr>
-				<td>{{ h.number }}</td>
-				<td>{{ t.soil_type }}</td>
-				<td>{{ t.turf_species }}</td>
-				<td>{{ t.turf_cultivar.name }}</td>
-			</tr>
+		<table>
+			<thead>
+				<th>#</th>
+				<th>Soil</th>
+				<th>Species</th>
+				<th>Cultivar</th>
+			</thead>
+
+			{% for h in course.hole.all %}
+				{% for t in h.tee.all %}
+				<tr>
+					<td>{{ h.number }}</td>
+					<td>{{ t.soil_type }}</td>
+					<td>{{ t.turf_species }}</td>
+					<td>{{ t.turf_cultivar.name }}</td>
+				</tr>
+				{% endfor %}
 			{% endfor %}
-		{% endfor %}
-	</table>
+		</table>
+	</div>
 	
 </section>
 

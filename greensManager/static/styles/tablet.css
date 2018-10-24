@@ -9,9 +9,47 @@
         height: 12vh;
     }
 
-    nav ul {
-        display: none;
-    }
+	header h1 {
+		width: auto;
+	}
+
+	#session-info {
+		width: 14%;
+		float: right;
+	}
+
+	nav ul {
+		display: none;
+		background-color: green;
+		width: 100%;
+		float: none;
+		clear: both;
+		position: relative;
+		top: 50px;
+		z-index: 1;
+	}
+
+	nav ul li {
+		display: block;
+		position: relative;
+		top: 10px;
+	}
+
+	.parent-menu {
+		width: 100%;
+		float: none;
+		display: block;
+		z-index: 1;
+	}
+
+	nav ul ul {
+		display: none;
+	}
+
+	#hamburger {
+		display: inline;
+		margin-right: 1em;
+	}
 
     .content-block {
         width: 48vw;
@@ -27,6 +65,7 @@
     header h1 {
         float: none;
         text-align: center;
+		width: 100%;
     }
 
     #session-info {

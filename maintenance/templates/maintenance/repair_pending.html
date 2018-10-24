@@ -1,0 +1,38 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include 'machines/shophead.html' %}
+
+<h2>Pending repairs:</h2>
+
+<section class="content-block content-block-full">
+
+	<a href="{% url 'maint:repair_new' %}">
+		<button>Add New</button>
+	</a>
+
+	<h3>Repairs Not Yet Completed</h3>
+
+	<table>
+		<thead>
+			<th>Date Noted</th>
+			<th>Machine</th>
+			<th>Description</th>
+		</thead>
+
+		{% for r in repairs %}
+		<tr>
+			<td>
+				<a href="{% url 'maint:repair_detail' pk=r.pk %}">
+					{{ r.date_ooc }}
+				</a>
+			</td>
+			<td>{{ r.machine }}</td>
+			<td>{{ r.description }}</td>
+		</tr>
+		{% endfor %}
+
+	</table>
+
+</section>
+
+{% include 'foot.html' %}

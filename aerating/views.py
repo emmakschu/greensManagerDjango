@@ -6,7 +6,9 @@ from .models import (
     GreensAerating,
     TeeAerating,
     FairwayAerating,
-    RoughAerating
+    RoughAerating,
+    QuadraTining,
+    DeepTine,
 )
 
 from .forms import (
@@ -15,10 +17,77 @@ from .forms import (
     TeeAeratingForm,
     FairwayAeratingForm,
     RoughAeratingForm,
+    QuadraTiningForm,
+    DeepTineForm,
 )
 
 def curr_time():
     return now()
+
+def qtIndex(request):
+    aeratings = QuadraTining.objects.all().order_by('-aerate_date')[:20]
+
+    context = {
+        'curr_time': curr_time(),
+        'aeratings': aeratings,
+    }
+
+    return render(request, 'aerating/qt_index.html', context)
+
+def qtNew(request):
+    form = QuadraTiningForm()
+
+    context = {
+        'curr_time': curr_time(),
+        'form': form,
+    }
+
+    return render(request, 'aerating/qt_new.html', context)
+
+def qtCreate(request):
+    if request.method == 'POST':
+        form = QuadraTiningForm(data=request.POST)
+
+        if form.is_valid() and request.user.is_authenticated():
+            pending_form = form.save(commit=False)
+            
+            pending_form.save()
+            form.save_m2m()
+
+    return redirect('aerate:greens_detail', pk=pending_form.pk)
+
+def dtIndex(request):
+    aeratings = DeepTine.objects.all().order_by('-updated_at')[:20]
+
+    context = {
+        'curr_time': curr_time(),
+        'aeratings': aeratings,
+    }
+
+    return render(request, 'aerating/dt_index.html', context)
+
+def dtNew(request):
+    form = DeepTineForm()
+
+    context = {
+        'curr_time': curr_time(),
+        'form': form,
+    }
+
+    return render(request, 'aerating/dt_new.html', context)
+
+def dtCreate(request):
+    if request.method == 'POST':
+        form = DeepTineForm(data=request.POST)
+
+        if form.is_valid() and request.user.is_authenticated():
+            pending_form = form.save(commit=False)
+
+            pending_form.save()
+            form.save_m2m()
+
+    return redirect('aerate:greens_detail', pk=pending_form.pk)
+
 
 def index(request):
     aeratings = Aerating.objects.all().order_by('-aerate_date')[:20]
@@ -64,7 +133,12 @@ def greensCreate(request):
     return redirect('aerate:greens_detail', pk=pending_form.pk)
 
 def greensDetail(request, pk):
-    aerating = GreensAerating.objects.get(pk=pk)
+    if GreensAerating.objects.filter(pk=pk).exists():
+        aerating = GreensAerating.objects.get(pk=pk)
+    elif QuadraTining.objects.filter(pk=pk).exists():
+        aerating = QuadraTining.objects.get(pk=pk)
+    elif DeepTine.objects.filter(pk=pk).exists():
+        aerating = DeepTine.objects.get(pk=pk)
     
     context = {
         'curr_time': curr_time(),
@@ -74,8 +148,15 @@ def greensDetail(request, pk):
     return render(request, 'aerating/greens_detail.html', context)
 
 def greensEdit(request, pk):
-    aerating = GreensAerating.objects.get(pk=pk)
-    form = GreensAeratingForm(instance=aerating)
+    if GreensAerating.objects.filter(pk=pk).exists():
+        aerating = GreensAerating.objects.get(pk=pk)
+        form = GreensAeratingForm(instance=aerating)
+    elif QuadraTining.objects.filter(pk=pk).exists():
+        aerating = QuadraTining.objects.get(pk=pk)
+        form = QuadraTiningForm(instance=aerating)
+    elif DeepTine.objects.filter(pk=pk).exists():
+        aerating = DeepTine.objects.get(pk=pk)
+        form = DeepTineForm(instance=aerating)
     
     context = {
         'curr_time': curr_time(),
@@ -86,11 +167,21 @@ def greensEdit(request, pk):
     return render(request, 'aerating/greens_edit.html', context)
 
 def greensUpdate(request, pk):
-    aerating = GreensAerating.objects.get(pk=pk)
+    if GreensAerating.objects.filter(pk=pk).exists():
+        aerating = GreensAerating.objects.get(pk=pk)
+    elif QuadraTining.objects.filter(pk=pk).exists():
+        aerating = QuadraTining.objects.get(pk=pk)
+    elif DeepTine.objects.filter(pk=pk).exists():
+        aerating = DeepTine.objects.get(pk=pk)
     
     if request.method == 'POST':
-        form = GreensAeratingForm(request.POST, instance=aerating)
-        
+        if GreensAerating.objects.filter(pk=pk).exists():
+            form = GreensAeratingForm(request.POST, instance=aerating)
+        elif QuadraTining.objects.filter(pk=pk).exists():
+            form = QuadraTiningForm(request.POST, instance=aerating)
+        elif DeepTine.objects.filter(pk=pk).exists():
+            form = DeepTineForm(request.POST, instance=aerating)
+
         if form.is_valid() and request.user.is_authenticated():
             pending_form = form.save(commit=False)
             

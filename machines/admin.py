@@ -14,7 +14,9 @@ from .models import (
     TrapRake,
     UtilVehicle,
     Tractor,
-    FertSpreader
+    FertSpreader,
+    Truck,
+    HourReading,
 )
 
 admin.site.register(GreensMower)
@@ -29,3 +31,5 @@ admin.site.register(TrapRake)
 admin.site.register(UtilVehicle)
 admin.site.register(Tractor)
 admin.site.register(FertSpreader)
+admin.site.register(Truck)
+admin.site.register(HourReading)

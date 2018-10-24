@@ -1,0 +1,50 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include 'head.html' %}
+
+<h2>Iso valve search results:</h2>
+
+<section class="content-block content-block-full">
+
+	<h3>{{ query }}</h3>
+
+	<table>
+		<thead>
+			<th>Latitude</th>
+			<th>Longitude</th>
+			<th>Open</th>
+			<th>Tee</th>
+			<th>Green</th>
+			<th>Fairway</th>
+			<th>Rough</th>
+			<th>Problem</th>
+			<th>Handle</th>
+		</thead>
+
+		{% for v in valves %}
+		<tr>
+			<td>{{ v.latitude }}</td>
+			<td>{{ v.longitude }}</td>
+			<td>{{ v.open }}</td>
+			<td>{{ v.tee }}</td>
+			<td>{{v.green }}</td>
+			<td>{{ v.fairway }}</td>
+			<td>{{ v.rough }}</td>
+			<td>{{ v.problem }}</td>
+			<td>{{ v.handle }}</td>
+			<td><a href="{% url 'irr:iso_detail' pk=v.pk %}">
+						<button>Detail</button>
+					</a>
+			</td>
+			<td><a href="{% url 'irr:iso_edit' pk=v.pk %}">
+						<button>Edit</button>
+					</a>
+			</td>
+		</tr>
+		{% endfor %}
+
+	</table>
+
+</section>
+
+{% include 'foot.html' %}

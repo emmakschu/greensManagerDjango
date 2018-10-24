@@ -7,64 +7,28 @@ class Stimp(models.Model):
     simple_version = models.BooleanField()
     green = models.ForeignKey('courses.Green')
     
-    forward1 = models.DecimalField(decimal_places=2,
-                                   max_digits=12)
-    forward2 = models.DecimalField(decimal_places=2,
-                                   max_digits=12,
-                                   blank=True,
-                                   null=True)
-    forward3 = models.DecimalField(decimal_places=2,
-                                   max_digits=12,
-                                   blank=True,
-                                   null=True)
-    forwardAvg = models.DecimalField(decimal_places=2,
-                                     max_digits=12)
+    forward1 = models.FloatField()
+    forward2 = models.FloatField(blank=True, null=True)
+    forward3 = models.FloatField(blank=True, null=True)
+    forwardAvg = models.FloatField(blank=True, null=True)
     
-    backward1 = models.DecimalField(decimal_places=2,
-                                    max_digits=12)
-    backward2 = models.DecimalField(decimal_places=2,
-                                    max_digits=12,
-                                    blank=True,
-                                    null=True)
-    backward3 = models.DecimalField(decimal_places=2,
-                                    max_digits=12,
-                                    blank=True,
-                                    null=True)
-    backwardAvg = models.DecimalField(decimal_places=2,
-                                      max_digits=12)
+    backward1 = models.FloatField()
+    backward2 = models.FloatField(blank=True, null=True)
+    backward3 = models.FloatField(blank=True, null=True)
+    backwardAvg = models.FloatField(blank=True, null=True)
     
-    left1 = models.DecimalField(decimal_places=2,
-                                max_digits=12)
-    left2 = models.DecimalField(decimal_places=2,
-                                max_digits=12,
-                                blank=True,
-                                null=True)
-    left3 = models.DecimalField(decimal_places=2,
-                                max_digits=12,
-                                blank=True,
-                                null=True)
-    leftAvg = models.DecimalField(decimal_places=2,
-                                  max_digits=12)
+    left1 = models.FloatField()
+    left2 = models.FloatField(blank=True, null=True)
+    left3 = models.FloatField(blank=True, null=True)
+    leftAvg = models.FloatField(blank=True, null=True)
     
-    right1 = models.DecimalField(decimal_places=2,
-                                 max_digits=12)
-    right2 = models.DecimalField(decimal_places=2,
-                                 max_digits=12,
-                                 blank=True,
-                                 null=True)
-    right3 = models.DecimalField(decimal_places=2,
-                                 max_digits=12,
-                                 blank=True,
-                                 null=True)
-    rightAvg = models.DecimalField(decimal_places=2,
-                                   max_digits=12)
+    right1 = models.FloatField()
+    right2 = models.FloatField(blank=True, null=True)
+    right3 = models.FloatField(blank=True, null=True)
+    rightAvg = models.FloatField(blank=True, null=True)
     
-    stdDev = models.DecimalField(decimal_places=5,
-                                 max_digits=15)
-    mu_k = models.DecimalField(decimal_places=5,
-                               max_digits=15)
-    raw_speed = models.DecimalField(decimal_places=2,
-                                    max_digits=12)
-    adj_speed = models.DecimalField(decimal_places=2,
-                                    max_digits=12)
+    stdDev = models.FloatField()
+    mu_k = models.FloatField()
+    raw_speed = models.FloatField()
+    adj_speed = models.FloatField()
     

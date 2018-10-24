@@ -4,14 +4,14 @@
 
 <h2>Service record details:</h2>
 
-<section class="content-block content-block-full">
+<section class="content-block">
 
     <h3>Oil Change</h3>
     
     <table>
         <tr>
             <th>Date</th>
-            <td>{{ oilchange.date_fixed }}</td>
+            <td>{{ oilchange.date_fixed | date:"M d, Y" }}</td>
         </tr>
         
         <tr>
@@ -45,15 +45,6 @@
         </tr>
         
         <tr>
-            <th>Parts Used</th>
-            <td>{% for p in parts %}
-                    {{ p.part }} 
-                    ({{ p.qty }} &#64; {{ p.part.price }})<br />
-                {% endfor %}
-            </td>
-        </tr>
-        
-        <tr>
             <th>Total Cost</th>
             <td>{{ oilchange.total_cost }}</td>
         </tr>
@@ -72,5 +63,43 @@
     </a>
 
 </section>
+
+{% for p in parts %}
+	<section class="content-block">
+		<h3>Part Used</h3>
+
+		<table>
+			<tr>
+				<th>Part #</th>
+				<td><a href="{% url 'parts:part_detail' pk=p.part.pk %}">
+						{{ p.part.part_no }}
+					</a>
+				</td>
+			</tr>
+
+			<tr>
+				<th>Make</th>
+				<td>{{ p.part.make }}</td>
+			</tr>
+
+			<tr>
+				<th>Description</th>
+				<td>{{ p.part.description }}</td>
+			</tr>
+
+			<tr>
+				<th>Cost</th>
+				<td>{{ p.part.price }}</td>
+			</tr>
+
+			<tr>
+				<th>Quantity</th>
+				<td>{{ p.qty }}</td>
+			</tr>
+
+		</table>
+
+	</section>
+{% endfor %}
 
 {% include "foot.html" %}

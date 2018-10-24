@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.gis.db import models as gis
 from datetime import date
 
 
@@ -109,6 +110,7 @@ class SprinklerHead(models.Model):
                               null = True)
 
     problem = models.BooleanField(default = False)
+    notes = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -193,6 +195,7 @@ class Drain(models.Model):
     # if not explicitly along a fairway/tee/etc., there is usually
     # some convention of what is being drained.
     hole = models.ForeignKey('courses.Hole')
+    notes = models.TextField(blank=True, null=True)
 
     problem = models.BooleanField(default = False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -241,6 +244,7 @@ class ShutoffValve(models.Model):
 
     problem = models.BooleanField(default = False)
     notes = models.TextField(blank=True, null=True)
+    handle = models.TextField(default="handle")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

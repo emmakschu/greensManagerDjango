@@ -3,6 +3,8 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
+
+    url(r'^hours/(?P<pk>\d+)/', views.hourReading, name="hour_read"),
     
     url(r'^spreader/(?P<pk>\d+)/update/', views.spreaderUpdate,
         name="spreader_update"),

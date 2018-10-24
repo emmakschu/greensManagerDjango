@@ -5,6 +5,7 @@ from .models import (
     OilChange,
     Repair,
     RepairPart,
+    BedknifeToReel,
 )
 
 class OilChangeForm(forms.ModelForm):
@@ -51,3 +52,8 @@ class RepairPartForm(forms.ModelForm):
         exclude = [
             'repair'
         ]
+
+class BedknifeToReelForm(forms.ModelForm):
+    class Meta:
+        model = BedknifeToReel
+        fields = '__all__'

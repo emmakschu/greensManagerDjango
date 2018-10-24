@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.utils.timezone import now
+from django.db.models import Q
 
 from .models import (
     Fluid,
@@ -13,11 +14,48 @@ from .forms import (
     FuelForm,
     OilForm,
     PartForm,
-    FilterForm
+    FilterForm,
+    PartsSearchForm,
 )
 
 def curr_time():
     return now()
+
+def partsSearch(request):
+    if request.method == 'GET':
+        form = PartsSearchForm()
+
+        context = {
+            'curr_time': curr_time(),
+            'form': form,
+        } 
+
+        return render(request, 'parts/search.html', context)
+
+    if request.method == 'POST':
+        form = PartsSearchForm(request.POST)
+
+        partNo = form['part_no'].value()
+        make = form['make'].value()
+        desc = form['description'].value()
+        loc = form['location'].value()
+
+        query = "%s %s %s %s" % (partNo, make, desc, loc)
+
+        parts = Part.objects.filter(
+                (Q(part_no__icontains=partNo) |
+                Q(alt_part_no__icontains=partNo)) &
+                Q(make__icontains=make) &
+                Q(description__icontains=desc) &
+                Q(location__icontains=loc))
+
+        context = {
+            'curr_time': curr_time(),
+            'query': query,
+            'parts': parts,
+        }
+
+        return render(request, 'parts/result.html', context)
 
 def index(request):
     recently_added = \
@@ -202,7 +240,10 @@ def partCreate(request):
             pending_form = form.save(commit=False)
             pending_form.save()
         
-    return redirect('parts:part_detail', pk=pending_form.pk)
+            return redirect('parts:part_detail', pk=pending_form.pk)
+        
+        if request.user.is_authenticated() == False:
+            return redirect('welcome:login')
 
 def partDetail(request, pk):
     part = Part.objects.get(pk=pk)
@@ -239,7 +280,7 @@ def partUpdate(request, pk):
     return redirect('parts:part_detail', pk=part.pk)
 
 def filterIndex(request):
-    filters = Filter.objects.all().order_by('-updated_at')[:20]
+    filters = Filter.objects.all()
     
     context = {
         'curr_time': curr_time(),

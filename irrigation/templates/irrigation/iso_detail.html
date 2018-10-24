@@ -27,6 +27,10 @@
                 {% if iso.rough %}
                     {{ iso.rough }}
                 {% endif %}
+
+		{% if iso.notes %}
+		    {{ iso.notes }}
+		{% endif %}
             </td>
         </tr>
         
@@ -50,6 +54,11 @@
                 {% endif %}
             </td>
         </tr>
+
+				<tr>
+						<th>Handle Type</th>
+						<td>{{ iso.handle }}</td>
+				</tr>
         
         <tr>
             <th>Problem?</th>

@@ -37,8 +37,12 @@ class Part(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "%s %s" % (self.make, self.description)
+        return "%s %s %s" % (self.make, 
+                             self.part_no,
+                             self.description)
 
 class Filter(Part):
     def __str__(self):
-        return "Filter %s" % self.part_no
+        return "Filter: %s %s %s" % (self.make,
+                                     self.part_no,
+                                     self.description)

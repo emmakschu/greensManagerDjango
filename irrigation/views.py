@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.utils.timezone import now
+from django.db.models import Q
 
 from .models import (
     SatelliteBox,
@@ -16,6 +17,7 @@ from .forms import (
     QuickCouplerForm,
     DrainForm,
     ShutoffValveForm,
+    IsoSearchForm,
     IrrigationDigForm
 )
 
@@ -152,6 +154,21 @@ def sprinklerUpdate(request, pk):
         
     return redirect('irr:sprinkler_detail', pk=sprinkler.pk)
 
+def sprinklerSearch(request):
+    if request.method == 'POST':
+        return render(request, 'irrigation/sprinkler_search.html')
+
+
+    else:
+        searchForm = SprinklerSearchForm()
+
+        context = {
+            'curr_time': curr_time(),
+            'searchForm': searchForm,
+        }
+
+        return render(request, 'irrigation/sprinkler_search.html', context)
+
 def qcIndex(request):
     qcs = QuickCoupler.objects.all()
     
@@ -216,7 +233,7 @@ def qcUpdate(request, pk):
     return redirect('irr:qc_detail', pk=qc.pk)
 
 def drainIndex(request):
-    drains = Drain.objects.all()
+    drains = Drain.objects.all().order_by('hole_id')
     
     context = {
         'curr_time': curr_time(),
@@ -280,7 +297,7 @@ def drainUpdate(request, pk):
     return redirect('irr:drain_detail', pk=drain.pk)
 
 def isoIndex(request):
-    isos = ShutoffValve.objects.all()
+    isos = ShutoffValve.objects.all().order_by('longitude')
     
     context = {
         'curr_time': curr_time(),
@@ -343,6 +360,91 @@ def isoUpdate(request, pk):
             form.save()
             
     return redirect('irr:iso_detail', pk=iso.pk)
+
+def isoSearch(request):
+    if request.method == 'GET':
+        form = IsoSearchForm()
+
+        context = {
+            'curr_time': curr_time(),
+            'form': form,
+        }
+
+        return render(request, 'irrigation/iso_search.html', context)
+
+    if request.method == 'POST':
+        form = IsoSearchForm(request.POST)
+
+        is_open = True
+        latitude = 0.0
+        longitude = 0.0
+        tee = None
+        fairway = None
+        green = None
+        rough = None
+        problem = False
+        handle = ""
+
+        if form['open'].value() == False:
+            is_open = False
+        if form['latitude'].value() != None:
+            latitude = form['latitude'].value()
+        if form['longitude'].value() != None:
+            longitude = form['longitude'].value()
+        if form['tee'].value() != None:
+            tee = form['tee'].value()
+        if form['fairway'].value() != None:
+            fairway = form['fairway'].value()
+        if form['green'].value() != None:
+            green = form['green'].value()
+        if form['rough'].value() != None:
+            rough = form['rough'].value()
+        if form['problem'].value() == True:
+            problem = form['problem'].value()
+        if form['handle'].value() != '':
+            handle = form['handle'].value()
+
+        query = """Search for iso valves where: 
+                open = %s
+                lat = %s
+                lon = %s
+                tee = %s
+                fairway = %s
+                green = %s
+                rough = %s
+                problem = %s
+                handle = %s """ % (is_open,
+                                 latitude,
+                                 longitude,
+                                 tee,
+                                 fairway,
+                                 green,
+                                 rough,
+                                 problem,
+                                 handle)
+
+        valves_open = ShutoffValve.objects.filter(Q(open=is_open))
+        valves_lat = ShutoffValve.objects.filter(
+                Q(latitude__icontains=latitude))
+        valves_long = ShutoffValve.objects.filter(
+                 Q(longitude__icontains=longitude)) 
+        valves_tee = ShutoffValve.objects.filter(Q(tee=tee))
+        valves_fairway = ShutoffValve.objects.filter(
+                Q(fairway=fairway)) 
+        valves_green = ShutoffValve.objects.filter(Q(green=green)) 
+        valves_rough = ShutoffValve.objects.filter(Q(rough=rough)) 
+        valves_prob = ShutoffValve.objects.filter(Q(problem=problem)) 
+        valves_handle = ShutoffValve.objects.filter(
+                 Q(handle__icontains=handle))
+
+        context = {
+            'curr_time': curr_time(),
+            'query': query,
+            'valves': valves_open,
+        }
+
+        return render(request, 'irrigation/iso_result.html', context)
+                  
 
 def digIndex(request):
     digs = IrrigationDig.objects.all().order_by('-date')

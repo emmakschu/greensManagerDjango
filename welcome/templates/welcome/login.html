@@ -1,0 +1,27 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include 'head.html' %}
+
+<h1>Login to GreensManager</h1>
+
+<form id="loginForm"
+			method="POST"
+			action="{% url 'welcome:login' %}">
+
+	{% csrf_token %}
+
+	<p>
+		{{ form.as_p }}
+
+		<input type="submit" value="Log In" />
+	</p>
+
+</form>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('nav').hide();
+	});
+</script>
+
+{% include 'foot.html' %}

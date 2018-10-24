@@ -9,6 +9,8 @@ from .models import (
     IrrigationDig
 )
 
+import courses.models as Course
+
 class SatelliteBoxForm(forms.ModelForm):
     class Meta:
         model = SatelliteBox
@@ -49,6 +51,21 @@ class ShutoffValveForm(forms.ModelForm):
             'updated_at'
         ]
 
+class IsoSearchForm(forms.Form):
+    open = forms.BooleanField(required=False)
+    latitude = forms.FloatField(required=False)
+    longitude = forms.FloatField(required=False)
+    tee = forms.ModelChoiceField(queryset=Course.Tee.objects.all(),
+            required=False)
+    green = forms.ModelChoiceField(queryset=Course.Green.objects.all(),
+            required=False)
+    fairway = forms.ModelChoiceField(queryset=Course.Fairway.objects.all(),
+            required=False)
+    rough = forms.ModelChoiceField(queryset=Course.Rough.objects.all(),
+            required=False)
+    problem = forms.BooleanField(required=False)
+    handle = forms.CharField(required=False)
+
 class IrrigationDigForm(forms.ModelForm):
     class Meta:
         model = IrrigationDig
@@ -56,3 +73,18 @@ class IrrigationDigForm(forms.ModelForm):
             'created_at',
             'updated_at'
         ]
+
+class SprinklerSearchForm(forms.Form):
+    latitude = forms.FloatField(required=False)
+    longitude = forms.FloatField(required=False)
+    box = forms.IntegerField(required=False)
+    station = forms.IntegerField(required=False)
+
+class QCSearchForm(forms.Form):
+    latitude = forms.FloatField(required=False)
+    longitude = forms.FloatField(required=False)
+
+class ValveSearchForm(forms.Form):
+    latitude = forms.FloatField(required=False)
+    longitude = forms.FloatField(required=False)
+    area = forms.CharField(required=False)

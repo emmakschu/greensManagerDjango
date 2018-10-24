@@ -2,13 +2,19 @@
 
 {% include "machines/shophead.html" %}
 
-<h2>{{ mower }}:</h2>
+<h2>{{ mower }}:
+	&nbsp;
+	<a href="{% url 'maint:repair_needed' machine=mower.pk %}">
+		<button>Report Breakdown</button>
+	</a>
+</h2>
 
 
 <section class="content-block">
 
     <h3>Basic Info</h3>
     
+		<div class="scroll-container">
     <table>
         <tr>
             <th>Make</th>
@@ -53,8 +59,19 @@
         
         <tr>
             <th>Cut Height</th>
-            <td>{{ mower.cut_height }}</td>
+            <td>{{ mower.cut_height }}
+							{{ mower.height_units }}</td>
         </tr>
+
+				<tr>
+						<th>Added to Database</th>
+						<td>{{ mower.created_at }}</td>
+				</tr>
+
+				<tr>
+						<th>Last Updated</th>
+						<td>{{ mower.updated_at }}</td>
+				</tr>
     </table>
     
     <br />
@@ -62,6 +79,7 @@
     <a href="{% url 'shop:greensmow_edit' pk=mower.pk %}">
         <button>Edit</button>
     </a>
+	</div>
 
 </section>
 
@@ -89,7 +107,7 @@
         
         <tr>
             <th>Motor Oil Capacity</th>
-            <td>{{ mower.oil_capacity }}</td>
+						<td>{{ mower.oil_capacity }} {{ mower.oil_units }}</td>
         </tr>
         
         <tr>
@@ -111,7 +129,8 @@
         
         <tr>
             <th>Hydraulic Oil Capacity</th>
-            <td>{{ mower.hyd_oil_capacity }}</td>
+						<td>{{ mower.hyd_oil_capacity }} 
+							{{ mower.hyd_oil_units }}</td>
         </tr>
         {% endif %}
         
@@ -122,6 +141,14 @@
                 {% endfor %}
             </td>
         </tr>
+
+				<tr>
+						<th>Air Filter</th>
+						<td>{% for f in mower.air_filter.all %}
+										{{ f }}<br />
+								{% endfor %}
+						</td>
+				</tr>
         
     </table>
     
@@ -175,4 +202,46 @@
     </table>
 </section>
 
+<section class="content-block">
+
+		<h3>Hour Benchmarks</h3>
+
+		<table>
+				<thead>
+						<th>Date</th>
+						<th>Hours</th>
+						<th>Notes</th>
+				</thead>
+
+				{% for h in hour_reads %}
+				<tr>
+						<td>{{ h.date }}</td>
+						<td>{{ h.hours }}</td>
+						<td>{{ h.notes }}</td>
+				</tr>
+				{% endfor %}
+		</table>
+
+</section>
+
+<section class="content-block">
+
+	<h3>Bedknife To Reel Adjustments</h3>
+
+	<table>
+		<thead>
+			<th>Date</th>
+			<th>Mechanic</th>
+		</thead>
+
+		{% for b in btr %}
+			<tr>
+				<td>{{ b.date }}</td>
+				<td>{{ b.mechanic.first_name }}
+					{{ b.mechanic.last_name }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+
+</section>
 {% include "foot.html" %}

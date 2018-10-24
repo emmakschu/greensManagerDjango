@@ -14,6 +14,7 @@ from .models import (
     TrapRake,
     UtilVehicle,
     Tractor,
+    HourReading,
     FertSpreader
 )
 
@@ -128,3 +129,8 @@ class FertSpreaderForm(forms.ModelForm):
             'created_at',
             'updated_at'
         ]
+
+class HourReadingForm(forms.ModelForm):
+    class Meta:
+        model = HourReading
+        fields = '__all__'

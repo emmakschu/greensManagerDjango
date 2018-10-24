@@ -1,0 +1,43 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include 'head.html' %}
+
+<h2>Stimping overview:</h2>
+
+<section class="content-block content-block-full">
+
+	<a href="{% url 'stimp:new' %}">
+		<button>Add New</button>
+	</a>
+
+	<h3>Recent Stimp Readings</h3>
+
+	<table>
+		<thead>
+			<th>Date</th>
+			<th>Green</th>
+			<th>Raw Speed</th>
+			<th>Adj Speed</th>
+			<th>&mu;<sub>k</sub></th>
+		</thead>
+
+		{% for s in stimps %}
+		<tr>
+			<td>{{ s.created_at | date:"M d, Y" }}</td>
+			<td>{{ s.green }}</td>
+			<td>{{ s.raw_speed }}</td>
+			<td>{{ s.adj_speed }}</td>
+			<td>{{ s.mu_k }}</td>
+			<td><a href="{% url 'stimp:detail' pk=s.pk %}">
+					<button>Detail</button>
+				</a>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+
+
+
+</section>
+
+{% include 'foot.html' %}

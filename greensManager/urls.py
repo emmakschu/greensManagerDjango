@@ -32,6 +32,8 @@ urlpatterns = [
     url(r'^aerate/', include('aerating.urls', namespace="aerate")),
     url(r'^notes/', include('notes.urls', namespace="notes")),
     url(r'^build/', include('building.urls', namespace="build")),
+    url(r'^stimp/', include('stimping.urls', namespace="stimp")),
     url(r'^admin/', admin.site.urls),
+    url(r'^blog/', include('blog.urls', namespace="blog")),
     url(r'^', include('welcome.urls', namespace="welcome"))
 ]

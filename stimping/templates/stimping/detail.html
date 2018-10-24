@@ -1,0 +1,31 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include 'head.html' %}
+
+<h2>Stimp detail:</h2>
+
+<section class="content-block content-block-full">
+
+	<h3>{{ stimp.green }} at {{ stimp.created_at }}</h3>
+
+	<table>
+		<tr>
+			<th>Speed</th>
+			<td>{{ stimp.adj_speed }}</td>
+		</tr>
+
+		<tr>
+			<th>Raw Speed</th>
+			<td>{{ stimp.raw_speed }}</td>
+		</tr>
+
+		<tr>
+			<th>&mu;<sub>k</sub></th>
+			<td>{{ stimp.mu_k }}</td>
+		</tr>
+
+	</table>
+
+</section>
+
+{% include 'foot.html' %}

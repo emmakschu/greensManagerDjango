@@ -5,6 +5,7 @@ class Aerating(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     aerate_date = models.DateField()
     aerator = models.ForeignKey('machines.Aerator')
+    notes = models.TextField(blank=True, null=True)
     
 class GreensAerating(Aerating):
     green = models.ManyToManyField('courses.Green')
@@ -17,3 +18,12 @@ class FairwayAerating(Aerating):
     
 class RoughAerating(Aerating):
     rough = models.ManyToManyField('courses.Rough')
+
+class QuadraTining(Aerating):
+    green = models.ManyToManyField('courses.Green')
+
+    def __str__(self):
+        return "Quadra-tining on %s" % self.aerate_date
+
+class DeepTine(Aerating):
+    green = models.ManyToManyField('courses.Green')

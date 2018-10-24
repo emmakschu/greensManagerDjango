@@ -33,6 +33,11 @@
             <th>Description</th>
             <td>{{ repair.description }}</td>
         </tr>
+
+				<tr>
+					<th>Total Cost</th>
+					<td>{{ repair.total_cost }}</td>
+				</tr>
         
     </table>
     
@@ -43,5 +48,39 @@
     </a>
 
 </section>
+
+{% for p in parts %}
+<section class="content-block">
+	<h3>Part Used</h3>
+
+	<table>
+		<tr>
+			<th>Part #</th>
+			<td>{{ p.part.part_no }}</td>
+		</tr>
+
+		<tr>
+			<th>Part Make</th>
+			<td>{{ p.part.make }}</td>
+		</tr>
+
+		<tr>
+			<th>Description</th>
+			<td>{{ p.part.description }}</td>
+		</tr>
+
+		<tr>
+			<th>Location</th>
+			<td>{{ p.part.location }}</td>
+		</tr>
+		
+		<tr>
+			<th>Cost</th>
+			<td>{{ p.part.cost }}</td>
+		</tr>
+	</table>
+
+</section>
+{% endfor %}
 
 {% include "foot.html" %}

@@ -1,0 +1,23 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include 'machines/shophead.html' %}
+
+<h2>Search for parts:</h2>
+
+<section class="content-block content-block-full">
+
+		<form id="partsSearch"
+				  method="POST"
+					action="{% url 'parts:parts_search' %}">
+
+				{% csrf_token %}
+
+				{{ form.as_p }}
+
+				<input type="submit" value="Search" />
+
+		</form>
+
+</section>
+
+{% include 'foot.html' %}

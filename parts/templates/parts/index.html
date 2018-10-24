@@ -7,6 +7,7 @@
 <section class="content-block">
     <h3>Recently added parts</h3>
 
+		<div class="scroll-container">
     <table>
         <thead>
             <th>Part #</th>
@@ -30,11 +31,13 @@
         </tr>
         {% endfor %}
     </table>
+	</div>
 </section>
 
 <section class="content-block">
     <h3>Recently updated parts</h3>
 
+		<div class="scroll-container">
     <table>
         <thead>
         <th>Part #</th>
@@ -59,11 +62,13 @@
         {% endfor %}
 
     </table>
+	</div>
 </section>
 
 <section class="content-block">
     <h3>Out of stock parts</h3>
 
+		<div class="scroll-container">
     <table>
         <thead>
             <th>Part #</th>
@@ -83,6 +88,7 @@
         </tr>
         {% endfor %}
     </table>
+	</div>
 </section>
 
 {% include "foot.html" %}

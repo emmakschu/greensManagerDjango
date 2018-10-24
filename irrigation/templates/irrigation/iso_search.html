@@ -1,0 +1,23 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% include 'head.html' %}
+
+<h2>Search for isolation valves:</h2>
+
+<section class="content-block content-block-full">
+	
+	<form id="isoSearchForm"
+			  method="POST"
+				action="{% url 'irr:iso_search' %}">
+
+			{% csrf_token %}
+
+			{{ form.as_p }}
+
+			<input type="submit" value="Search" />
+
+	</form>
+
+</section>
+
+{% include 'foot.html' %}

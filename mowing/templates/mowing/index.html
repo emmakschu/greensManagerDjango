@@ -5,6 +5,8 @@
 <section class="content-block content-block-half">
     <h3>Greens</h3>
     <p>Last: {{ last_greens }} ago</p>
+
+		<div class="scroll-container">
     <table>
         <thead>
             <th>Date</th>
@@ -14,7 +16,12 @@
 
         {% for m in greens_mow %}
         <tr>
-            <td>{{ m.mow_date }}</td>
+            <td>
+							<a href="{% url 'mow:greens_detail' pk=m.pk %}">
+								{{ m.mow_date }}
+							</a>
+						</td>
+							
             <td>{% for mower in m.mower.all %}
                     {{ mower }}<br />
                 {% endfor %}
@@ -26,12 +33,14 @@
         </tr>
         {% endfor %}
     </table>
+	</div>
 </section>
 
 <section class="content-block content-block-half">
     <h3>Tees</h3>
     <p>Last: {{ last_tees }} ago</p>
 
+		<div class="scroll-container">
     <table>
         <thead>
             <th>Date</th>
@@ -41,7 +50,11 @@
 
         {% for m in tee_mow %}
         <tr>
-            <td>{{ m.mow_date }}</td>
+            <td>
+							<a href="{% url 'mow:tees_detail' pk=m.pk %}">
+								{{ m.mow_date }}
+							</a>
+						</td>
             <td>{% for mower in m.mower.all %}
                     {{ mower }}<br />
                 {% endfor %}
@@ -53,11 +66,14 @@
         </tr>
         {% endfor %}
     </table>
+	</div>
 </section>
 
 <section class="content-block content-block-half">
     <h3>Fairways</h3>
     <p>Last: {{ last_fairway }} ago</p>
+
+		<div class="scroll-container">
 
     <table>
         <thead>
@@ -68,7 +84,11 @@
 
         {% for m in fairway_mow %}
         <tr>
-            <td>{{ m.mow_date }}</td>
+            <td>
+							<a href="{% url 'mow:fairways_detail' pk=m.pk %}">
+								{{ m.mow_date }}
+							</a>
+						</td>
             <td>{% for mower in m.mower.all %}
                     {{ mower }}<br />
                 {% endfor %}
@@ -80,11 +100,14 @@
         </tr>
         {% endfor %}
     </table>
+	</div>
 </section>
 
 <section class="content-block content-block-half">
     <h3>Roughs</h3>
     <p>Last: {{ last_rough }} ago</p>
+
+		<div class="scroll-container">
 
     <table>
         <thead>
@@ -95,7 +118,11 @@
 
         {% for m in rough_mow %}
         <tr>
-            <td>{{ m.mow_date }}</td>
+            <td>
+							<a href="{% url 'mow:roughs_detail' pk=m.pk %}">
+								{{ m.mow_date }}
+							</a>
+						</td>
             <td>{% for mower in m.mower.all %}
                     {{ mower }}<br />
                 {% endfor %}
@@ -107,6 +134,7 @@
         </tr>
         {% endfor %}
     </table>
+	</div>
 </section>
 
 {% include "foot.html" %}

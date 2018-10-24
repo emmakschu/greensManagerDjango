@@ -15,7 +15,8 @@ from .models import (
     TrapRake,
     UtilVehicle,
     Tractor,
-    FertSpreader
+    FertSpreader,
+    HourReading,
 )
 
 from .forms import (
@@ -32,6 +33,7 @@ from .forms import (
     TrapRakeForm,
     UtilVehicleForm,
     TractorForm,
+    HourReadingForm,
     FertSpreaderForm
 )
 
@@ -48,7 +50,8 @@ def index(request):
     return render(request, 'machines/index.html', context)
 
 def greensmowIndex(request):
-    mowers = GreensMower.objects.all()
+    mowers = GreensMower.objects.all().order_by('cut_height',
+            'ident_number')
     
     context = {
         'curr_time': curr_time(),
@@ -82,11 +85,15 @@ def greensmowCreate(request):
 def greensmowDetail(request, pk):
     mower = GreensMower.objects.get(pk=pk)
     oil_changes = Maint.OilChange.objects.filter(machine=mower)[:5]
+    hour_reads = HourReading.objects.filter(machine=mower)
+    btr = Maint.BedknifeToReel.objects.filter(mower=mower)[:5]
 
     context = {
         'curr_time': curr_time(),
         'mower': mower,
         'oil_changes': oil_changes,
+        'hour_reads': hour_reads,
+        'btr': btr,
     }
 
     return render(request, 'machines/greensmow_detail.html', context)
@@ -152,11 +159,13 @@ def teemowDetail(request, pk):
     mower = TeeMower.objects.get(pk=pk)
     oil_changes = Maint.OilChange.objects.filter(
         machine=mower).order_by('date_fixed')[:20]
+    hour_reads = HourReading.objects.filter(machine=mower)
     
     context = {
         'curr_time': curr_time(),
         'mower': mower,
         'oil_changes': oil_changes,
+        'hour_reads': hour_reads,
     }
     
     return render(request, 'machines/teemow_detail.html', context)
@@ -221,11 +230,13 @@ def fairwaymowCreate(request):
 def fairwaymowDetail(request, pk):
     mower = FairwayMower.objects.get(pk=pk)
     oil_changes = Maint.OilChange.objects.filter(machine=mower)[:5]
+    hour_reads = HourReading.objects.filter(machine=mower)
     
     context = {
         'curr_time': curr_time(),
         'mower': mower,
         'oil_changes': oil_changes,
+        'hour_reads': hour_reads,
     }
     
     return render(request, 'machines/fairwaymow_detail.html', context)
@@ -289,12 +300,18 @@ def roughmowCreate(request):
 
 def roughmowDetail(request, pk):
     mower = RoughMower.objects.get(pk=pk)
-    oil_changes = Maint.OilChange.objects.filter(machine=mower)[:5]
+    oil_changes = Maint.OilChange.objects.filter(
+            machine=mower).order_by('-date_fixed')[:10]
+    repairs = Maint.Repair.objects.filter(
+            machine=mower).order_by('-date_fixed')[:10]
+    hour_reads = HourReading.objects.filter(machine=mower)
     
     context = {
         'curr_time': curr_time(),
         'mower': mower,
         'oil_changes': oil_changes,
+        'repairs': repairs,
+        'hour_reads': hour_reads,
     }
     
     return render(request, 'machines/roughmow_detail.html', context)
@@ -372,11 +389,13 @@ def rollerCreate(request):
 def rollerDetail(request, pk):
     roller = Roller.objects.get(pk=pk)
     oil_changes = Maint.OilChange.objects.filter(machine=roller)[:5]
+    hour_reads = HourReading.objects.filter(machine=roller)
     
     context = {
         'curr_time': curr_time(),
         'roller': roller,
         'oil_changes': oil_changes,
+        'hour_reads': hour_reads,
     }
     
     return render(request, 'machines/roller_detail.html', context)
@@ -441,11 +460,13 @@ def aeratorCreate(request):
 def aeratorDetail(request, pk):
     aerator = Aerator.objects.get(pk=pk)
     oil_changes = Maint.OilChange.objects.filter(machine=aerator)
+    hour_reads = HourReading.objects.filter(machine=aerator)
     
     context = {
         'curr_time': curr_time(),
         'aerator': aerator,
         'oil_changes': oil_changes,
+        'hour_reads': hour_reads,
     }
     
     return render(request, 'machines/aerator_detail.html', context)
@@ -509,11 +530,13 @@ def sprayerCreate(request):
 def sprayerDetail(request, pk):
     sprayer = Sprayer.objects.get(pk=pk)
     oil_changes = Maint.OilChange.objects.filter(machine=sprayer)[:5]
+    hour_reads = HourReading.objects.filter(machine=sprayer)
     
     context = {
         'curr_time': curr_time(),
         'sprayer': sprayer,
         'oil_changes': oil_changes,
+        'hour_reads': hour_reads,
     }
     
     return render(request, 'machines/sprayer_detail.html', context)
@@ -646,11 +669,13 @@ def rakeCreate(request):
 def rakeDetail(request, pk):
     rake = TrapRake.objects.get(pk=pk)
     oil_changes = Maint.OilChange.objects.filter(machine=rake)
+    hour_reads = HourReading.objects.filter(machine=rake)
     
     context = {
         'curr_time': curr_time(),
         'rake': rake,
         'oil_changes': oil_changes,
+        'hour_reads': hour_reads,
     }
     
     return render(request, 'machines/rake_detail.html', context)
@@ -715,11 +740,13 @@ def utilCreate(request):
 def utilDetail(request, pk):
     util = UtilVehicle.objects.get(pk=pk)
     oil_changes = Maint.OilChange.objects.filter(machine=util)
+    hour_reads = HourReading.objects.filter(machine=util)
     
     context = {
         'curr_time': curr_time(),
         'util': util,
         'oil_changes': oil_changes,
+        'hour_reads': hour_reads,
     }
     
     return render(request, 'machines/util_detail.html', context)
@@ -784,11 +811,13 @@ def tractorCreate(request):
 def tractorDetail(request, pk):
     tractor = Tractor.objects.get(pk=pk)
     oil_changes = Maint.OilChange.objects.filter(machine=tractor)
+    hour_reads = HourReading.objects.filter(machine=tractor)
     
     context = {
         'curr_time': curr_time(),
         'tractor': tractor,
         'oil_changes': oil_changes,
+        'hour_reads': hour_reads,
     }
     
     return render(request, 'machines/tractor_detail.html', context)
@@ -882,3 +911,16 @@ def spreaderUpdate(request, pk):
             pending_form.save()
             
     return redirect('shop:spreader_detail', pk=spreader.pk)
+
+def hourReading(request, pk):
+    machine = Machine.objects.get(pk=pk)
+    form = HourReadingForm()
+    form['machine'] = machine
+
+    context = {
+        'curr_time': curr_time(),
+        'machine': machine,
+        'form': form,
+    }
+
+    return render(request, 'machines/hour_reading.html', context)

@@ -4,14 +4,18 @@ from . import views
 
 urlpatterns = [
     
-    url(r'^(?P<repair>\d+)/parts/create', views.partsCreate,
+    url(r'^(?P<repair>\d+)/parts/create/', views.partsCreate,
         name="parts_create"),
     url(r'^(?P<repair>\d+)/parts/', views.partsNew, 
-        name="parts_new"),
+        name="add_part"),
         
     url(r'^request/submit', views.repairRequest,
         name="repair_request"),
-    url(r'^request/', views.repairNeeded, name="repair_needed"),
+    url(r'^request/(?P<machine>\d+)/', views.repairNeeded, 
+        name="repair_needed"),
+
+    url(r'^repair/pending/', views.repairPending,
+        name="repair_pending"),
     
     url(r'^repair/(?P<pk>\d+)/update/', views.repairUpdate,
         name="repair_update"),

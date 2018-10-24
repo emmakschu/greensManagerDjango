@@ -45,6 +45,13 @@
                 {% endif %}
             </td>
         </tr>
+
+				{% if drain.notes != None %}
+				<tr>
+						<th>Notes</th>
+						<td>{{ drain.notes }}</td>
+				</tr>
+				{% endif %}
         
         <tr>
             <th>Added to Database</th>

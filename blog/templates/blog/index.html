@@ -1,0 +1,15 @@
+<!-- vim: set ft=htmldjango: -->
+
+{% for p in posts %}
+
+<section class="post">
+	<h2>{{ p.title }}</h2>
+	<h5>{{ p.created_at }}</h5>
+
+	<div class="post-content">
+		{{ p.content }}
+	</div>
+
+</section>
+
+{% endfor %}

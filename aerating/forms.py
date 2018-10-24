@@ -5,7 +5,9 @@ from .models import (
     GreensAerating,
     TeeAerating,
     FairwayAerating,
-    RoughAerating
+    RoughAerating,
+    QuadraTining,
+    DeepTine,
 )
 
 class AeratingForm(forms.ModelForm):
@@ -48,3 +50,18 @@ class RoughAeratingForm(forms.ModelForm):
             'updated_at',
         ]
     
+class QuadraTiningForm(forms.ModelForm):
+    class Meta:
+        model = QuadraTining
+        exclude = [
+            'created_at',
+            'updated_at',
+        ]
+
+class DeepTineForm(forms.ModelForm):
+    class Meta:
+        model = DeepTine
+        exclude = [
+            'created_at',
+            'updated_at',
+        ]

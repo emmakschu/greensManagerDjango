@@ -18,6 +18,7 @@
             <th>Lat.</th>
             <th>Long.</th>
             <th>Open</th>
+	    <th>Handle</th>
         </thead>
         
         {% for v in isos %}
@@ -38,6 +39,10 @@
                 {% if v.rough %}
                     {{ v.rough }}
                 {% endif %}
+
+		{% if v.notes %}
+		    {{ v.notes }}
+		{% endif %}
             </td>
         
             <td>{{ v.latitude }}</td>
@@ -49,6 +54,7 @@
                     <strong>N</strong>
                 {% endif %}
             </td>
+	    <td>{{ v.handle }}</td>
             <td class="center-align">
                 <a href="{% url 'irr:iso_detail' pk=v.pk %}">
                     <button>Detail</button>

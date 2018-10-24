@@ -31,6 +31,11 @@
                     <button>Detail</button>
                 </a>
             </td>
+						<td class="center-align">
+								<a href="{% url 'shop:aerator_edit' pk=a.pk %}">
+										<button>Edit</button>
+								</a>
+						</td>
         </tr>
         {% endfor %}
         

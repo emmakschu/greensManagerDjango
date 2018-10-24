@@ -188,7 +188,7 @@ def teesCreate(request):
             pending_form.save()
             form.save_m2m()
             
-    return redirect('mow:tee_detail', pk=pending_form.pk)
+    return redirect('mow:tees_detail', pk=pending_form.pk)
 
 def teesDetail(request, pk):
     mowing = TeeMowing.objects.get(pk=pk)

@@ -2,7 +2,12 @@
 
 {% include "machines/shophead.html" %}
 
-<h2>{{ cart }}:</h2>
+<h2>{{ cart }}:
+	&nbsp;
+	<a href="{% url 'maint:repair_needed' machine=cart.pk %}">
+		<button>Report Breakdown</button>
+	</a>
+</h2>
 
 <section class="content-block">
 

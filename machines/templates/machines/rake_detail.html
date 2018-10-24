@@ -2,7 +2,12 @@
 
 {% include "machines/shophead.html" %}
 
-<h2>{{ rake }}:</h2>
+<h2>{{ rake }}:
+	&nbsp;
+	<a href="{% url 'maint:repair_needed' machine=rake.pk %}">
+		<button>Report Breakdown</button>
+	</a>
+</h2>
 
 <section class="content-block">
 
@@ -184,4 +189,25 @@
     </table>
 </section>
 
+<section class="content-block">
+
+		<h3>Hour Benchmarks</h3>
+
+		<table>
+				<thead>
+						<th>Date</th>
+						<th>Hours</th>
+						<th>Notes</th>
+				</thead>
+
+				{% for h in hour_reads %}
+				<tr>
+						<td>{{ h.date }}</td>
+						<td>{{ h.hours }}</td>
+						<td>{{ h.notes }}</td>
+				</tr>
+				{% endfor %}
+		</table>
+
+</section>
 {% include "foot.html" %}

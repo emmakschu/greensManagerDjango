@@ -26,6 +26,10 @@ header h1 {
     width: 15%;
 }
 
+#hamburger {
+	display: none;
+}
+
 header nav {
     float: left;
     font-weight: bold;
@@ -135,6 +139,7 @@ a {
     margin-left: auto;
     margin-right: auto;
     /*text-align: center;*/
+	width: 970px;
     float: none;
     height: auto;
     overflow: auto;
@@ -180,3 +185,8 @@ footer a {
 .center-align {
     text-align: center;
 }
+
+.listing {
+	height: 3px;
+}
+

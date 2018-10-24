@@ -62,40 +62,10 @@
             </div>
 
             <div class="parent-menu">
-                <li>Find Parts
-                    <ul class="child-menu">
-                        <li>
-                            <input type="text"
-                                   id="searchByNum"
-                                   placeholder="Part #" />
-                            <input type="submit"
-                                   value="Find by Part No" />
-                        </li>
-
-                        <li>
-                            <input type="text"
-                                   id="searchByMake"
-                                   placeholder="Make" />
-                            <input type="submit"
-                                   value="Find by Make" />
-                        </li>
-
-                        <li>
-                            <input type="text"
-                                   id="searchByDesc"
-                                   placeholder="Description" />
-                            <input type="submit"
-                                   value="Find by Description" />
-                        </li>
-
-                        <li>
-                            <input type="text"
-                                   id="searchByLoc"
-                                   placeholder="Location" />
-                            <input type="submit"
-                                   value="Find by Location" />
-                        </li>
-                    </ul>
+                <li>
+									<a href="{% url 'parts:parts_search' %}">
+										Find Parts
+									</a>
                 </li>
             </div>
 
@@ -202,11 +172,34 @@
                     </ul>
                 </li>
             </div>
+
+						<div class="parent-menu">
+							<li>
+								<a href="{% url 'maint:repair_index' %}">
+									Repairs
+								</a>
+
+								<ul class="child-menu">
+									<li>
+										<a href="{% url 'maint:repair_pending' %}">
+											Pending Repairs
+										</a>
+									</li>
+
+									<li>
+										<a href="{% url 'maint:oilchange_index' %}">
+											Oil Changes
+										</a>
+									</li>
+								</ul>
+
+							</li>
+						</div>
         </ul>
     </nav>
 
     <p class="right-aligned" id="session-info">
-        Welcome {{ user.get_username }}!<br />
+			Welcome {{ user.first_name }} {{ user.last_name }}!<br />
         It is {{ curr_time }}
     </p>
 </header>

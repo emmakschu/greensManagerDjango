@@ -37,6 +37,10 @@ class Fertilizer(models.Model):
     # standard for the facility (or, price per container for 
     # liquid fertilizers)
     bag_size = models.PositiveIntegerField()
+    bag_units = models.ForeignKey('measures.Unit',
+                                  blank=True,
+                                  null=True,
+                                  related_name='+')
     # Price paid per bag/container
     price_per_bag = models.DecimalField(decimal_places = 2,
                                         max_digits = 10)

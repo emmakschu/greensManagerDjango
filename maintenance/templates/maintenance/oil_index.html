@@ -22,7 +22,7 @@
         
         {% for o in oilchanges %}
         <tr>
-            <td>{{ o.date_fixed }}</td>
+            <td>{{ o.date_fixed | date:"M d, Y"  }}</td>
             <td>{{ o.machine }}</td>
             <td>{{ o.hours_on_machine }}</td>
             <td>{{ o.oil }}</td>

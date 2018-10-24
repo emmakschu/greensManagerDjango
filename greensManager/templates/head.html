@@ -39,9 +39,12 @@
 <body>
 
 <header>
+	<h1>
+		<span id="hamburger">&equiv;</span>
     <a href="{% url 'welcome:index' %}">
-        <h1>GreensManager</h1>
+			GreensManager 
     </a>
+	</h1>
 
     <nav>
         <ul>
@@ -63,10 +66,26 @@
                                 Mowing overview
                             </a>
                         </li>
-                        <li>Greens</li>
-                        <li>Tees</li>
-                        <li>Fairways</li>
-                        <li>Roughs</li>
+                        <li>
+													<a href="{% url 'mow:greens_index' %}">
+														Greens
+													</a>
+												</li>
+                        <li>
+													<a href="{% url 'mow:tees_index' %}">
+														Tees
+													</a>
+												</li>
+                        <li>
+													<a href="{% url 'mow:fairways_index' %}">
+														Fairways
+													</a>
+												</li>
+                        <li>
+													<a href="{% url 'mow:roughs_index' %}">
+														Roughs
+													</a>
+												</li>
                         <li>Bunkers</li>
                     </ul>
                 </li>
@@ -156,7 +175,11 @@
                                 Machine catalog
                             </a>
                         </li>
-                        <li>Repairs</li>
+                        <li>
+													<a href="{% url 'maint:repair_index' %}">
+														Repairs
+													</a>
+												</li>
                         <li>
                             <a href="{% url 'parts:index' %}">
                                 Parts database
@@ -176,12 +199,42 @@
                     </ul>
                 </li>
             </div>
+
+						<div class="parent-menu">
+							<li><a href="{% url 'aerate:index' %}">Aerating</a>
+								<ul class="child-menu">
+									<li><a href="{% url 'aerate:greens_index' %}">
+											Greens Aerating</a></li>
+									<li><a href="{% url 'aerate:qt_index' %}">
+											Quadra-Tining</a></li>
+									<li><a href="{% url 'aerate:dt_index' %}">
+											Deep-Tine Aerating</a></li>
+									<li><a href="{% url 'aerate:tees_index' %}">
+											Tee Aerating</a></li>
+									<li><a href="{% url 'aerate:fairways_index' %}">
+											Fairway Aerating</a></li>
+								</ul>
+							</li>
+						</div>
         </ul>
     </nav>
 
     <p class="right-aligned" id="session-info">
-        Welcome {{ user.get_username }}!<br />
+			Welcome {{ user.first_name }} {{ user.last_name }}!<br />
         It is {{ curr_time }}
     </p>
 
 </header>
+
+<script type="text/javascript">
+	$('#hamburger').on('click', function(){
+		$('nav ul').toggle();
+		$('nav ul ul').toggle();
+
+		if ($('nav').css('width') != '100%') {
+			$('nav').css('width', '100%');
+		} else {
+			$('nav').css('width', '0');
+		}
+	});
+</script>

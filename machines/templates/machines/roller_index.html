@@ -31,6 +31,10 @@
                     <button>Detail</button>
                 </a>
             </td>
+						<td><a href="{% url 'shop:roller_edit' pk=r.pk %}">
+									<button>Edit</button>
+								</a>
+						</td>
         </tr>
         {% endfor %}
         

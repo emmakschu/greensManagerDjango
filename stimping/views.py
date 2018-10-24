@@ -1,9 +1,9 @@
-rom django.shortcuts import render, redirect
+from django.shortcuts import render, redirect
 from django.utils.timezone import now
 
 from .models import Stimp
 from .forms import StimpForm, SimpleStimpForm
-import stimp as s
+from . import stimp as s
 
 def curr_time():
     return now()
@@ -32,38 +32,34 @@ def new(request):
 
 def create(request):
     if request.method == 'POST':
-        form = StimpForm(data=request.POST)
+        form = SimpleStimpForm(data=request.POST)
         
         if form.is_valid() and request.user.is_authenticated():
             pending_form = form.save(commit=False)
+
             
-            if pending_form.simple_version:
-                for f in (pending_form.forward2, 
-                          pending_form.forward3):
-                    f = pending_form.forward1
+            pending_form.forward2 = pending_form.forward1
+            pending_form.forward3 = pending_form.forward1
+            
+            pending_form.backward2 = pending_form.backward1
+            pending_form.backward3 = pending_form.backward1
                 
-                for f in (pending_form.backward2,
-                          pending_form.backward3):
-                    f = pending_form.backward1
-                    
-                for f in (pending_form.left2,
-                          pending_form.left3):
-                    f = pending_form.left1
-                    
-                for f in (pending_form.right2,
-                          pending_form.right3):
-                    f = pending_form.right1
-                    
-            pending_form.forward_avg = s.list_mean(
+            pending_form.left2 = pending_form.left1
+            pending_form.left3 = pending_form.left1
+                
+            pending_form.right2 = pending_form.right1
+            pending_form.right3 = pending_form.right1
+                
+            pending_form.forwardAvg = s.list_mean(
                 [pending_form.forward1, pending_form.forward2,
                     pending_form.forward3])
-            pending_form.backward_avg = s.list_mean(
+            pending_form.backwardAvg = s.list_mean(
                 [pending_form.backward1, pending_form.backward2,
                     pending_form.backward3])
-            pending_form.left_avg = s.list_mean(
+            pending_form.leftAvg = s.list_mean(
                 [pending_form.left1, pending_form.left2,
                     pending_form.left3])
-            pending_form.right_avg = s.list_mean(
+            pending_form.rightAvg = s.list_mean(
                 [pending_form.right1, pending_form.right2,
                     pending_form.right3])
             
@@ -83,8 +79,8 @@ def create(request):
             ]
             
             pending_form.raw_speed = s.list_mean(
-                [pending_form.forward_avg, pending_form.backward_avg,
-                 pending_form.left_avg, pending_form.right_avg])
+                [pending_form.forwardAvg, pending_form.backwardAvg,
+                 pending_form.leftAvg, pending_form.rightAvg]) / 12
             
             pending_form.adj_speed = s.stimp_two_axes_adjusted(
                 all_vals[0],

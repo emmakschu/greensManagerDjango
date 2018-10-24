@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.utils.timezone import now
+from django.contrib.auth import authenticate, login
 
 from courses import models as Courses
 from fertilizing import models as Fert
@@ -14,11 +15,45 @@ from notes import models as Notes
 from notes import forms as NoteF
 
 from .calcMowDirections import *
+from .forms import *
 
 def curr_time():
     return now()
 
+def login_page(request):
+
+    if request.method == 'GET':
+
+        form = LoginForm()
+        context = {
+            'form': form,
+            'curr_time': curr_time(),
+        }
+
+        return render(request, 'welcome/login.html', context)
+
+    if request.method == 'POST':
+
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request,
+                            username=username, 
+                            password=password)
+
+        if user is not None:
+            login(request, user)
+
+            return redirect('welcome:index')
+
+        else:
+            return redirect('welcome:login')
+
+
 def index(request):
+
+    if request.user.is_authenticated() == False:
+        return redirect('welcome:login')
+
     course_list = Courses.Course.objects.all()
     hole_list = Courses.Hole.objects.all()
     box_probs = Irrig.SatelliteBox.objects.filter(problem=True)

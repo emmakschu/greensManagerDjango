@@ -3,6 +3,14 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
+
+    url(r'^dt/create/', views.dtCreate, name="dt_create"),
+    url(r'^dt/new/', views.dtNew, name="dt_new"),
+    url(r'^dt/', views.dtIndex, name="dt_index"),
+
+    url(r'^qt/create/', views.qtCreate, name="qt_create"),
+    url(r'^qt/new/', views.qtNew, name="qt_new"),
+    url(r'^qt/', views.qtIndex, name="qt_index"),
     
     url(r'^roughs/(?P<pk>\d+)/update/', views.roughsUpdate,
         name="roughs_update"),

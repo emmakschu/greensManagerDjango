@@ -16,6 +16,7 @@ urlpatterns = [
         name="iso_update"),
     url(r'^iso/(?P<pk>\d+)/edit/', views.isoEdit, name="iso_edit"),
     url(r'^iso/(?P<pk>\d+)/', views.isoDetail, name="iso_detail"),
+    url(r'^iso/search/', views.isoSearch, name="iso_search"),
     url(r'^iso/create/', views.isoCreate, name="iso_create"),
     url(r'^iso/new/', views.isoNew, name="iso_new"),
     url(r'^iso/', views.isoIndex, name="iso_index"),

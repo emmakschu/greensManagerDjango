@@ -35,6 +35,7 @@ class OilChange(Maintenance):
     oil = models.ForeignKey('parts.Oil')
     oil_qty = models.DecimalField(decimal_places=2,
                                   max_digits=12)
+    oil_units = models.ForeignKey('measures.VolumeUnit')
     oil_cost = models.DecimalField(decimal_places=2,
                                    max_digits=12,
                                    blank=True,
@@ -43,3 +44,9 @@ class OilChange(Maintenance):
 class Repair(Maintenance):
     def __str__(self):
         return "Repair on %s" % self.machine
+
+class BedknifeToReel(models.Model):
+    date = models.DateField()
+    mower = models.ForeignKey('machines.Mower')
+    mechanic = models.ForeignKey(User)
+
