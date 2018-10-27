@@ -214,6 +214,21 @@ class Drain(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+class ElectronicValve(models.Model):
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+    green = models.ForeignKey('courses.Green',
+                              blank=True,
+                              null=True,
+                              on_delete=models.CASCADE)
+    tee = models.ForeignKey('courses.Tee',
+                            blank=True,
+                            null=True,
+                            on_delete=models.CASCADE)
+    problem = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
 class ShutoffValve(models.Model):
     """
     ShutoffValve class
