@@ -4,7 +4,7 @@ class Aerating(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     aerate_date = models.DateField()
-    aerator = models.ForeignKey('machines.Aerator')
+    aerator = models.ForeignKey('machines.Aerator', on_delete=models.CASCADE)
     notes = models.TextField(blank=True, null=True)
     
 class GreensAerating(Aerating):

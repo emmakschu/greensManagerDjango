@@ -3,17 +3,20 @@ from django.db import models
 from django.contrib.auth import User
 
 class Employee(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User,
+                             on_delete=models.CASCADE)
     pay_rate = models.DecimalField(decimal_places=2,
                                    max_length=12)
     active = models.BooleanField(default=True)
 
     def __str__(self):
-        return "%s %s" % (user.first_name, user.last_name)
+        return "%s %s" % (self.user.first_name, self.user.last_name)
 
 class Task(models.Model):
-    assigned_by = models.ForeignKey(User)
-    supervisor = models.ForeignKey(Employee)
+    assigned_by = models.ForeignKey(User,
+                                    on_delete=models.CASCADE)
+    supervisor = models.ForeignKey(Employee,
+                                   on_delete=models.CASCADE)
     additional_workers = models.ManyToManyField(Employee)
     description = models.TextField()
     notes = models.TextField(blank=True, null=True)
@@ -25,16 +28,18 @@ class Task(models.Model):
     duration = models.DateTimeField(blank=True, null=True)
     
     labor_cost = models.DecimalField(decimal_places=2,
-                                     max_length=15)
+                                     max_length=15,
+                                     default=0)
 
     def __str__(self):
         return "%s %s" % (self.started, self.description)
 
 class MowTask(Task):
-    mowing = models.ForeignKey('mowing.Mowing')
+    mowing = models.ForeignKey('mowing.Mowing',
+                               on_delete=models.CASCADE)
 
     def __str__(self):
-        return "Mowing by: %s; start: %s, end: %s" % (self.supervisor,
+        return "Mowing by: %s; start: %s, end: %s" % (self.supervisor.user.name,
                                                       self.started,
                                                       self.completed)
 

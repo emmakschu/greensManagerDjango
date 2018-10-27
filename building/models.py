@@ -11,13 +11,16 @@ class BuildGreen(Build):
     green = models.ForeignKey('courses.Green')
     soil_type = models.ForeignKey('turfs.SoilType',
                                   blank=True,
-                                  null=True)
+                                  null=True,
+                                  on_delete=models.CASCADE)
     cultivar = models.ForeignKey('turfs.Cultivar',
                                  blank=True,
-                                 null=True)
+                                 null=True,
+                                 on_delete=models.CASCADE)
     species = models.ForeignKey('turfs.TurfgrassSpecies',
                                 blank=True,
-                                null=True)
+                                null=True,
+                                on_delete=models.CASCADE)
     
     def __str__(self):
         return "Greens build %s on %s" % (self.green,
@@ -27,26 +30,33 @@ class BuildTee(Build):
     tee = models.ForeignKey('courses.Tee')
     soil_type = models.ForeignKey('turfs.SoilType',
                                   blank=True,
-                                  null=True)
+                                  null=True,
+                                  on_delete=models.CASCADE)
     cultivar = models.ForeignKey('turfs.Cultivar',
                                  blank=True,
-                                 null=True)
+                                 null=True,
+                                 on_delete=models.CASCADE)
     species = models.ForeignKey('turfs.TurfgrassSpecies',
                                 blank=True,
-                                null=True)
+                                null=True,
+                                on_delete=models.CASCADE)
     
 class BuildFairway(Build):
     fairway = models.ForeignKey('courses.Fairway')
     soil_type = models.ForeignKey('turfs.SoilType',
                                   blank=True,
-                                  null=True)
+                                  null=True,
+                                  on_delete=models.CASCADE)
     cultivar = models.ForeignKey('turfs.Cultivar',
                                  blank=True,
-                                 null=True)
+                                 null=True,
+                                 on_delete=models.CASCADE)
     species = models.ForeignKey('turfs.TurfgrassSpecies',
                                 blank=True,
-                                null=True)
+                                null=True,
+                                on_delete=models.CASCADE)
 
 class BuildBunker(Build):
-    bunker = models.ForeignKey('courses.Bunker')
+    bunker = models.ForeignKey('courses.Bunker',
+                               on_delete=models.CASCADE)
     

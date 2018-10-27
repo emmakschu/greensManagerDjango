@@ -65,7 +65,9 @@ class Hole(models.Model):
     yardage = models.IntegerField()
     
     # Hole must belong to a Course object
-    course = models.ForeignKey(Course, related_name='hole')
+    course = models.ForeignKey(Course,
+                               related_name='hole',
+                               on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -91,13 +93,16 @@ class TurfFeature(models.Model):
     # turf cultivar
     soil_type = models.ForeignKey('turfs.SoilType',
                                   blank = True,
-                                  null = True)
+                                  null = True,
+                                  on_delete=models.CASCADE)
     turf_species = models.ForeignKey('turfs.TurfgrassSpecies',
                                      blank = True,
-                                     null = True)
+                                     null = True,
+                                     on_delete=models.CASCADE)
     turf_cultivar = models.ForeignKey('turfs.Cultivar',
                                       blank = True,
-                                      null = True)
+                                      null = True,
+                                      on_delete=models.CASCADE)
 
     mow_direction = models.DecimalField(decimal_places=24,
                                         max_digits=32,
@@ -116,7 +121,9 @@ class Tee(TurfFeature):
 
     """
 
-    hole = models.ForeignKey(Hole, related_name='tee')
+    hole = models.ForeignKey(Hole,
+                             related_name='tee',
+                             on_delete=models.CASCADE)
     notes = models.CharField(max_length=256)
 
     def __str__(self):
@@ -132,7 +139,9 @@ class Fairway(TurfFeature):
 
     """
 
-    hole = models.ForeignKey(Hole, related_name='fairway')
+    hole = models.ForeignKey(Hole,
+                             related_name='fairway',
+                             on_delete=models.CASCADE)
 
     def __str__(self):
         return "%s fairway" % (self.hole)
@@ -146,7 +155,9 @@ class Green(TurfFeature):
 
     """
 
-    hole = models.ForeignKey(Hole, related_name='green')
+    hole = models.ForeignKey(Hole,
+                             related_name='green',
+                             on_delete=models.CASCADE)
 
     def __str__(self):
         return "%s green" % (self.hole)
@@ -160,7 +171,9 @@ class Rough(TurfFeature):
     
     """
 
-    hole = models.ForeignKey(Hole, related_name='rough')
+    hole = models.ForeignKey(Hole,
+                             related_name='rough',
+                             on_delete=models.CASCADE)
 
     def __str__(self):
         return "%s rough" % (self.hole)
@@ -187,8 +200,11 @@ class Bunker(models.Model):
     the Hole class, and an instance of the BunkerLocation class.
 
     """
-    hole = models.ForeignKey(Hole, related_name='bunker')
-    bunker_location = models.ForeignKey(BunkerLocation)
+    hole = models.ForeignKey(Hole,
+                             related_name='bunker',
+                             on_delete=models.CASCADE)
+    bunker_location = models.ForeignKey(BunkerLocation,
+                                        on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

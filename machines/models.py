@@ -71,9 +71,11 @@ class Machine(models.Model):
                                       blank = True,
                                       related_name = 'machine_oil')
     oil_capacity = models.FloatField(blank = True, null = True)
-    oil_units = models.ForeignKey('measures.VolumeUnit', blank=True,
+    oil_units = models.ForeignKey('measures.VolumeUnit',
+                                  blank=True,
                                   null=True,
-                                  related_name="mach_oil_units")
+                                  related_name="mach_oil_units",
+                                  on_delete=models.CASCADE)
     hyd_oil_type = models.ManyToManyField('parts.Oil', 
                                           blank = True,
                                           related_name = 'mach_hyd_oil')
@@ -81,7 +83,8 @@ class Machine(models.Model):
     hyd_oil_units = models.ForeignKey('measures.VolumeUnit',
                                       blank=True,
                                       null=True,
-                                      related_name="mach_hyd_unit")
+                                      related_name="mach_hyd_unit",
+                                      on_delete=models.CASCADE)
     oil_filter = models.ManyToManyField('parts.Filter', 
                                         blank = True,
                                         related_name = 'mach_oil_filter')
@@ -123,7 +126,8 @@ class Mower(Machine):
     height_units = models.ForeignKey('measures.DistanceUnit',
                                      blank=True,
                                      null=True,
-                                     related_name="height_unit")
+                                     related_name="height_unit",
+                                     on_delete=models.CASCADE)
 
 class GreensMower(Mower):
     """
@@ -171,7 +175,8 @@ class Roller(Machine):
     width_units = models.ForeignKey('measures.DistanceUnit',
                                     blank=True,
                                     null=True,
-                                    related_name="width_unit")
+                                    related_name="width_unit",
+                                    on_delete=models.CASCADE)
 
 class Aerator(Machine):
     """
@@ -195,7 +200,8 @@ class Sprayer(Machine):
     tank_units = models.ForeignKey('measures.VolumeUnit',
                                    blank=True,
                                    null=True,
-                                   related_name="tank_unit")
+                                   related_name="tank_unit",
+                                   on_delete=models.CASCADE)
 
 class Cart(Machine):
     """
@@ -233,7 +239,8 @@ class UtilVehicle(Machine):
     bed_units = models.ForeignKey('measures.Unit',
                                   blank=True,
                                   null=True,
-                                  related_name="bed_unit")
+                                  related_name="bed_unit",
+                                  on_delete=models.CASCADE)
 
 class Tractor(Machine):
     """
@@ -271,7 +278,8 @@ class FertSpreader(models.Model):
     units = models.ForeignKey('measures.Unit',
                               blank=True,
                               null=True,
-                              related_name="cap_unit")
+                              related_name="cap_unit",
+                              on_delete=models.CASCADE)
     # Notes, e.g.: "Should be set to H for tees", etc.
     notes = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -312,7 +320,8 @@ class Truck(models.Model):
     oil_units = models.ForeignKey('measures.VolumeUnit',
                                   blank=True,
                                   null=True,
-                                  related_name="truck_oil_unit")
+                                  related_name="truck_oil_unit",
+                                  on_delete=models.CASCADE)
     hyd_oil_type = models.ManyToManyField('parts.Oil', 
                                           blank = True,
                                           related_name = 'truck_hyd')
@@ -320,7 +329,8 @@ class Truck(models.Model):
     hyd_oil_units = models.ForeignKey('measures.VolumeUnit',
                                       blank=True,
                                       null=True,
-                                      related_name="truck_hyd_unit")
+                                      related_name="truck_hyd_unit",
+                                      on_delete=models.CASCADE)
     oil_filter = models.ManyToManyField('parts.Filter', 
                                         blank = True,
                                         related_name = 'truck_oil_filter')
@@ -340,7 +350,8 @@ class HourReading(models.Model):
     Keeps track of regular readings of hour meters
     """
 
-    machine = models.ForeignKey(Machine)
+    machine = models.ForeignKey(Machine,
+                                on_delete=models.CASCADE)
     hours = models.FloatField()
     date = models.DateField(auto_now=True)
     notes = models.TextField(blank=True, null=True)

@@ -40,7 +40,8 @@ class Fertilizer(models.Model):
     bag_units = models.ForeignKey('measures.Unit',
                                   blank=True,
                                   null=True,
-                                  related_name='+')
+                                  related_name='+',
+                                  on_delete=models.CASCADE)
     # Price paid per bag/container
     price_per_bag = models.DecimalField(decimal_places = 2,
                                         max_digits = 10)
@@ -70,7 +71,8 @@ class Fertilizing(models.Model):
     fert_date = models.DateTimeField(auto_now = True)
 
     # Fertilizer used; refs an instance of the Fertilizer class
-    fertilizer = models.ForeignKey(Fertilizer)
+    fertilizer = models.ForeignKey(Fertilizer,
+                                   on_delete=models.CASCADE)
     
     # Fertilizer spreader used
     spreader = models.ManyToManyField('machines.FertSpreader')
