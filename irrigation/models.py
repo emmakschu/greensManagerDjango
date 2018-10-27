@@ -58,6 +58,8 @@ class SatelliteBox(models.Model):
     def __str__(self):
         return "box %d" % (self.box_number)
 
+
+
 class SprinklerHead(models.Model):
     """
     SprinklerHead class
@@ -86,7 +88,8 @@ class SprinklerHead(models.Model):
     # Some (fairway) sprinkler heads have a note on the distance to
     # green on them. Can be omitted.
     distance = models.IntegerField(blank = True, null = True)
-    satellite_box = models.ForeignKey(SatelliteBox)
+    satellite_box = models.ForeignKey(SatelliteBox,
+                                      on_delete=models.CASCADE)
 
     ###
     # Can belong to a tee, fairway, green, rough, or none. The area
@@ -95,19 +98,24 @@ class SprinklerHead(models.Model):
     ###
     hole = models.ForeignKey('courses.Hole',
                              blank = True,
-                             null = True)
+                             null = True,
+                             on_delete=models.CASCADE)
     tee = models.ForeignKey('courses.Tee',
                             blank = True,
-                            null = True)
+                            null = True,
+                            on_delete=models.CASCADE)
     fairway = models.ForeignKey('courses.Fairway',
                                 blank = True,
-                                null = True)
+                                null = True,
+                                on_delete=models.CASCADE)
     green = models.ForeignKey('courses.Green',
                               blank = True,
-                              null = True)
+                              null = True,
+                              on_delete=models.CASCADE)
     rough = models.ForeignKey('courses.Rough',
                               blank = True,
-                              null = True)
+                              null = True,
+                              on_delete=models.CASCADE)
 
     problem = models.BooleanField(default = False)
     notes = models.TextField(blank=True, null=True)
@@ -151,16 +159,20 @@ class QuickCoupler(models.Model):
     ###
     tee = models.ForeignKey('courses.Tee',
                             blank = True,
-                            null = True)
+                            null = True,
+                            on_delete=models.CASCADE)
     fairway = models.ForeignKey('courses.Fairway',
                                 blank = True,
-                                null = True)
+                                null = True,
+                                on_delete=models.CASCADE)
     green = models.ForeignKey('courses.Green',
                               blank = True,
-                              null = True)
+                              null = True,
+                              on_delete=models.CASCADE)
     rough = models.ForeignKey('courses.Rough',
                               blank = True,
-                              null = True)
+                              null = True,
+                              on_delete=models.CASCADE)
 
     problem = models.BooleanField(default = False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -194,7 +206,8 @@ class Drain(models.Model):
     # Hole should indicate which hole the drain is closest to. Even
     # if not explicitly along a fairway/tee/etc., there is usually
     # some convention of what is being drained.
-    hole = models.ForeignKey('courses.Hole')
+    hole = models.ForeignKey('courses.Hole',
+                             on_delete=models.CASCADE)
     notes = models.TextField(blank=True, null=True)
 
     problem = models.BooleanField(default = False)
@@ -231,16 +244,20 @@ class ShutoffValve(models.Model):
     ###
     tee = models.ForeignKey('courses.Tee',
                             blank = True,
-                            null = True)
+                            null = True,
+                            on_delete=models.CASCADE)
     fairway = models.ForeignKey('courses.Fairway',
                                 blank = True,
-                                null = True)
+                                null = True,
+                                on_delete=models.CASCADE)
     green = models.ForeignKey('courses.Green',
                               blank = True,
-                              null = True)
+                              null = True,
+                              on_delete=models.CASCADE)
     rough = models.ForeignKey('courses.Rough',
                               blank = True,
-                              null = True)
+                              null = True,
+                              on_delete=models.CASCADE)
 
     problem = models.BooleanField(default = False)
     notes = models.TextField(blank=True, null=True)
@@ -260,16 +277,20 @@ class IrrigationDig(models.Model):
     under this realm for future reference.
     """
     date = models.DateField(default=date.today)
-    hole = models.ForeignKey('courses.Hole')
+    hole = models.ForeignKey('courses.Hole',
+                             on_delete=models.CASCADE)
     sprinkler = models.ForeignKey(SprinklerHead,
                                   blank = True,
-                                  null = True)
+                                  null = True,
+                                  on_delete=models.CASCADE)
     quick_coupler = models.ForeignKey(QuickCoupler,
                                       blank=True,
-                                      null=True)
+                                      null=True,
+                                      on_delete=models.CASCADE)
     drain = models.ForeignKey(Drain,
                               blank=True,
-                              null=True)
+                              null=True,
+                              on_delete=models.CASCADE)
     fixed = models.BooleanField(default = False)
     description = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
