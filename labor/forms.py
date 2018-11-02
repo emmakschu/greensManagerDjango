@@ -29,4 +29,4 @@ class TaskForm(forms.ModelForm):
 
 class MowTaskForm(TaskForm):
     class Meta:
-        model = MowTaskForm
+        model = MowTask
