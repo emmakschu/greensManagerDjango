@@ -44,7 +44,7 @@ class MowTask(Task):
                                on_delete=models.CASCADE)
 
     def __str__(self):
-        return "Mowing by: %s; start: %s, end: %s" % (self.supervisor.user.name,
+        return "Mowing by: %s; start: %s, end: %s" % (self.supervisor.user.first_name,
                                                       self.started,
                                                       self.completed)
 
