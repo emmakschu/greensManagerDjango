@@ -35,5 +35,6 @@ urlpatterns = [
     url(r'^stimp/', include('stimping.urls', namespace="stimp")),
     url(r'^admin/', admin.site.urls),
     url(r'^blog/', include('blog.urls', namespace="blog")),
+    url(r'^labor/', include('labor.urls', namespace="labor")),
     url(r'^', include('welcome.urls', namespace="welcome"))
 ]

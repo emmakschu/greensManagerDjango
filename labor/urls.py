@@ -3,5 +3,6 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url('^', views.index, name="index"),
+    url(r'mow', views.mowTaskIndex, name="mowIndex"),
+    url(r'^', views.index, name="index"),
 ]
