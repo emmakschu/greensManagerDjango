@@ -27,6 +27,13 @@ class TaskForm(forms.ModelForm):
             'labor_cost'
         ]
 
-class MowTaskForm(TaskForm):
+class MowTaskForm(forms.ModelForm):
     class Meta:
         model = MowTask
+        exclude = [
+            'created_at',
+            'updated_at',
+            'completed',
+            'duration',
+            'labor_cost'
+        ]
