@@ -20,7 +20,9 @@ class Task(models.Model):
                                    on_delete=models.CASCADE,
                                    related_name="task_super")
     additional_workers = models.ManyToManyField(Employee,
-                                                related_name="task_workers")
+                                                related_name="task_workers",
+                                                blank=True,
+                                                null=True)
     description = models.TextField()
     notes = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
