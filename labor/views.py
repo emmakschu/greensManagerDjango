@@ -12,6 +12,8 @@ from .models import (
     WtfTask
 )
 
+from .forms import *
+
 def curr_time():
     return now()
 
@@ -30,3 +32,13 @@ def mowTaskIndex(request):
     }
 
     return render(request, 'labor/mow_task_index.html', context)
+
+def mowTaskNew(request):
+    form = MowTaskForm()
+
+    context = {
+        'curr_time': curr_time(),
+        'form': form,
+    }
+
+    return render(request, 'labor/mow_task_new.html', context)
