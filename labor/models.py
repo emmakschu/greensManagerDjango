@@ -6,7 +6,7 @@ class Employee(models.Model):
     user = models.ForeignKey(User,
                              on_delete=models.CASCADE)
     pay_rate = models.DecimalField(decimal_places=2,
-                                   max_length=12)
+                                   max_digits=12)
     active = models.BooleanField(default=True)
 
     def __str__(self):
@@ -14,10 +14,13 @@ class Employee(models.Model):
 
 class Task(models.Model):
     assigned_by = models.ForeignKey(User,
-                                    on_delete=models.CASCADE)
+                                    on_delete=models.CASCADE,
+                                    related_name="task_assigned")
     supervisor = models.ForeignKey(Employee,
-                                   on_delete=models.CASCADE)
-    additional_workers = models.ManyToManyField(Employee)
+                                   on_delete=models.CASCADE,
+                                   related_name="task_super")
+    additional_workers = models.ManyToManyField(Employee,
+                                                related_name="task_workers")
     description = models.TextField()
     notes = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -28,7 +31,7 @@ class Task(models.Model):
     duration = models.DateTimeField(blank=True, null=True)
     
     labor_cost = models.DecimalField(decimal_places=2,
-                                     max_length=15,
+                                     max_digits=15,
                                      default=0)
 
     def __str__(self):
