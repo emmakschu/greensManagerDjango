@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'measures.apps.MeasuresConfig',
     'spraying.apps.SprayingConfig',
     'blog.apps.BlogConfig',
+    'labor.apps.LaborConfig',
     'greensManager',
 ]
 
