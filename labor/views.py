@@ -12,7 +12,11 @@ from .models import (
     WtfTask
 )
 
-from .forms import *
+from .forms import (
+    EmployeeForm,
+    TaskForm,
+    MowTaskForm
+)
 
 def curr_time():
     return now()
