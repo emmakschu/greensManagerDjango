@@ -1,0 +1,23 @@
+{% include "head.html" %}
+
+<h2>Mowing Tasks:</h2>
+
+<section class="content-block-full">
+    <table>
+        <thead>
+            <th>Assigned by</th>
+            <th>Supervisor</th>
+            <th>Description</th>
+        </thead>
+
+        {% for m in mow_tasks %}
+        <tr>
+            <td>{{ m.assigned_by }}</td>
+            <td>{{ m.supervisor }}</td>
+            <td>{{ m.description }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</section>
+
+{% include "foot.html" %}
