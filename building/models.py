@@ -28,7 +28,8 @@ class BuildGreen(Build):
                                           self.build_date)
     
 class BuildTee(Build):
-    tee = models.ForeignKey('courses.Tee')
+    tee = models.ForeignKey('courses.Tee',
+                            on_delete=models.CASCADE)
     soil_type = models.ForeignKey('turfs.SoilType',
                                   blank=True,
                                   null=True,
