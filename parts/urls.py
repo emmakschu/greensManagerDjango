@@ -2,6 +2,7 @@ from django.conf.urls import url
 
 from . import views
 
+app_name = 'parts'
 urlpatterns = [
 
     url(r'^search/', views.partsSearch, name="parts_search"),

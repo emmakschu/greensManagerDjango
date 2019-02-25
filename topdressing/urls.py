@@ -2,6 +2,7 @@ from django.conf.urls import url
 
 from . import views
 
+app_name = 'topdress'
 urlpatterns = [
     
     url(r'^fairways/(?P<pk>\d+)/update/', views.fairwaysUpdate,

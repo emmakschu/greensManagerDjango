@@ -2,6 +2,7 @@ from django.conf.urls import url
 
 from . import views
 
+app_name = 'roll'
 urlpatterns = [
     
     url(r'^tees/(?P<pk>\d+)/update/', views.teesUpdate,
