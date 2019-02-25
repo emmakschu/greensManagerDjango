@@ -99,7 +99,7 @@ def fuelCreate(request):
         
         form = FuelForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             unit_price = pending_form.price / pending_form.unit_size
             pending_form.price_per_unit = unit_price
@@ -135,7 +135,7 @@ def fuelUpdate(request, pk):
     if request.method == 'POST':
         form = FuelForm(request.POST, instance=fuel)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             unit_price = pending_form.price / pending_form.unit_size
             pending_form.price_per_unit = unit_price
@@ -168,7 +168,7 @@ def oilCreate(request):
         
         form = OilForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             unit_price = pending_form.price / pending_form.unit_size
             pending_form.price_per_unit = unit_price
@@ -204,7 +204,7 @@ def oilUpdate(request, pk):
     if request.method == 'POST':
         form = OilForm(request.POST, instance=oil)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             unit_price = pending_form.price / pending_form.unit_size
             pending_form.price_per_unit = unit_price
@@ -223,11 +223,15 @@ def partIndex(request):
     return render(request, 'parts/part_index.html', context)
 
 def partNew(request):
+    if request.user.is_authenticated == False:
+        no_user = True
+
     form = PartForm()
     
     context = {
         'curr_time': curr_time(),
         'form': form,
+        'no_user': no_user,
     }
     
     return render(request, 'parts/part_new.html', context)
@@ -236,13 +240,13 @@ def partCreate(request):
     if request.method == 'POST':
         form = PartForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
         
             return redirect('parts:part_detail', pk=pending_form.pk)
         
-        if request.user.is_authenticated() == False:
+        if request.user.is_authenticated == False:
             return redirect('welcome:login')
 
 def partDetail(request, pk):
@@ -273,11 +277,12 @@ def partUpdate(request, pk):
     if request.method == 'POST':
         form = PartForm(request.POST, instance=part)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
-            
-    return redirect('parts:part_detail', pk=part.pk)
+            return redirect('parts:part_detail', pk=part.pk)
+        if request.user.is_authenticated == False:
+            return redirect('welcome:login')
 
 def filterIndex(request):
     filters = Filter.objects.all()
@@ -304,7 +309,7 @@ def filterCreate(request):
         
         form = FilterForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
             
@@ -338,7 +343,7 @@ def filterUpdate(request, pk):
     if request.method == 'POST':
         form = FilterForm(request.POST, instance=filt)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
     
