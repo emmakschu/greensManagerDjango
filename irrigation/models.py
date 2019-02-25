@@ -208,6 +208,7 @@ class Drain(models.Model):
     # some convention of what is being drained.
     hole = models.ForeignKey('courses.Hole',
                              on_delete=models.CASCADE)
+    handle_type = models.CharField(max_length=256)
     notes = models.TextField(blank=True, null=True)
 
     problem = models.BooleanField(default = False)

@@ -5,7 +5,8 @@ class Stimp(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     simple_version = models.BooleanField()
-    green = models.ForeignKey('courses.Green')
+    green = models.ForeignKey('courses.Green',
+                              on_delete=models.CASCADE)
     
     forward1 = models.FloatField()
     forward2 = models.FloatField(blank=True, null=True)

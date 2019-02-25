@@ -73,7 +73,8 @@ class QuickCoupler(models.Model):
     diameter_units = models.ForeignKey('measures.DistanceUnit',
                                        on_delete=models.CASCADE)
     coupler_size = models.CharField(max_length=256)
-    threading = models.ForeignKey(ThreadType)
+    threading = models.ForeignKey(ThreadType,
+                                  on_delete=models.CASCADE)
     in_stock = models.PositiveIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
