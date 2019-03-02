@@ -2,13 +2,8 @@ from django import forms
 
 from .models import (
     Employee,
-    Task,
-    MowTask,
-    TrapTask,
-    RecordsTask,
-    ShopTask,
-    MiscTask,
-    WtfTask
+    TaskClass,
+    Task
 )
 
 class EmployeeForm(forms.ModelForm):
@@ -19,17 +14,6 @@ class EmployeeForm(forms.ModelForm):
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        exclude = [
-            'created_at',
-            'updated_at',
-            'completed',
-            'duration',
-            'labor_cost'
-        ]
-
-class MowTaskForm(forms.ModelForm):
-    class Meta:
-        model = MowTask
         exclude = [
             'created_at',
             'updated_at',
