@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.utils.timezone import now
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
 from .models import (
     Fluid,
@@ -222,9 +223,11 @@ def partIndex(request):
     
     return render(request, 'parts/part_index.html', context)
 
+# TODO: Adjust views to redirect to login page if necessary
 def partNew(request):
     if request.user.is_authenticated == False:
         no_user = True
+        return redirect('welcome:login')
 
     form = PartForm()
     
@@ -247,6 +250,7 @@ def partCreate(request):
             return redirect('parts:part_detail', pk=pending_form.pk)
         
         if request.user.is_authenticated == False:
+            origin = 'parts:create'
             return redirect('welcome:login')
 
 def partDetail(request, pk):
@@ -260,6 +264,11 @@ def partDetail(request, pk):
     return render(request, 'parts/part_detail.html', context)
 
 def partEdit(request, pk):
+    if request.user.is_authenticated == False:
+        no_user = True
+    else:
+        no_user = False
+
     part = Part.objects.get(pk=pk)
     form = PartForm(instance=part)
     
@@ -267,6 +276,7 @@ def partEdit(request, pk):
         'curr_time': curr_time(),
         'part': part,
         'form': form,
+        'no_user': no_user,
     }
     
     return render(request, 'parts/part_edit.html', context)

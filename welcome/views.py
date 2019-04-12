@@ -20,7 +20,8 @@ from .forms import *
 def curr_time():
     return now()
 
-def login_page(request):
+# TODO: Fix login page to allow redirect back to calling page!
+def login_page(request, next):
 
     if request.method == 'GET':
 

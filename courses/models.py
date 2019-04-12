@@ -68,6 +68,8 @@ class Hole(models.Model):
     course = models.ForeignKey(Course,
                                related_name='hole',
                                on_delete=models.CASCADE)
+    map = models.ImageField(blank=True,
+                            null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -158,6 +160,8 @@ class Green(TurfFeature):
     hole = models.ForeignKey(Hole,
                              related_name='green',
                              on_delete=models.CASCADE)
+    map = models.ImageField(blank=True,
+                            null=True)
 
     def __str__(self):
         return "%s green" % (self.hole)
