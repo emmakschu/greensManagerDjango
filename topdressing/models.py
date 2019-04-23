@@ -24,7 +24,8 @@ class Topdressing(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     
     topdress_date = models.DateField()
-    sand = models.ForeignKey(SandType)
+    sand = models.ForeignKey(SandType,
+                             on_delete=models.CASCADE)
     
 class GreenTopdressing(Topdressing):
     greens = models.ManyToManyField('courses.Green')

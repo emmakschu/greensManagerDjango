@@ -25,12 +25,15 @@ class Chemical(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 class TradeChem(models.Model):
-    manufacturer = models.ForeignKey(ChemManufacturer)
-    chemical = models.ForeignKey(Chemical)
+    manufacturer = models.ForeignKey(ChemManufacturer,
+                                     on_delete=models.CASCADE)
+    chemical = models.ForeignKey(Chemical,
+                                 on_delete=models.CASCADE)
     trade_name = models.CharField(max_length = 128)
     unit_size = models.FloatField()
     units = models.ForeignKey('measures.Unit',
-                              related_name='+')
+                              related_name='+',
+                              on_delete=models.CASCADE)
     unit_price = models.DecimalField(decimal_places = 2,
                                      max_digits = 15)
     notes = models.TextField()
@@ -39,28 +42,36 @@ class TradeChem(models.Model):
 
 class Spraying(models.Model):
     spray_date = models.DateTimeField(default = timezone.now)
-    sprayer = models.ForeignKey('machines.Sprayer')
-    operator = models.ForeignKey(User)
+    sprayer = models.ForeignKey('machines.Sprayer',
+                                on_delete=models.CASCADE)
+    operator = models.ForeignKey(User,
+                                 on_delete=models.CASCADE)
     tanks_sprayed = models.FloatField()
     water_per_tank = models.FloatField()
     water_units = models.ForeignKey('measures.VolumeUnit',
-                                    related_name='+')
+                                    related_name='+',
+                                    on_delete=models.CASCADE)
     area_covered = models.FloatField(blank=True, null=True)
     area_units = models.ForeignKey('measures.AreaUnit',
-                                   related_name='+')
+                                   related_name='+',
+                                   on_delete=models.CASCADE)
     notes = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 class ChemUsedInSpray(models.Model):
-    chemical = models.ForeignKey(TradeChem)
-    spray = models.ForeignKey(Spraying)
+    chemical = models.ForeignKey(TradeChem,
+                                 on_delete=models.CASCADE)
+    spray = models.ForeignKey(Spraying,
+                              on_delete=models.CASCADE)
     amount_used_per_tank = models.FloatField()
     units = models.ForeignKey('measures.Unit',
-                              related_name='+')
+                              related_name='+',
+                              on_delete=models.CASCADE)
     rate = models.FloatField()
     rate_units = models.ForeignKey('measures.RateUnit',
-                                   related_name='+')
+                                   related_name='+',
+                                   on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

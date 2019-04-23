@@ -4,8 +4,11 @@ from django.contrib.auth.models import User
 class Note(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)	
-	created_by = models.ForeignKey(User, related_name="creator")
-	updated_by = models.ForeignKey(User, related_name="editor")
+	created_by = models.ForeignKey(User,
+								   related_name="creator",
+								   on_delete=models.CASCADE)
+	updated_by = models.ForeignKey(User, related_name="editor",
+								   on_delete=models.CASCADE)
 
 	content = models.TextField()
 

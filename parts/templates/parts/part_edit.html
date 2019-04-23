@@ -2,6 +2,14 @@
 
 {% include "machines/shophead.html" %}
 
+{% if no_user %}
+    <p class="center-align warning">
+        <strong>NOTICE:</strong>
+        You are not logged in. If you wish to edit a part in the database, you will
+        need to <a href="{% url 'welcome:login' %}">log in</a></a> first.
+    </p>
+{% endif %}
+
 <h2>Edit part:</h2>
 
 <section class="content-block content-block-full">

@@ -2,6 +2,7 @@ from django.conf.urls import url
 
 from . import views
 
+app_name = 'irr'
 urlpatterns = [
     
     url(r'^dig/(?P<pk>\d+)/update/', views.digUpdate, 

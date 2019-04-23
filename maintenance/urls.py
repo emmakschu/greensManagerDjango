@@ -2,6 +2,7 @@ from django.conf.urls import url
 
 from . import views
 
+app_name = 'maint'
 urlpatterns = [
     
     url(r'^(?P<repair>\d+)/parts/create/', views.partsCreate,

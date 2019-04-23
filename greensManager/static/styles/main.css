@@ -190,3 +190,13 @@ footer a {
 	height: 3px;
 }
 
+.warning {
+    background-color: red;
+    color: white;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.warning a {
+    color: aquamarine;
+}

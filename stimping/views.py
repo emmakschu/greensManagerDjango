@@ -3,7 +3,7 @@ from django.utils.timezone import now
 
 from .models import Stimp
 from .forms import StimpForm, SimpleStimpForm
-from . import stimp as s
+from . import stimping as s
 
 def curr_time():
     return now()

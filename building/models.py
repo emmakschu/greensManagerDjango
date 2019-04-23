@@ -8,7 +8,8 @@ class Build(models.Model):
     details = models.TextField()
 
 class BuildGreen(Build):
-    green = models.ForeignKey('courses.Green')
+    green = models.ForeignKey('courses.Green',
+                              on_delete=models.CASCADE)
     soil_type = models.ForeignKey('turfs.SoilType',
                                   blank=True,
                                   null=True,
@@ -27,7 +28,8 @@ class BuildGreen(Build):
                                           self.build_date)
     
 class BuildTee(Build):
-    tee = models.ForeignKey('courses.Tee')
+    tee = models.ForeignKey('courses.Tee',
+                            on_delete=models.CASCADE)
     soil_type = models.ForeignKey('turfs.SoilType',
                                   blank=True,
                                   null=True,
@@ -42,7 +44,8 @@ class BuildTee(Build):
                                 on_delete=models.CASCADE)
     
 class BuildFairway(Build):
-    fairway = models.ForeignKey('courses.Fairway')
+    fairway = models.ForeignKey('courses.Fairway',
+                                on_delete=models.CASCADE)
     soil_type = models.ForeignKey('turfs.SoilType',
                                   blank=True,
                                   null=True,

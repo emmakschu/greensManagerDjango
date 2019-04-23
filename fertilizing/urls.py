@@ -2,6 +2,7 @@ from django.conf.urls import url
 
 from . import views
 
+app_name = 'fert'
 urlpatterns = [
     
     url(r'^roughs/(?P<pk>\d+)/update/',

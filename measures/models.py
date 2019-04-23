@@ -23,8 +23,12 @@ class TimeUnit(Unit):
     conversion = models.FloatField()
 
 class RateUnit(models.Model):
-    numerator = models.ForeignKey(Unit, related_name="num")
-    denominator = models.ForeignKey(Unit, related_name="den")
+    numerator = models.ForeignKey(Unit,
+                                  related_name="num",
+                                  on_delete=models.CASCADE)
+    denominator = models.ForeignKey(Unit,
+                                    related_name="den",
+                                    on_delete=models.CASCADE)
 
     def __str__(self):
         return "%s / %s" % (self.numerator,

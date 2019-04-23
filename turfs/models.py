@@ -32,7 +32,8 @@ class TurfgrassSpecies(models.Model):
 
     name = models.CharField(max_length=256)
     common_name = models.CharField(max_length=256)
-    genus = models.ForeignKey(TurfgrassGenus)
+    genus = models.ForeignKey(TurfgrassGenus,
+                              on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -43,7 +44,8 @@ class TurfgrassSpecies(models.Model):
 
 class Cultivar(models.Model):
     name = models.CharField(max_length=256)
-    species = models.ForeignKey(TurfgrassSpecies)
+    species = models.ForeignKey(TurfgrassSpecies,
+                                on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

@@ -2,6 +2,7 @@ from django.conf.urls import url
 
 from . import views
 
+app_name = 'aerate'
 urlpatterns = [
 
     url(r'^dt/create/', views.dtCreate, name="dt_create"),
