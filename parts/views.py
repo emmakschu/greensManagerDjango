@@ -276,8 +276,9 @@ def partUpdate(request, pk):
         if form.is_valid() and request.user.is_authenticated():
             pending_form = form.save(commit=False)
             pending_form.save()
-            
-    return redirect('parts:part_detail', pk=part.pk)
+            return redirect('parts:part_detail', pk=part.pk)
+        if request.user.is_authenticated() == False:
+            return redirect('welcome:login')
 
 def filterIndex(request):
     filters = Filter.objects.all()

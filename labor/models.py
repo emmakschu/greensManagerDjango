@@ -12,7 +12,15 @@ class Employee(models.Model):
     def __str__(self):
         return "%s %s" % (self.user.first_name, self.user.last_name)
 
+class TaskClass(models.Model):
+    name = models.CharField(max_length=256)
+
+    def __str__(self):
+        return self.name
+
 class Task(models.Model):
+    task_class = models.ForeignKey(TaskClass,
+                                  on_delete=models.CASCADE)
     assigned_by = models.ForeignKey(User,
                                     on_delete=models.CASCADE,
                                     related_name="task_assigned")
@@ -38,38 +46,3 @@ class Task(models.Model):
 
     def __str__(self):
         return "%s %s" % (self.started, self.description)
-
-class MowTask(Task):
-    mowing = models.ForeignKey('mowing.Mowing',
-                               on_delete=models.CASCADE)
-
-    def __str__(self):
-        return "Mowing by: %s; start: %s, end: %s" % (self.supervisor.user.first_name,
-                                                      self.started,
-                                                      self.completed)
-
-
-class TrapTask(Task):
-
-    def __str__(self):
-        return "Traps: %s" % self
-
-class RecordsTask(Task):
-
-    def __str__(self):
-        return "Record Keeping: %s" % self
-
-class ShopTask(Task):
-
-    def __str__(self):
-        return "Shop Work: %s" % self
-
-class MiscTask(Task):
-
-    def __str__(self):
-        return "Misc: %s" % self
-
-class WtfTask(Task):
-
-    def __str__(self):
-        return "%s" % self
