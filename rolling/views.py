@@ -40,7 +40,7 @@ def greensCreate(request):
     if request.method == 'POST':
         form = GreensRollingForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             pending_form.save()
@@ -76,7 +76,7 @@ def greensUpdate(request, pk):
     if request.method == 'POST':
         form = GreensRollingForm(request.POST, instance=rolling)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             pending_form.save()
@@ -108,7 +108,7 @@ def teesCreate(request):
     if request.method == 'POST':
         form = TeeRollingForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             pending_form.save()
@@ -144,7 +144,7 @@ def teesUpdate(request, pk):
     if request.method == 'POST':
         form = TeeRollingForm(request.POST, instance=rolling)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             pending_form.save()

@@ -75,7 +75,7 @@ def greensmowCreate(request):
         
         form = GreensMowerForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
             form.save_m2m()
@@ -116,7 +116,7 @@ def greensmowUpdate(request, pk):
     if request.method == 'POST':
         form = GreensMowerForm(request.POST, instance=mower)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
             form.save_m2m()
@@ -148,7 +148,7 @@ def teemowCreate(request):
         
         form = TeeMowerForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
             form.save_m2m()
@@ -188,7 +188,7 @@ def teemowUpdate(request, pk):
     if request.method == 'POST':
         form = TeeMowerForm(request.POST, instance=mower)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
             form.save_m2m()
@@ -220,7 +220,7 @@ def fairwaymowCreate(request):
         
         form = FairwayMowerForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
             form.save_m2m()
@@ -259,7 +259,7 @@ def fairwaymowUpdate(request, pk):
     if request.method == 'POST':
         form = FairwayMowerForm(request.POST, instance=mower)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
             form.save_m2m()
@@ -291,7 +291,7 @@ def roughmowCreate(request):
         
         form = RoughMowerForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
             form.save_m2m()
@@ -334,7 +334,7 @@ def roughmowUpdate(request, pk):
     if request.method == 'POST':
         form = RoughMowerForm(request.POST, instance=mower)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
             form.save_m2m()
@@ -379,7 +379,7 @@ def rollerCreate(request):
         
         form = RollerForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
             form.save_m2m()
@@ -418,7 +418,7 @@ def rollerUpdate(request, pk):
     if request.method == 'POST':
         form = RollerForm(request.POST, instance=roller)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
             form.save_m2m()
@@ -450,7 +450,7 @@ def aeratorCreate(request):
         
         form = AeratorForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
             form.save_m2m()
@@ -489,7 +489,7 @@ def aeratorUpdate(request, pk):
     if request.method == 'POST':
         form = AeratorForm(request.POST, instance=aerator)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
             form.save_m2m()
@@ -520,7 +520,7 @@ def sprayerCreate(request):
     if request.method == 'POST':
         form = SprayerForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
             form.save_m2m()
@@ -559,7 +559,7 @@ def sprayerUpdate(request, pk):
     if request.method == 'POST':
         form = SprayerForm(request.POST, instance=sprayer)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
             form.save_m2m()
@@ -591,7 +591,7 @@ def cartCreate(request):
         
         form = CartForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
             form.save_m2m()
@@ -628,7 +628,7 @@ def cartUpdate(request, pk):
     if request.method == 'POST':
         form = CartForm(request.POST, instance=cart)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
             form.save_m2m()
@@ -659,7 +659,7 @@ def rakeCreate(request):
     if request.method == 'POST':
         form = TrapRakeForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
             form.save_m2m()
@@ -698,7 +698,7 @@ def rakeUpdate(request, pk):
     if request.method == 'POST':
         form = TrapRakeForm(request.POST, instance=rake)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
             form.save_m2m()
@@ -730,7 +730,7 @@ def utilCreate(request):
         
         form = UtilVehicleForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
             form.save_m2m()
@@ -769,7 +769,7 @@ def utilUpdate(request, pk):
     if request.method == 'POST':
         form = UtilVehicleForm(request.POST, instance=util)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
             form.save_m2m()
@@ -801,7 +801,7 @@ def tractorCreate(request):
         
         form = TractorForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
             form.save_m2m()
@@ -840,7 +840,7 @@ def tractorUpdate(request, pk):
     if request.method == 'POST':
         form = TractorForm(request.POST, instance=tractor)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
             form.save_m2m()
@@ -872,7 +872,7 @@ def spreaderCreate(request):
         
         form = FertSpreaderForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
             
@@ -906,7 +906,7 @@ def spreaderUpdate(request, pk):
     if request.method == 'POST':
         form = FertSpreaderForm(request.POST, instance=spreader)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
             

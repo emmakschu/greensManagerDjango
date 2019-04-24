@@ -34,7 +34,7 @@ def create(request):
     if request.method == 'POST':
         form = SimpleStimpForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
 
             

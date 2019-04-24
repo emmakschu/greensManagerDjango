@@ -108,7 +108,7 @@ def greensCreate(request):
     if request.method == 'POST':
         form = GreensMowingForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             pending_form.save()
@@ -151,7 +151,7 @@ def greensUpdate(request, pk):
     if request.method == 'POST':
         form = GreensMowingForm(request.POST, instance=mowing)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
             form.save_m2m()
@@ -182,7 +182,7 @@ def teesCreate(request):
     if request.method == 'POST':
         form = TeeMowingForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             pending_form.save()
@@ -218,7 +218,7 @@ def teesUpdate(request, pk):
     if request.method == 'POST':
         form = TeeMowingForm(request.POST, instance=mowing)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             pending_form.save()
@@ -250,7 +250,7 @@ def fairwaysCreate(request):
     if request.method == 'POST':
         form = FairwayMowingForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             pending_form.save()
@@ -286,7 +286,7 @@ def fairwaysUpdate(request, pk):
     if request.method == 'POST':
         form = FairwayMowingForm(request.POST, instance=mowing)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             pending_form.save()
@@ -318,7 +318,7 @@ def roughsCreate(request):
     if request.method == 'POST':
         form = RoughMowingForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             pending_form.save()
@@ -354,7 +354,7 @@ def roughsUpdate(request, pk):
     if request.method == 'POST':
         form = RoughMowingForm(request.POST, instance=mowing)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             pending_form.save()

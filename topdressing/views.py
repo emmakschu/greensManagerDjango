@@ -43,7 +43,7 @@ def sandCreate(request):
     if request.method == 'POST':
         form = SandTypeForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
         
@@ -77,7 +77,7 @@ def sandUpdate(request, pk):
     if request.method == 'POST':
         form = SandTypeForm(request.POST, instance=sand)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
             
