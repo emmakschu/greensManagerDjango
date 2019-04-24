@@ -48,7 +48,7 @@ def qtCreate(request):
     if request.method == 'POST':
         form = QuadraTiningForm(data=request.POST)
 
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             pending_form.save()
@@ -80,7 +80,7 @@ def dtCreate(request):
     if request.method == 'POST':
         form = DeepTineForm(data=request.POST)
 
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
 
             pending_form.save()
@@ -124,7 +124,7 @@ def greensCreate(request):
     if request.method == 'POST':
         form = GreensAeratingForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             pending_form.save()
@@ -182,7 +182,7 @@ def greensUpdate(request, pk):
         elif DeepTine.objects.filter(pk=pk).exists():
             form = DeepTineForm(request.POST, instance=aerating)
 
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             pending_form.save()
@@ -215,7 +215,7 @@ def teesCreate(request):
     if request.method == 'POST':
         form = TeeAeratingForm(data=request.POST)
         
-        if form.is_valid() and request.is_authenticated():
+        if form.is_valid() and request.is_authenticated:
             pending_form = form.save(commit=False)
             
             pending_form.save()
@@ -249,7 +249,7 @@ def teesUpdate(request, pk):
     if request.method == 'POST':
         form = TeeAeratingForm(request.POST, instance=aerating)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             pending_form.save()
@@ -282,7 +282,7 @@ def fairwaysCreate(request):
     if request.method == 'POST':
         form = FairwayAeratingForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             pending_form.save()
@@ -318,7 +318,7 @@ def fairwaysUpdate(request, pk):
     if request.method == 'POST':
         form = FairwayAeratingForm(request.POST, instance=aerating)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             pending_form.save()
@@ -351,7 +351,7 @@ def roughsCreate(request):
     if request.method == 'POST':
         form = RoughAeratingForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             pending_form.save()
@@ -387,7 +387,7 @@ def roughsUpdate(request, pk):
     if request.method == 'POST':
         form = RoughAeratingForm(request.POST, instance=aerating)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             pending_form.save()

@@ -13,7 +13,7 @@ def daily_update(request, pk):
             form.instance.valid_date = note.valid_date
 
             pending_form = form.save(commit=False)
-            if request.user.is_authenticated():
+            if request.user.is_authenticated:
                 pending_form.updated_by = request.user
 
                 pending_form.save()
@@ -30,7 +30,7 @@ def weekly_update(request, pk):
             form.instance.start_date = note.start_date
 
             pending_form = form.save(commit=False)
-            if request.user.is_authenticated():
+            if request.user.is_authenticated:
                 pending_form.updated_by = request.user
 
                 pending_form.save()

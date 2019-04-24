@@ -51,7 +51,7 @@ def satboxCreate(request):
     if request.method == 'POST':
         form = SatelliteBoxForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
     
@@ -85,7 +85,7 @@ def satboxUpdate(request, pk):
     if request.method == 'POST':
         form = SatelliteBoxForm(request.POST, instance=satbox)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             form.save()
         
     return redirect('irr:satbox_detail', pk=satbox.pk)
@@ -114,7 +114,7 @@ def sprinklerCreate(request):
     if request.method == 'POST':
         form = SprinklerHeadForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
             
@@ -149,7 +149,7 @@ def sprinklerUpdate(request, pk):
     if request.method == 'POST':
         form = SprinklerHeadForm(request.POST, instance=sprinkler)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             form.save()
         
     return redirect('irr:sprinkler_detail', pk=sprinkler.pk)
@@ -193,7 +193,7 @@ def qcCreate(request):
     if request.method == 'POST':
         form = QuickCouplerForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
     
@@ -227,7 +227,7 @@ def qcUpdate(request, pk):
     if request.method == 'POST':
         form = QuickCouplerForm(request.POST, instance=qc)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             form.save()
     
     return redirect('irr:qc_detail', pk=qc.pk)
@@ -257,7 +257,7 @@ def drainCreate(request):
         
         form = DrainForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
             
@@ -291,7 +291,7 @@ def drainUpdate(request, pk):
     if request.method == 'POST':
         form = DrainForm(request.POST, instance=drain)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             form.save()
             
     return redirect('irr:drain_detail', pk=drain.pk)
@@ -321,7 +321,7 @@ def isoCreate(request):
         
         form = ShutoffValveForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
             
@@ -356,7 +356,7 @@ def isoUpdate(request, pk):
         
         form = ShutoffValveForm(request.POST, instance=iso)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             form.save()
             
     return redirect('irr:iso_detail', pk=iso.pk)
@@ -471,7 +471,7 @@ def digCreate(request):
         
         form = IrrigationDigForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.save()
             
@@ -505,7 +505,7 @@ def digUpdate(request, pk):
     if request.method == 'POST':
         form = IrrigationDigForm(request.POST, instance=dig)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             form.save()
             
     return redirect('irr:dig_detail', pk=dig.pk)

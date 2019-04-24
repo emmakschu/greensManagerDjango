@@ -57,7 +57,7 @@ def createFert(request):
     if request.method == 'POST':
         form = FertilizerForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             pending_form.unit_price = \
@@ -95,7 +95,7 @@ def fertUpdate(request, pk):
     if request.method == 'POST':
         form = FertilizerForm(instance=fert, data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             pending_form.unit_price = \
@@ -139,7 +139,7 @@ def greensCreate(request):
     if request.method == 'POST':
         form = GreensFertForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             price_per_bag = pending_form.fertilizer.price_per_bag
@@ -169,7 +169,7 @@ def greensUpdate(request, pk):
     if request.method == 'POST':
         form = GreensFertForm(request.POST, instance=greens_fert)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             price_per_bag = pending_form.fertilizer.price_per_bag
@@ -213,7 +213,7 @@ def teesCreate(request):
     if request.method == 'POST':
         form = TeeFertForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             price_per_bag = pending_form.fertilizer.price_per_bag
@@ -243,7 +243,7 @@ def teesUpdate(request, pk):
     if request.method == 'POST':
         form = TeeFertForm(request.POST, instance=tees_fert)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             price_per_bag = pending_form.fertilizer.price_per_bag
@@ -287,7 +287,7 @@ def fairwaysCreate(request):
     if request.method == 'POST':
         form = FairwayFertForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             price_per_bag = pending_form.fertilizer.price_per_bag
@@ -317,7 +317,7 @@ def fairwaysUpdate(request, pk):
     if request.method == 'POST':
         form = FairwayFertForm(request.POST, instance=fairways_fert)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             price_per_bag = pending_form.fertilizer.price_per_bag
@@ -361,7 +361,7 @@ def roughsCreate(request):
     if request.method == 'POST':
         form = RoughFertForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             price_per_bag = pending_form.fertilizer.price_per_bag
@@ -391,7 +391,7 @@ def roughsUpdate(request, pk):
     if request.method == 'POST':
         form = RoughFertForm(request.POST, instance=roughs_fert)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             price_per_bag = pending_form.fertilizer.price_per_bag

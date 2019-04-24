@@ -46,7 +46,7 @@ def partsNew(request, repair):
     if request.method == 'POST':
         form = RepairPartForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.repair_id = repair.pk
 
@@ -84,7 +84,7 @@ def partsCreate(request, repair):
     if request.method == 'POST':
         form = RepairPartForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             part = Parts.Part.objects.filter(pending_form.part)
@@ -127,7 +127,7 @@ def oilchangeCreate(request):
     if request.method == 'POST':
         form = OilChangeForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             pending_form.oil_cost = pending_form.oil.price_per_unit \
@@ -183,7 +183,7 @@ def oilchangeUpdate(request, pk):
     if request.method == 'POST':
         form = OilChangeForm(request.POST, instance=oilchange)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             pending_form.oil_cost = pending_form.oil.price_per_unit* \
@@ -241,7 +241,7 @@ def repairRequest(request):
     if request.method == 'POST':
         form = RepairRequestForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             pending_form.total_cost = 0
 
@@ -260,7 +260,7 @@ def repairCreate(request):
     if request.method == 'POST':
         form = RepairForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             pending_form.total_cost = 0
@@ -316,7 +316,7 @@ def repairUpdate(request, pk):
     if request.method == 'POST':
         form = RepairForm(request.POST, instance=repair)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             pending_form.save()

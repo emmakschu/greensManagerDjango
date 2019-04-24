@@ -53,7 +53,7 @@ def greenCreate(request):
     if request.method == 'POST':
         form = BuildGreenForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             green = Green.objects.get(pk=pending_form.green.pk)
@@ -100,7 +100,7 @@ def greenUpdate(request, pk):
     if request.method == 'POST':
         form = BuildGreenForm(request.POST, instance=build)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             green = Green.objects.get(pk=pending_form.green.pk)
@@ -143,7 +143,7 @@ def teeCreate(request):
     if request.method == 'POST':
         form = BuildTeeForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             tee = Tee.objects.get(pk=pending_form.tee.pk)
@@ -190,7 +190,7 @@ def teeUpdate(request, pk):
     if request.method == 'POST':
         form = BuildTeeForm(request.POST, instance=build)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             tee = Tee.objects.get(pk=pending_form.tee.pk)
@@ -233,7 +233,7 @@ def fairwayCreate(request):
     if request.method == 'POST':
         form = BuildFairwayForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             fairway = Fairway.objects.get(pk=pending_form.fairway.pk)
@@ -285,7 +285,7 @@ def fairwayUpdate(request, pk):
     if request.method == 'POST':
         form = BuildFairwayForm(request.POST, instance=build)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             fairway = Fairway.objects.get(pk=pending_form.fairway.pk)
@@ -333,7 +333,7 @@ def bunkerCreate(request):
     if request.method == 'POST':
         form = BuildBunkerForm(data=request.POST)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             pending_form.save()
@@ -368,7 +368,7 @@ def bunkerUpdate(request, pk):
     if request.method == 'POST':
         form = BuildBunkerForm(request.POST, instance=build)
         
-        if form.is_valid() and request.user.is_authenticated():
+        if form.is_valid() and request.user.is_authenticated:
             pending_form = form.save(commit=False)
             
             pending_form.save()
